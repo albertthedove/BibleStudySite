@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblical Chronologies</title>
+    <meta name="description" content="Interactive timelines and tables for studying the kings of Israel & Judah and the churches founded by Apostle Paul.">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Georgia', serif;
+            background: #f5e9d1 url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600"><rect fill="%23f5e9d1" width="600" height="600"/><path d="M100,100 Q300,50 500,100 T500,500 Q300,550 100,500 T100,100" fill="none" stroke="%23d4b580" stroke-width="3" opacity="0.2"/><text x="300" y="320" font-size="80" text-anchor="middle" fill="%23a08040" opacity="0.1">Holy Scripture</text></svg>') fixed;
+            background-size: cover;
+            color: #3c2f2f;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        header {
+            text-align: center;
+            padding: 80px 20px 60px;
+            background: linear-gradient(rgba(245,233,209,0.8), rgba(245,233,209,0.95));
+            box-shadow: 0 4px 20px rgba(139,69,19,0.2);
+        }
+        h1 {
+            font-size: 3.5em;
+            color: #8b4513;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        p.tagline {
+            font-size: 1.4em;
+            font-style: italic;
+            color: #654321;
+            margin: 20px 0 40px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .btn {
+            display: inline-block;
+            padding: 16px 40px;
+            font-size: 1.3em;
+            background: #8b4513;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            box-shadow: 0 6px 15px rgba(139,69,19,0.3);
+            transition: all 0.3s;
+        }
+        .btn:hover {
+            background: #a0522d;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(139,69,19,0.4);
+        }
+        main {
+            flex: 1;
+            padding: 60px 20px;
+            text-align: center;
+        }
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .feature {
+            flex: 1;
+            min-width: 280px;
+            background: rgba(255,255,255,0.8);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+        }
+        .feature h2 {
+            color: #8b4513;
+            margin-top: 0;
+        }
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: rgba(139,69,19,0.1);
+            color: #654321;
+            font-size: 0.9em;
+        }
+        @media (max-width: 768px) {
+            h1 { font-size: 2.8em; }
+            .btn { font-size: 1.1em; padding: 14px 30px; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Biblical Chronologies</h1>
+        <p class="tagline">Explore the timeline of the kings of Israel and Judah, and the churches planted by the Apostle Paul — with interactive tables and visual timelines.</p>
+        <a href="chronologies.html" class="btn">Enter the Chronologies</a>
+    </header>
+
+    <main>
+        <div class="features">
+            <div class="feature">
+                <h2>Old Testament Kings</h2>
+                <p>Detailed chronology of every king of the United and Divided Monarchy, with spiritual evaluation, contemporary prophets, key events, and Scripture references.</p>
+            </div>
+            <div class="feature">
+                <h2>Paul's Churches & Letters</h2>
+                <p>Trace the founding of churches during Paul's missionary journeys and when each letter was written — including verification that all Pauline epistles predate the Gospels.</p>
+            </div>
+            <div class="feature">
+                <h2>Interactive Tools</h2>
+                <p>Search, filter, export to CSV, view visual timelines, toggle dark mode, and share — all designed for deep Bible study.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        Built with reverence for the Word of God • © 2025 • For personal and group Bible study
+    </footer>
+</body>
+</html>
