@@ -19,73 +19,61 @@
         h1, h2 { text-align: center; color: #2c3e50; }
         .section { margin-bottom: 40px; }
         p.intro { text-align:center; font-size:1.1em; max-width:900px; margin:20px auto; }
-
         /* Enhanced table styles */
-        table.display { 
-            border-collapse: separate; 
-            border-spacing: 0; 
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
-            border-radius: 8px; 
-            overflow: hidden; 
+        table.display {
+            border-collapse: separate;
+            border-spacing: 0;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
         }
-        table.display thead th { 
-            background-color: #343a40; 
-            color: white; 
-            font-weight: bold; 
-            text-align: center; 
-            padding: 12px; 
+        table.display thead th {
+            background-color: #343a40;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            padding: 12px;
         }
-        table.display tbody td { 
-            padding: 10px; 
-            text-align: center; 
-            border-bottom: 1px solid #dee2e6; 
+        table.display tbody td {
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #dee2e6;
         }
         table.display tbody tr:nth-child(even) { background-color: #f8f9fa; }
         table.display tbody tr:hover { background-color: #e2e6ea; }
-
         /* Row color coding for OT */
         .united { background-color: #cfe2ff !important; color: #000 !important; }
         .faithful { background-color: #d1e7dd !important; color: #000 !important; }
         .partial { background-color: #fff3cd !important; color: #000 !important; }
         .evil { background-color: #f8d7da !important; color: #000 !important; }
-
         .highlight { outline: 3px solid #ffc107 !important; outline-offset: -3px; }
-
         #filters { margin: 20px 0; display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; align-items: center; }
         #timeline, #paulTimeline { height: 550px; border: 1px solid #ddd; margin-top: 30px; background: #fff; }
-
         .vis-item { font-weight: bold; }
-
         #darkModeToggle { position: fixed; top: 20px; right: 20px; z-index: 1000; background: #343a40; color: white; border: none; width: 50px; height: 50px; border-radius: 50%; font-size: 1.4em; box-shadow: 0 4px 8px rgba(0,0,0,0.2); cursor: pointer; }
         body.dark-mode #darkModeToggle { background: #f1c40f; color: #000; }
-
         body.dark-mode { background-color: #121212; color: #e0e0e0; }
         body.dark-mode .container { background: #1e1e1e; }
         body.dark-mode table.display { background: #2d2d2d; }
         body.dark-mode table.display thead th { background-color: #1f1f1f; }
         body.dark-mode table.display tbody tr:nth-child(even) { background-color: #1e1e1e; }
         body.dark-mode table.display tbody tr:hover { background-color: #3a3a3a; }
-
         .table-responsive-note { font-style: italic; color: #666; margin-bottom: 10px; text-align: center; }
         body.dark-mode .table-responsive-note { color: #aaa; }
-
         .controls { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin: 20px 0; }
         .search-box { flex: 1; min-width: 200px; }
         .action-buttons button { margin-left: 8px; }
-
         footer { text-align: center; padding: 20px; margin-top: 50px; font-size: 0.9em; color: #666; border-top: 1px solid #dee2e6; }
         body.dark-mode footer { color: #999; border-top-color: #333; }
     </style>
 </head>
 <body>
     <button id="darkModeToggle" title="Toggle Dark Mode">🌙</button>
-
     <div class="container">
         <h1>Biblical Chronologies</h1>
         <p class="intro">
             Explore the kings of Israel and Judah in the Old Testament tab, or the churches founded by Apostle Paul in the New Testament tab.
         </p>
-
         <div class="controls">
             <div class="search-box">
                 <input type="text" id="globalSearch" class="form-control" placeholder="Search kings, churches, letters, prophets...">
@@ -98,7 +86,6 @@
                 <button id="shareCopy" class="btn btn-outline-info"><i class="fas fa-link"></i> Copy Link</button>
             </div>
         </div>
-
         <ul class="nav nav-tabs" role="tablist">
             <li class="nav-item" role="presentation">
                 <button class="nav-link active" id="ot-tab" data-bs-toggle="tab" data-bs-target="#ot" type="button" role="tab">Old Testament (Kings)</button>
@@ -107,7 +94,6 @@
                 <button class="nav-link" id="nt-tab" data-bs-toggle="tab" data-bs-target="#nt" type="button" role="tab">New Testament (Paul's Churches)</button>
             </li>
         </ul>
-
         <div class="tab-content">
             <div class="tab-pane fade show active" id="ot" role="tabpanel">
                 <p class="table-responsive-note">On mobile: swipe left/right to see all columns →</p>
@@ -129,11 +115,11 @@
                     </select>
                     <button id="exportCsv" class="btn btn-outline-primary btn-sm">Export to CSV</button>
                 </div>
-
                 <table id="kingsTable" class="display responsive nowrap" width="100%">
                     <thead>
                         <tr>
                             <th>King Name</th>
+                            <th>Father</th>
                             <th>Period / Kingdom</th>
                             <th>Monarchical Order</th>
                             <th>Chronological Start (BCE)</th>
@@ -149,11 +135,9 @@
                     </thead>
                     <tbody></tbody>
                 </table>
-
                 <h2 class="section">Chronological Timeline</h2>
                 <div id="timeline"></div>
             </div>
-
             <div class="tab-pane fade" id="nt" role="tabpanel">
                 <p class="table-responsive-note">On mobile: swipe left/right to see all columns →</p>
                 <table id="paulTable" class="display responsive nowrap" width="100%">
@@ -176,27 +160,22 @@
                     </thead>
                     <tbody></tbody>
                 </table>
-
                 <h2 class="section">Timeline of Paul's Letters vs. Gospels</h2>
                 <div id="paulTimeline"></div>
-
                 <h2 class="section">Verification Summary</h2>
                 <p>All Paul's letters (AD 49–64) were written before or overlapping only slightly with the earliest Gospel (Mark, AD 65). This demonstrates that the Pauline epistles predate the written Gospels.</p>
             </div>
         </div>
-
         <footer>
             Built with ❤️ for Bible study • © 2025 • All Scripture references from public domain / standard chronologies
         </footer>
     </div>
-
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/vis-timeline@latest/standalone/umd/vis-timeline-graph2d.min.js"></script>
-
     <script>
         // Dark Mode
         const toggleBtn = document.getElementById('darkModeToggle');
@@ -209,17 +188,14 @@
             document.body.classList.add('dark-mode');
             toggleBtn.textContent = '☀️';
         }
-
         // Global Search
         $('#globalSearch').on('keyup', function() {
             const value = this.value;
             $('#kingsTable').DataTable().search(value).draw();
             $('#paulTable').DataTable().search(value).draw();
         });
-
         // Print
         document.getElementById('printBtn').addEventListener('click', () => window.print());
-
         // Share
         const url = encodeURIComponent(window.location.href);
         const title = encodeURIComponent(document.title);
@@ -229,63 +205,86 @@
         document.getElementById('shareCopy').onclick = () => {
             navigator.clipboard.writeText(window.location.href).then(() => alert('Link copied!'));
         };
-
-        // Full Kings Data
+        // Prophet Tribes Map
+        const prophetTribes = {
+            'Samuel': 'Levi',
+            'Nathan': 'Unknown',
+            'Gad': 'Unknown',
+            'Ahijah': 'Unknown',
+            'Shemaiah': 'Unknown',
+            'Jehu son of Hanani': 'Unknown',
+            'Azariah': 'Unknown',
+            'Hanani': 'Unknown',
+            'Jahaziel': 'Levi',
+            'Micaiah': 'Unknown',
+            'Elijah': 'Unknown',
+            'Elisha': 'Unknown',
+            'Zechariah son of Jehoiada': 'Levi',
+            'Jonah': 'Zebulun',
+            'Amos': 'Judah',
+            'Hosea': 'Unknown',
+            'Isaiah': 'Judah',
+            'Micah': 'Judah',
+            'Huldah': 'Unknown',
+            'Zephaniah': 'Judah',
+            'Jeremiah': 'Levi'
+        };
+        // Full Kings Data with Fathers
         const kingsData = [
-            { name: 'Saul', kingdom: 'United Monarchy', order: 1, start: 1050, end: 1010, length: 40, capital: 'Gibeah', evaluation: 'Partially Faithful', keyActs: 'First king; disobeyed God at times (e.g., Amalek, witch of Endor).', prophets: ['Samuel'], refs: '1 Samuel 9–31; 1 Chronicles 10', events: 'Anointed by Samuel; battles with Philistines; death at Mount Gilboa.' },
-            { name: 'David', kingdom: 'United Monarchy', order: 2, start: 1010, end: 970, length: 40, capital: 'Hebron → Jerusalem', evaluation: 'Faithful', keyActs: 'Man after God’s own heart; conquered Jerusalem; brought Ark.', prophets: ['Samuel', 'Nathan', 'Gad'], refs: '2 Samuel; 1 Kings 1–2; 1 Chronicles 11–29', events: 'Defeated Goliath; adultery with Bathsheba; Absalom rebellion.' },
-            { name: 'Solomon', kingdom: 'United Monarchy', order: 3, start: 970, end: 931, length: 40, capital: 'Jerusalem', evaluation: 'Partially Faithful', keyActs: 'Built Temple; great wisdom; later idolatry due to foreign wives.', prophets: ['Nathan', 'Ahijah'], refs: '1 Kings 1–11; 2 Chronicles 1–9', events: 'Temple dedication; visit by Queen of Sheba; kingdom division foretold.' },
-            { name: 'Rehoboam', kingdom: 'Judah', order: 1, start: 931, end: 913, length: 17, capital: 'Jerusalem', evaluation: 'Evil', keyActs: 'Divided kingdom; did evil.', prophets: ['Shemaiah'], refs: '1 Kings 11:42–14:31; 2 Chr 9:31–12:16', events: 'Kingdom split; Shishak invasion.' },
-            { name: 'Abijah', kingdom: 'Judah', order: 2, start: 913, end: 911, length: 3, capital: 'Jerusalem', evaluation: 'Evil', keyActs: 'War with Jeroboam; sins like father.', prophets: ['Shemaiah'], refs: '1 Kings 14:31–15:8; 2 Chr 13', events: 'Victory over Israel.' },
-            { name: 'Asa', kingdom: 'Judah', order: 3, start: 911, end: 870, length: 41, capital: 'Jerusalem', evaluation: 'Faithful', keyActs: 'Removed idols; did right.', prophets: ['Azariah', 'Hanani'], refs: '1 Kings 15:8-24; 2 Chr 14–16', events: 'Reforms; victory over Cushites.' },
-            { name: 'Jehoshaphat', kingdom: 'Judah', order: 4, start: 873, end: 848, length: 25, capital: 'Jerusalem', evaluation: 'Faithful', keyActs: 'Did right; judicial reforms.', prophets: ['Jahaziel', 'Micaiah'], refs: '1 Kings 22:41-50; 2 Chr 17–20', events: 'Alliance with Ahab.' },
-            { name: 'Jehoram', kingdom: 'Judah', order: 5, start: 853, end: 841, length: 8, capital: 'Jerusalem', evaluation: 'Evil', keyActs: 'Idolatry; married Ahab’s daughter.', prophets: ['Elijah'], refs: '2 Kings 8:16-24; 2 Chr 21', events: 'Revolts of Edom and Libnah.' },
-            { name: 'Ahaziah', kingdom: 'Judah', order: 6, start: 841, end: 841, length: 1, capital: 'Jerusalem', evaluation: 'Evil', keyActs: 'Walked in ways of Ahab.', prophets: [], refs: '2 Kings 8:24–9:29; 2 Chr 22:1-9', events: 'Killed by Jehu.' },
-            { name: 'Athaliah (Queen)', kingdom: 'Judah', order: 7, start: 841, end: 835, length: 6, capital: 'Jerusalem', evaluation: 'Evil', keyActs: 'Usurped throne; Baal worship.', prophets: [], refs: '2 Kings 11; 2 Chr 22:10–23:21', events: 'Overthrown; Joash crowned.' },
-            { name: 'Joash', kingdom: 'Judah', order: 8, start: 835, end: 796, length: 40, capital: 'Jerusalem', evaluation: 'Partially Faithful', keyActs: 'Repaired Temple; later turned to idolatry.', prophets: ['Zechariah son of Jehoiada'], refs: '2 Kings 11–12; 2 Chr 24', events: 'Temple restoration.' },
-            { name: 'Amaziah', kingdom: 'Judah', order: 9, start: 796, end: 767, length: 29, capital: 'Jerusalem', evaluation: 'Partially Faithful', keyActs: 'Did right but not wholeheartedly.', prophets: [], refs: '2 Kings 14:1-20; 2 Chr 25', events: 'Victory over Edom; defeated by Israel.' },
-            { name: 'Uzziah (Azariah)', kingdom: 'Judah', order: 10, start: 790, end: 740, length: 52, capital: 'Jerusalem', evaluation: 'Faithful', keyActs: 'Prospered; became leprous for pride.', prophets: ['Isaiah'], refs: '2 Kings 15:1-7; 2 Chr 26', events: 'Earthquake in his reign.' },
-            { name: 'Jotham', kingdom: 'Judah', order: 11, start: 750, end: 732, length: 16, capital: 'Jerusalem', evaluation: 'Faithful', keyActs: 'Did right; built gates.', prophets: ['Isaiah', 'Micah'], refs: '2 Kings 15:32-38; 2 Chr 27', events: 'War with Rezin and Pekah began.' },
-            { name: 'Ahaz', kingdom: 'Judah', order: 12, start: 735, end: 716, length: 16, capital: 'Jerusalem', evaluation: 'Evil', keyActs: 'Idolatry; child sacrifice; altar from Damascus.', prophets: ['Isaiah', 'Micah'], refs: '2 Kings 16; 2 Chr 28', events: 'Syro-Ephraimite War.' },
-            { name: 'Hezekiah', kingdom: 'Judah', order: 13, start: 715, end: 686, length: 29, capital: 'Jerusalem', evaluation: 'Faithful', keyActs: 'Great reforms; destroyed high places.', prophets: ['Isaiah', 'Micah'], refs: '2 Kings 18–20; 2 Chr 29–32', events: 'Sennacherib invasion; miraculous deliverance.' },
-            { name: 'Manasseh', kingdom: 'Judah', order: 14, start: 695, end: 642, length: 55, capital: 'Jerusalem', evaluation: 'Evil', keyActs: 'Worst idolatry; later repented in captivity.', prophets: [], refs: '2 Kings 21:1-18; 2 Chr 33', events: 'Taken captive to Babylon; repentance.' },
-            { name: 'Amon', kingdom: 'Judah', order: 15, start: 642, end: 640, length: 2, capital: 'Jerusalem', evaluation: 'Evil', keyActs: 'Followed father’s early evil.', prophets: [], refs: '2 Kings 21:19-26; 2 Chr 33:21-25', events: 'Assassinated.' },
-            { name: 'Josiah', kingdom: 'Judah', order: 16, start: 640, end: 609, length: 31, capital: 'Jerusalem', evaluation: 'Faithful', keyActs: 'Major revival; found Book of the Law.', prophets: ['Huldah', 'Zephaniah', 'Jeremiah'], refs: '2 Kings 22–23; 2 Chr 34–35', events: 'Passover revival; killed at Megiddo.' },
-            { name: 'Jehoahaz', kingdom: 'Judah', order: 17, start: 609, end: 609, length: 0.25, capital: 'Jerusalem', evaluation: 'Evil', keyActs: 'Did evil.', prophets: ['Jeremiah'], refs: '2 Kings 23:31-34; 2 Chr 36:1-4', events: 'Deposed by Neco.' },
-            { name: 'Jehoiakim', kingdom: 'Judah', order: 18, start: 609, end: 598, length: 11, capital: 'Jerusalem', evaluation: 'Evil', keyActs: 'Burned Jeremiah’s scroll.', prophets: ['Jeremiah'], refs: '2 Kings 23:34–24:6; 2 Chr 36:5-8', events: 'Vassal to Babylon.' },
-            { name: 'Jehoiachin', kingdom: 'Judah', order: 19, start: 598, end: 597, length: 0.25, capital: 'Jerusalem', evaluation: 'Evil', keyActs: 'Taken captive.', prophets: ['Jeremiah'], refs: '2 Kings 24:8-17; 2 Chr 36:9-10', events: 'First deportation.' },
-            { name: 'Zedekiah', kingdom: 'Judah', order: 20, start: 597, end: 586, length: 11, capital: 'Jerusalem', evaluation: 'Evil', keyActs: 'Rebelled against Babylon.', prophets: ['Jeremiah'], refs: '2 Kings 24:18–25:21; 2 Chr 36:11-21', events: 'Fall of Jerusalem; Temple destroyed.' },
-            { name: 'Jeroboam I', kingdom: 'Israel', order: 1, start: 931, end: 910, length: 22, capital: 'Shechem → Tirzah', evaluation: 'Evil', keyActs: 'Golden calves at Bethel and Dan.', prophets: ['Ahijah'], refs: '1 Kings 11:26–14:20', events: 'Led rebellion; kingdom split.' },
-            { name: 'Nadab', kingdom: 'Israel', order: 2, start: 910, end: 909, length: 2, capital: 'Tirzah', evaluation: 'Evil', keyActs: 'Continued father’s sins.', prophets: [], refs: '1 Kings 15:25-31', events: 'Killed by Baasha.' },
-            { name: 'Baasha', kingdom: 'Israel', order: 3, start: 909, end: 886, length: 24, capital: 'Tirzah', evaluation: 'Evil', keyActs: 'Wiped out Jeroboam’s house.', prophets: ['Jehu son of Hanani'], refs: '1 Kings 15:27–16:7', events: 'War with Asa of Judah.' },
-            { name: 'Elah', kingdom: 'Israel', order: 4, start: 886, end: 885, length: 2, capital: 'Tirzah', evaluation: 'Evil', keyActs: 'Drunk when killed.', prophets: [], refs: '1 Kings 16:8-14', events: 'Assassinated by Zimri.' },
-            { name: 'Zimri', kingdom: 'Israel', order: 5, start: 885, end: 885, length: 0.02, capital: 'Tirzah', evaluation: 'Evil', keyActs: 'Reigned 7 days.', prophets: [], refs: '1 Kings 16:15-20', events: 'Burned palace over himself.' },
-            { name: 'Omri', kingdom: 'Israel', order: 6, start: 885, end: 874, length: 12, capital: 'Samaria (founded)', evaluation: 'Evil', keyActs: 'Worse than all before him.', prophets: [], refs: '1 Kings 16:21-28', events: 'Established Samaria as capital.' },
-            { name: 'Ahab', kingdom: 'Israel', order: 7, start: 874, end: 853, length: 22, capital: 'Samaria', evaluation: 'Evil', keyActs: 'Married Jezebel; promoted Baal worship.', prophets: ['Elijah', 'Micaiah'], refs: '1 Kings 16:29–22:40', events: 'Naboth’s vineyard; death at Ramoth-Gilead.' },
-            { name: 'Ahaziah', kingdom: 'Israel', order: 8, start: 853, end: 852, length: 2, capital: 'Samaria', evaluation: 'Evil', keyActs: 'Served Baal.', prophets: ['Elijah'], refs: '1 Kings 22:51–2 Kings 1', events: 'Fell through lattice.' },
-            { name: 'Joram (Jehoram)', kingdom: 'Israel', order: 9, start: 852, end: 841, length: 12, capital: 'Samaria', evaluation: 'Evil', keyActs: 'Removed Baal pillar but kept calves.', prophets: ['Elisha'], refs: '2 Kings 3–9', events: 'Killed by Jehu.' },
-            { name: 'Jehu', kingdom: 'Israel', order: 10, start: 841, end: 814, length: 28, capital: 'Samaria', evaluation: 'Partially Faithful', keyActs: 'Destroyed Baal worship in Israel.', prophets: ['Elisha'], refs: '2 Kings 9–10', events: 'Anointed by Elisha’s servant; massacre of Ahab’s house.' },
-            { name: 'Jehoahaz', kingdom: 'Israel', order: 11, start: 814, end: 798, length: 17, capital: 'Samaria', evaluation: 'Evil', keyActs: 'Followed Jeroboam’s sins.', prophets: ['Elisha'], refs: '2 Kings 13:1-9', events: 'Oppressed by Hazael.' },
-            { name: 'Jehoash (Joash)', kingdom: 'Israel', order: 12, start: 798, end: 782, length: 16, capital: 'Samaria', evaluation: 'Evil', keyActs: 'Defeated Aram three times.', prophets: [], refs: '2 Kings 13:10-25', events: 'Defeated Amaziah of Judah.' },
-            { name: 'Jeroboam II', kingdom: 'Israel', order: 13, start: 793, end: 753, length: 41, capital: 'Samaria', evaluation: 'Evil', keyActs: 'Restored borders; prosperity but idolatry.', prophets: ['Jonah', 'Amos', 'Hosea'], refs: '2 Kings 14:23-29', events: 'Golden age materially.' },
-            { name: 'Zechariah', kingdom: 'Israel', order: 14, start: 753, end: 752, length: 0.5, capital: 'Samaria', evaluation: 'Evil', keyActs: 'Did evil.', prophets: [], refs: '2 Kings 15:8-12', events: 'Assassinated; end of Jehu dynasty.' },
-            { name: 'Shallum', kingdom: 'Israel', order: 15, start: 752, end: 752, length: 0.08, capital: 'Samaria', evaluation: 'Evil', keyActs: 'Usurper.', prophets: [], refs: '2 Kings 15:13-15', events: 'Reigned one month.' },
-            { name: 'Menahem', kingdom: 'Israel', order: 16, start: 752, end: 742, length: 10, capital: 'Samaria', evaluation: 'Evil', keyActs: 'Paid tribute to Assyria.', prophets: [], refs: '2 Kings 15:17-22', events: 'Sacked Tiphsah.' },
-            { name: 'Pekahiah', kingdom: 'Israel', order: 17, start: 742, end: 740, length: 2, capital: 'Samaria', evaluation: 'Evil', keyActs: 'Did evil.', prophets: [], refs: '2 Kings 15:23-26', events: 'Killed by Pekah.' },
-            { name: 'Pekah', kingdom: 'Israel', order: 18, start: 752, end: 732, length: 20, capital: 'Samaria', evaluation: 'Evil', keyActs: 'Alliance with Rezin against Judah.', prophets: [], refs: '2 Kings 15:27-31', events: 'Lost territory to Tiglath-Pileser.' },
-            { name: 'Hoshea', kingdom: 'Israel', order: 19, start: 732, end: 722, length: 9, capital: 'Samaria', evaluation: 'Evil', keyActs: 'Last king; rebelled against Assyria.', prophets: ['Hosea'], refs: '2 Kings 17', events: 'Fall of Samaria; exile of Israel.' }
+            { name: 'Saul', father: 'Kish', kingdom: 'United Monarchy', order: 1, start: 1050, end: 1010, length: 40, capital: 'Gibeah', evaluation: 'Partially Faithful', keyActs: 'First king; disobeyed God at times (e.g., Amalek, witch of Endor).', prophets: ['Samuel'], refs: '1 Samuel 9–31; 1 Chronicles 10', events: 'Anointed by Samuel; battles with Philistines; death at Mount Gilboa.' },
+            { name: 'David', father: 'Jesse', kingdom: 'United Monarchy', order: 2, start: 1010, end: 970, length: 40, capital: 'Hebron → Jerusalem', evaluation: 'Faithful', keyActs: 'Man after God’s own heart; conquered Jerusalem; brought Ark.', prophets: ['Samuel', 'Nathan', 'Gad'], refs: '2 Samuel; 1 Kings 1–2; 1 Chronicles 11–29', events: 'Defeated Goliath; adultery with Bathsheba; Absalom rebellion.' },
+            { name: 'Solomon', father: 'David', kingdom: 'United Monarchy', order: 3, start: 970, end: 931, length: 40, capital: 'Jerusalem', evaluation: 'Partially Faithful', keyActs: 'Built Temple; great wisdom; later idolatry due to foreign wives.', prophets: ['Nathan', 'Ahijah'], refs: '1 Kings 1–11; 2 Chronicles 1–9', events: 'Temple dedication; visit by Queen of Sheba; kingdom division foretold.' },
+            { name: 'Rehoboam', father: 'Solomon', kingdom: 'Judah', order: 1, start: 931, end: 913, length: 17, capital: 'Jerusalem', evaluation: 'Evil', keyActs: 'Divided kingdom; did evil.', prophets: ['Shemaiah'], refs: '1 Kings 11:42–14:31; 2 Chr 9:31–12:16', events: 'Kingdom split; Shishak invasion.' },
+            { name: 'Abijah', father: 'Rehoboam', kingdom: 'Judah', order: 2, start: 913, end: 911, length: 3, capital: 'Jerusalem', evaluation: 'Evil', keyActs: 'War with Jeroboam; sins like father.', prophets: ['Shemaiah'], refs: '1 Kings 14:31–15:8; 2 Chr 13', events: 'Victory over Israel.' },
+            { name: 'Asa', father: 'Abijah', kingdom: 'Judah', order: 3, start: 911, end: 870, length: 41, capital: 'Jerusalem', evaluation: 'Faithful', keyActs: 'Removed idols; did right.', prophets: ['Azariah', 'Hanani'], refs: '1 Kings 15:8-24; 2 Chr 14–16', events: 'Reforms; victory over Cushites.' },
+            { name: 'Jehoshaphat', father: 'Asa', kingdom: 'Judah', order: 4, start: 873, end: 848, length: 25, capital: 'Jerusalem', evaluation: 'Faithful', keyActs: 'Did right; judicial reforms.', prophets: ['Jahaziel', 'Micaiah'], refs: '1 Kings 22:41-50; 2 Chr 17–20', events: 'Alliance with Ahab.' },
+            { name: 'Jehoram', father: 'Jehoshaphat', kingdom: 'Judah', order: 5, start: 853, end: 841, length: 8, capital: 'Jerusalem', evaluation: 'Evil', keyActs: 'Idolatry; married Ahab’s daughter.', prophets: ['Elijah'], refs: '2 Kings 8:16-24; 2 Chr 21', events: 'Revolts of Edom and Libnah.' },
+            { name: 'Ahaziah', father: 'Jehoram', kingdom: 'Judah', order: 6, start: 841, end: 841, length: 1, capital: 'Jerusalem', evaluation: 'Evil', keyActs: 'Walked in ways of Ahab.', prophets: [], refs: '2 Kings 8:24–9:29; 2 Chr 22:1-9', events: 'Killed by Jehu.' },
+            { name: 'Athaliah (Queen)', father: 'Omri', kingdom: 'Judah', order: 7, start: 841, end: 835, length: 6, capital: 'Jerusalem', evaluation: 'Evil', keyActs: 'Usurped throne; Baal worship.', prophets: [], refs: '2 Kings 11; 2 Chr 22:10–23:21', events: 'Overthrown; Joash crowned.' },
+            { name: 'Joash', father: 'Ahaziah', kingdom: 'Judah', order: 8, start: 835, end: 796, length: 40, capital: 'Jerusalem', evaluation: 'Partially Faithful', keyActs: 'Repaired Temple; later turned to idolatry.', prophets: ['Zechariah son of Jehoiada'], refs: '2 Kings 11–12; 2 Chr 24', events: 'Temple restoration.' },
+            { name: 'Amaziah', father: 'Joash', kingdom: 'Judah', order: 9, start: 796, end: 767, length: 29, capital: 'Jerusalem', evaluation: 'Partially Faithful', keyActs: 'Did right but not wholeheartedly.', prophets: [], refs: '2 Kings 14:1-20; 2 Chr 25', events: 'Victory over Edom; defeated by Israel.' },
+            { name: 'Uzziah (Azariah)', father: 'Amaziah', kingdom: 'Judah', order: 10, start: 790, end: 740, length: 52, capital: 'Jerusalem', evaluation: 'Faithful', keyActs: 'Prospered; became leprous for pride.', prophets: ['Isaiah'], refs: '2 Kings 15:1-7; 2 Chr 26', events: 'Earthquake in his reign.' },
+            { name: 'Jotham', father: 'Uzziah', kingdom: 'Judah', order: 11, start: 750, end: 732, length: 16, capital: 'Jerusalem', evaluation: 'Faithful', keyActs: 'Did right; built gates.', prophets: ['Isaiah', 'Micah'], refs: '2 Kings 15:32-38; 2 Chr 27', events: 'War with Rezin and Pekah began.' },
+            { name: 'Ahaz', father: 'Jotham', kingdom: 'Judah', order: 12, start: 735, end: 716, length: 16, capital: 'Jerusalem', evaluation: 'Evil', keyActs: 'Idolatry; child sacrifice; altar from Damascus.', prophets: ['Isaiah', 'Micah'], refs: '2 Kings 16; 2 Chr 28', events: 'Syro-Ephraimite War.' },
+            { name: 'Hezekiah', father: 'Ahaz', kingdom: 'Judah', order: 13, start: 715, end: 686, length: 29, capital: 'Jerusalem', evaluation: 'Faithful', keyActs: 'Great reforms; destroyed high places.', prophets: ['Isaiah', 'Micah'], refs: '2 Kings 18–20; 2 Chr 29–32', events: 'Sennacherib invasion; miraculous deliverance.' },
+            { name: 'Manasseh', father: 'Hezekiah', kingdom: 'Judah', order: 14, start: 695, end: 642, length: 55, capital: 'Jerusalem', evaluation: 'Evil', keyActs: 'Worst idolatry; later repented in captivity.', prophets: [], refs: '2 Kings 21:1-18; 2 Chr 33', events: 'Taken captive to Babylon; repentance.' },
+            { name: 'Amon', father: 'Manasseh', kingdom: 'Judah', order: 15, start: 642, end: 640, length: 2, capital: 'Jerusalem', evaluation: 'Evil', keyActs: 'Followed father’s early evil.', prophets: [], refs: '2 Kings 21:19-26; 2 Chr 33:21-25', events: 'Assassinated.' },
+            { name: 'Josiah', father: 'Amon', kingdom: 'Judah', order: 16, start: 640, end: 609, length: 31, capital: 'Jerusalem', evaluation: 'Faithful', keyActs: 'Major revival; found Book of the Law.', prophets: ['Huldah', 'Zephaniah', 'Jeremiah'], refs: '2 Kings 22–23; 2 Chr 34–35', events: 'Passover revival; killed at Megiddo.' },
+            { name: 'Jehoahaz', father: 'Josiah', kingdom: 'Judah', order: 17, start: 609, end: 609, length: 0.25, capital: 'Jerusalem', evaluation: 'Evil', keyActs: 'Did evil.', prophets: ['Jeremiah'], refs: '2 Kings 23:31-34; 2 Chr 36:1-4', events: 'Deposed by Neco.' },
+            { name: 'Jehoiakim', father: 'Josiah', kingdom: 'Judah', order: 18, start: 609, end: 598, length: 11, capital: 'Jerusalem', evaluation: 'Evil', keyActs: 'Burned Jeremiah’s scroll.', prophets: ['Jeremiah'], refs: '2 Kings 23:34–24:6; 2 Chr 36:5-8', events: 'Vassal to Babylon.' },
+            { name: 'Jehoiachin', father: 'Jehoiakim', kingdom: 'Judah', order: 19, start: 598, end: 597, length: 0.25, capital: 'Jerusalem', evaluation: 'Evil', keyActs: 'Taken captive.', prophets: ['Jeremiah'], refs: '2 Kings 24:8-17; 2 Chr 36:9-10', events: 'First deportation.' },
+            { name: 'Zedekiah', father: 'Josiah', kingdom: 'Judah', order: 20, start: 597, end: 586, length: 11, capital: 'Jerusalem', evaluation: 'Evil', keyActs: 'Rebelled against Babylon.', prophets: ['Jeremiah'], refs: '2 Kings 24:18–25:21; 2 Chr 36:11-21', events: 'Fall of Jerusalem; Temple destroyed.' },
+            { name: 'Jeroboam I', father: 'Nebat', kingdom: 'Israel', order: 1, start: 931, end: 910, length: 22, capital: 'Shechem → Tirzah', evaluation: 'Evil', keyActs: 'Golden calves at Bethel and Dan.', prophets: ['Ahijah'], refs: '1 Kings 11:26–14:20', events: 'Led rebellion; kingdom split.' },
+            { name: 'Nadab', father: 'Jeroboam I', kingdom: 'Israel', order: 2, start: 910, end: 909, length: 2, capital: 'Tirzah', evaluation: 'Evil', keyActs: 'Continued father’s sins.', prophets: [], refs: '1 Kings 15:25-31', events: 'Killed by Baasha.' },
+            { name: 'Baasha', father: 'Ahijah', kingdom: 'Israel', order: 3, start: 909, end: 886, length: 24, capital: 'Tirzah', evaluation: 'Evil', keyActs: 'Wiped out Jeroboam’s house.', prophets: ['Jehu son of Hanani'], refs: '1 Kings 15:27–16:7', events: 'War with Asa of Judah.' },
+            { name: 'Elah', father: 'Baasha', kingdom: 'Israel', order: 4, start: 886, end: 885, length: 2, capital: 'Tirzah', evaluation: 'Evil', keyActs: 'Drunk when killed.', prophets: [], refs: '1 Kings 16:8-14', events: 'Assassinated by Zimri.' },
+            { name: 'Zimri', father: 'N/A (Usurper)', kingdom: 'Israel', order: 5, start: 885, end: 885, length: 0.02, capital: 'Tirzah', evaluation: 'Evil', keyActs: 'Reigned 7 days.', prophets: [], refs: '1 Kings 16:15-20', events: 'Burned palace over himself.' },
+            { name: 'Omri', father: 'N/A (Usurper)', kingdom: 'Israel', order: 6, start: 885, end: 874, length: 12, capital: 'Samaria (founded)', evaluation: 'Evil', keyActs: 'Worse than all before him.', prophets: [], refs: '1 Kings 16:21-28', events: 'Established Samaria as capital.' },
+            { name: 'Ahab', father: 'Omri', kingdom: 'Israel', order: 7, start: 874, end: 853, length: 22, capital: 'Samaria', evaluation: 'Evil', keyActs: 'Married Jezebel; promoted Baal worship.', prophets: ['Elijah', 'Micaiah'], refs: '1 Kings 16:29–22:40', events: 'Naboth’s vineyard; death at Ramoth-Gilead.' },
+            { name: 'Ahaziah', father: 'Ahab', kingdom: 'Israel', order: 8, start: 853, end: 852, length: 2, capital: 'Samaria', evaluation: 'Evil', keyActs: 'Served Baal.', prophets: ['Elijah'], refs: '1 Kings 22:51–2 Kings 1', events: 'Fell through lattice.' },
+            { name: 'Joram (Jehoram)', father: 'Ahab', kingdom: 'Israel', order: 9, start: 852, end: 841, length: 12, capital: 'Samaria', evaluation: 'Evil', keyActs: 'Removed Baal pillar but kept calves.', prophets: ['Elisha'], refs: '2 Kings 3–9', events: 'Killed by Jehu.' },
+            { name: 'Jehu', father: 'Nimshi', kingdom: 'Israel', order: 10, start: 841, end: 814, length: 28, capital: 'Samaria', evaluation: 'Partially Faithful', keyActs: 'Destroyed Baal worship in Israel.', prophets: ['Elisha'], refs: '2 Kings 9–10', events: 'Anointed by Elisha’s servant; massacre of Ahab’s house.' },
+            { name: 'Jehoahaz', father: 'Jehu', kingdom: 'Israel', order: 11, start: 814, end: 798, length: 17, capital: 'Samaria', evaluation: 'Evil', keyActs: 'Followed Jeroboam’s sins.', prophets: ['Elisha'], refs: '2 Kings 13:1-9', events: 'Oppressed by Hazael.' },
+            { name: 'Jehoash (Joash)', father: 'Jehoahaz', kingdom: 'Israel', order: 12, start: 798, end: 782, length: 16, capital: 'Samaria', evaluation: 'Evil', keyActs: 'Defeated Aram three times.', prophets: [], refs: '2 Kings 13:10-25', events: 'Defeated Amaziah of Judah.' },
+            { name: 'Jeroboam II', father: 'Jehoash', kingdom: 'Israel', order: 13, start: 793, end: 753, length: 41, capital: 'Samaria', evaluation: 'Evil', keyActs: 'Restored borders; prosperity but idolatry.', prophets: ['Jonah', 'Amos', 'Hosea'], refs: '2 Kings 14:23-29', events: 'Golden age materially.' },
+            { name: 'Zechariah', father: 'Jeroboam II', kingdom: 'Israel', order: 14, start: 753, end: 752, length: 0.5, capital: 'Samaria', evaluation: 'Evil', keyActs: 'Did evil.', prophets: [], refs: '2 Kings 15:8-12', events: 'Assassinated; end of Jehu dynasty.' },
+            { name: 'Shallum', father: 'Jabesh', kingdom: 'Israel', order: 15, start: 752, end: 752, length: 0.08, capital: 'Samaria', evaluation: 'Evil', keyActs: 'Usurper.', prophets: [], refs: '2 Kings 15:13-15', events: 'Reigned one month.' },
+            { name: 'Menahem', father: 'Gadi', kingdom: 'Israel', order: 16, start: 752, end: 742, length: 10, capital: 'Samaria', evaluation: 'Evil', keyActs: 'Paid tribute to Assyria.', prophets: [], refs: '2 Kings 15:17-22', events: 'Sacked Tiphsah.' },
+            { name: 'Pekahiah', father: 'Menahem', kingdom: 'Israel', order: 17, start: 742, end: 740, length: 2, capital: 'Samaria', evaluation: 'Evil', keyActs: 'Did evil.', prophets: [], refs: '2 Kings 15:23-26', events: 'Killed by Pekah.' },
+            { name: 'Pekah', father: 'Remaliah', kingdom: 'Israel', order: 18, start: 752, end: 732, length: 20, capital: 'Samaria', evaluation: 'Evil', keyActs: 'Alliance with Rezin against Judah.', prophets: [], refs: '2 Kings 15:27-31', events: 'Lost territory to Tiglath-Pileser.' },
+            { name: 'Hoshea', father: 'Elah', kingdom: 'Israel', order: 19, start: 732, end: 722, length: 9, capital: 'Samaria', evaluation: 'Evil', keyActs: 'Last king; rebelled against Assyria.', prophets: ['Hosea'], refs: '2 Kings 17', events: 'Fall of Samaria; exile of Israel.' }
         ];
-
         // Populate kings table
         const kingsTableBody = $('#kingsTable tbody');
         kingsData.forEach(king => {
             const rowClass = king.kingdom === 'United Monarchy' ? 'united' :
                              king.evaluation === 'Faithful' ? 'faithful' :
                              king.evaluation === 'Partially Faithful' ? 'partial' : 'evil';
-            const prophetsStr = king.prophets.length > 0 ? king.prophets.join(', ') : 'None';
+            const prophetsStr = king.prophets.length > 0 ? king.prophets.map(p => `${p} (${prophetTribes[p] || 'Unknown'})`).join(', ') : 'None';
             kingsTableBody.append(`
                 <tr class="${rowClass}" data-kingdom="${king.kingdom}" data-prophets="${king.prophets.join(',')}">
                     <td>${king.name}</td>
+                    <td>${king.father || 'N/A'}</td>
                     <td>${king.kingdom}</td>
                     <td>${king.order}</td>
                     <td>${king.start}</td>
@@ -300,22 +299,19 @@
                 </tr>
             `);
         });
-
         $('#kingsTable').DataTable({
             responsive: true,
             paging: false,
             info: false,
-            order: [[3, 'desc']]
+            order: [[4, 'desc']]  // Adjusted index for start year after adding Father column
         });
-
         // Populate prophet filter
         const allProphets = [...new Set(kingsData.flatMap(k => k.prophets))].sort();
         const prophetSelect = $('#prophetFilter');
         allProphets.forEach(p => prophetSelect.append(`<option value="${p}">${p}</option>`));
-
         // OT filters
-        $('#kingdomFilter').on('change', function() { $('#kingsTable').DataTable().column(1).search(this.value).draw(); });
-        $('#evalFilter').on('change', function() { $('#kingsTable').DataTable().column(7).search(this.value).draw(); });
+        $('#kingdomFilter').on('change', function() { $('#kingsTable').DataTable().column(2).search(this.value).draw(); });  // Adjusted column index
+        $('#evalFilter').on('change', function() { $('#kingsTable').DataTable().column(8).search(this.value).draw(); });  // Adjusted
         $('#prophetFilter').on('change', function() {
             const prophet = this.value;
             $('#kingsTable tbody tr').removeClass('highlight');
@@ -325,19 +321,17 @@
                 });
             }
         });
-
         // Export CSV
         $('#exportCsv').on('click', function() {
-            let csv = 'Name,Period/Kingdom,Order,Start BCE,End BCE,Length,Capital,Evaluation,Key Acts,Prophets,References,Events\n';
+            let csv = 'Name,Father,Period/Kingdom,Order,Start BCE,End BCE,Length,Capital,Evaluation,Key Acts,Prophets,References,Events\n';
             kingsData.forEach(k => {
-                csv += `"${k.name}","${k.kingdom}",${k.order},${k.start},${k.end},${k.length},"${k.capital}","${k.evaluation}","${k.keyActs}","${k.prophets.join(';')}","${k.refs}","${k.events}"\n`;
+                csv += `"${k.name}","${k.father || 'N/A'}","${k.kingdom}",${k.order},${k.start},${k.end},${k.length},"${k.capital}","${k.evaluation}","${k.keyActs}","${k.prophets.map(p => `${p} (${prophetTribes[p] || 'Unknown'})`).join(';')}","${k.refs}","${k.events}"\n`;
             });
             const blob = new Blob([csv], { type: 'text/csv' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url; a.download = 'kings.csv'; a.click();
         });
-
         // OT Timeline
         const container = document.getElementById('timeline');
         const groups = new vis.DataSet([
@@ -347,7 +341,6 @@
             { id: 'events', content: 'Major Events' }
         ]);
         const items = new vis.DataSet();
-
         kingsData.forEach((king, i) => {
             const groupId = king.kingdom === 'United Monarchy' ? 'united' :
                             king.kingdom === 'Judah' ? 'judah' : 'israel';
@@ -360,14 +353,12 @@
                 className: groupId
             });
         });
-
         const eventsData = [
             { content: 'Kingdom Split', start: -931, group: 'events', type: 'point' },
             { content: 'Fall of Samaria (Israel)', start: -722, group: 'events', type: 'point' },
             { content: 'Fall of Jerusalem (Judah)', start: -586, group: 'events', type: 'point' }
         ];
         eventsData.forEach((e, i) => items.add({ id: 'event' + i, ...e, className: 'event' }));
-
         const options = {
             start: -1100,
             end: -500,
@@ -380,9 +371,7 @@
             },
             showCurrentTime: false
         };
-
         new vis.Timeline(container, items, groups, options);
-
         // Paul's Churches - COMPLETE
         const paulsChurches = [
             { order: 1, letter: 'Galatians', letterYear: 49, yearsAfter: 2, city: 'Pisidian Antioch', province: 'Galatia', modern: 'Yalvaç, Turkey', continent: 'Asia', founded: 47, beforeGospels: 'Yes', writtenFrom: 'Antioch (Syria)', imprisoned: 'No', leaders: 'Elders (Acts 14:23)' },
@@ -397,7 +386,6 @@
             { order: 10, letter: 'Romans', letterYear: 57, yearsAfter: 'N/A', city: 'Rome', province: 'Italy', modern: 'Rome, Italy', continent: 'Europe', founded: 'Pre-Paul', beforeGospels: 'Yes', writtenFrom: 'Corinth', imprisoned: 'No', leaders: 'N/A' },
             { order: 11, letter: 'Titus', letterYear: 64, yearsAfter: 1, city: 'Crete churches', province: 'Crete', modern: 'Crete, Greece', continent: 'Europe', founded: 63, beforeGospels: 'Yes', writtenFrom: 'Macedonia', imprisoned: 'No', leaders: 'Titus to appoint elders (Titus 1:5)' }
         ];
-
         // Populate Paul's table
         const paulTableBody = $('#paulTable tbody');
         paulsChurches.forEach(church => {
@@ -419,13 +407,11 @@
                 </tr>
             `);
         });
-
         $('#paulTable').DataTable({
             responsive: true,
             paging: false,
             info: false
         });
-
         // NT Timeline
         const paulContainer = document.getElementById('paulTimeline');
         const paulGroups = new vis.DataSet([
@@ -433,7 +419,6 @@
             { id: 'gospels', content: 'Gospels' }
         ]);
         const paulItems = new vis.DataSet();
-
         const paulLetters = [
             { name: 'Galatians', year: 49, prison: false },
             { name: '1 Thessalonians', year: 51, prison: false },
@@ -448,7 +433,6 @@
             { name: 'Titus', year: 64, prison: false },
             { name: '1 Timothy', year: 64, prison: false }
         ];
-
         paulLetters.forEach((letter, i) => {
             const className = letter.prison ? 'prison' : 'paul-letter';
             paulItems.add({
@@ -460,14 +444,12 @@
                 className: className
             });
         });
-
         const gospels = [
             { name: 'Mark', year: 65 },
             { name: 'Matthew', year: 70 },
             { name: 'Luke', year: 80 },
             { name: 'John', year: 90 }
         ];
-
         gospels.forEach((g, i) => {
             paulItems.add({
                 id: 'gospel' + i,
@@ -478,7 +460,6 @@
                 className: 'gospel'
             });
         });
-
         const paulOptions = {
             start: 45,
             end: 100,
@@ -491,7 +472,6 @@
             },
             showCurrentTime: false
         };
-
         new vis.Timeline(paulContainer, paulItems, paulGroups, paulOptions);
     </script>
 </body>
