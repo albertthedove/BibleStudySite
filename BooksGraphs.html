@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bible Dashboard</title>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Chart.js Zoom Plugin -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.1/dist/chartjs-plugin-zoom.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f8f9fa;
+            color: #333;
+        }
+        header {
+            text-align: center;
+            padding: 30px 0;
+            background: #2c3e50;
+            color: white;
+            margin-bottom: 30px;
+            border-radius: 8px;
+        }
+        h1 { margin: 0; font-size: 2.8em; }
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .controls label {
+            font-weight: bold;
+        }
+        select, button {
+            padding: 8px 12px;
+            font-size: 1em;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .chart-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+        }
+        .chart-wrapper {
+            position: relative;
+            height: 600px;
+        }
+        #timelineChart {
+            height: 700px !important;
+        }
+        .timeline-controls {
+            margin-top: 15px;
+            text-align: center;
+        }
+        .timeline-controls label {
+            margin-right: 10px;
+        }
+        #timelineZoomSlider {
+            width: 400px;
+            vertical-align: middle;
+        }
+        #resetZoomBtn {
+            padding: 8px 16px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        #resetZoomBtn:hover {
+            background: #2980b9;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.6);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 28px;
+            cursor: pointer;
+            color: #aaa;
+        }
+        .close:hover { color: #000; }
+        .author-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #3498db;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            float: left;
+            margin-right: 15px;
+        }
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Bible Dashboard</h1>
+        <p>Interactive Visualizations of Scripture • Books, Chapters, Words, and Timeline</p>
+    </header>
+
+    <div class="container">
+        <!-- Global Controls -->
+        <div class="controls">
+            <div>
+                <label for="version">Bible Version:</label>
+                <select id="version">
+                    <option value="nkjv">NKJV</option>
+                    <option value="kjv" selected>KJV</option>
+                    <option value="nlt">NLT</option>
+                    <option value="esv">ESV</option>
+                    <option value="niv">NIV</option>
+                    <option value="nasb">NASB</option>
+                </select>
+            </div>
+            <div>
+                <label for="metric">Bar Chart Metric:</label>
+                <select id="metric">
+                    <option value="chapters" selected>Chapters</option>
+                    <option value="words">Word Count</option>
+                </select>
+            </div>
+            <div>
+                <label for="sortOrder">Bar Chart Sort:</label>
+                <select id="sortOrder">
+                    <option value="canonical" selected>Canonical Order</option>
+                    <option value="ascending">Smallest to Largest</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Old Testament Bar Chart -->
+        <div class="chart-container">
+            <h2 style="text-align:center;">Old Testament Books</h2>
+            <div class="chart-wrapper">
+                <canvas id="otChart"></canvas>
+            </div>
+        </div>
+
+        <!-- New Testament Bar Chart -->
+        <div class="chart-container">
+            <h2 style="text-align:center;">New Testament Books</h2>
+            <div class="chart-wrapper">
+                <canvas id="ntChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Bible Timeline -->
+        <div class="chart-container">
+            <h2 style="text-align:center;">Zoomable Bible Timeline</h2>
+            <p style="text-align:center;color:#666;">Bar length = word count (current version) • Click a bar for details • Use slider, pinch, or mouse wheel to zoom horizontally</p>
+            <div class="chart-wrapper">
+                <canvas id="timelineChart"></canvas>
+            </div>
+            <div class="timeline-controls">
+                <label for="timelineZoomSlider">Zoom Level:</label>
+                <input type="range" id="timelineZoomSlider" min="0" max="100" value="0" step="1">
+                <button id="resetZoomBtn">Reset Zoom</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Book Details -->
+    <div id="bookModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <footer>
+        Bible Dashboard • Data based on mainstream conservative scholarship • Word counts approximate • Public Domain / Fair Use
+    </footer>
+
+    <script>
+        // Register Zoom Plugin
+        Chart.register(ChartZoom);
+
+        // Custom Plugin for Data Labels on Bar Charts
+        const dataLabelPlugin = {
+            id: 'dataLabelPlugin',
+            afterDatasetsDraw: function(chart) {
+                const ctx = chart.ctx;
+                chart.data.datasets.forEach((dataset, i) => {
+                    const meta = chart.getDatasetMeta(i);
+                    meta.data.forEach((bar, index) => {
+                        const value = dataset.data[index];
+                        if (value > 0) {
+                            ctx.fillStyle = '#333';
+                            ctx.font = 'bold 12px Arial';
+                            ctx.textAlign = 'center';
+                            ctx.textBaseline = 'bottom';
+                            ctx.fillText(value, bar.x, bar.y - 5);
+                        }
+                    });
+                });
+            }
+        };
+
+        // === Embedded Data ===
+        const bibleData = {
+            ot: [
+                {name:"Genesis",chapters:50,author:"Moses",years:"-1400",major:"Adam, Noah, Abraham, Isaac, Jacob, Joseph",christ:"Seed of woman (3:15), Abraham's seed",summary:"Beginnings: Creation, Fall, Flood, Patriarchs"},
+                {name:"Exodus",chapters:40,author:"Moses",years:"-1400",major:"Moses, Aaron, Pharaoh",christ:"Passover Lamb",summary:"Deliverance from Egypt, Law given, Tabernacle"},
+                {name:"Leviticus",chapters:27,author:"Moses",years:"-1400",major:"Aaron",christ:"Atonement sacrifices",summary:"Holiness code and sacrificial system"},
+                {name:"Numbers",chapters:36,author:"Moses",years:"-1400",major:"Moses, Joshua, Caleb",christ:"Bronze serpent (Num 21 = John 3)",summary:"Wilderness wanderings and census"},
+                {name:"Deuteronomy",chapters:34,author:"Moses",years:"-1400",major:"Moses",christ:"Prophet like Moses (18:15)",summary:"Moses' final speeches, renewal of covenant"},
+                {name:"Joshua",chapters:24,author:"Joshua",years:"-1370",major:"Joshua, Rahab",christ:"Captain of the Lord's army",summary:"Conquest and division of Canaan"},
+                {name:"Judges",chapters:21,author:"Samuel?",years:"-1100",major:"Gideon, Samson, Deborah",christ:"Cycle points to need for King",summary:"Cycles of apostasy and deliverance"},
+                {name:"Ruth",chapters:4,author:"Samuel?",years:"-1100",major:"Ruth, Boaz",christ:"Kinsman-Redeemer",summary:"Redemption and David's ancestry"},
+                {name:"1 Samuel",chapters:31,author:"Samuel/Gad",years:"-1050",major:"Samuel, Saul, David",christ:"Rejected king vs anointed king",summary:"Transition to monarchy"},
+                {name:"2 Samuel",chapters:24,author:"Gad/Nathan",years:"-1000",major:"David",christ:"Davidic covenant (2 Sam 7)",summary:"David's reign and covenant"},
+                {name:"1 Kings",chapters:22,author:"Jeremiah?",years:"-950",major:"Solomon, Elijah",christ:"Temple foreshadows Christ",summary:"Solomon, divided kingdom, Elijah"},
+                {name:"2 Kings",chapters:25,author:"Jeremiah?",years:"-600",major:"Elisha, Hezekiah, Josiah",christ:"Need for new covenant",summary:"Fall of Israel and Judah"},
+                {name:"1 Chronicles",chapters:29,author:"Ezra?",years:"-450",major:"David",christ:"Temple worship",summary:"Genealogies and David's reign"},
+                {name:"2 Chronicles",chapters:36,author:"Ezra?",years:"-450",major:"Solomon to exile",christ:"Faithful kings point to Christ",summary:"History of Judah's kings"},
+                {name:"Ezra",chapters:10,author:"Ezra",years:"-450",major:"Ezra",christ:"Restoration foreshadows",summary:"Return from exile, temple rebuilt"},
+                {name:"Nehemiah",chapters:13,author:"Nehemiah",years:"-445",major:"Nehemiah",christ:"Rebuilding walls = spiritual renewal",summary:"Walls rebuilt, reforms"},
+                {name:"Esther",chapters:10,author:"Mordecai?",years:"-470",major:"Esther, Mordecai",christ:"Providential salvation",summary:"Jews saved in Persia"},
+                {name:"Job",chapters:42,author:"Unknown (Job?)",years:"-2000?",major:"Job",christ:"Suffering servant",summary:"Suffering and sovereignty of God"},
+                {name:"Psalms",chapters:150,author:"David & others",years:"-1000 to -400",major:"David",christ:"Messianic psalms (2,22,110)",summary:"Worship, lament, praise"},
+                {name:"Proverbs",chapters:31,author:"Solomon & others",years:"-950",major:"Solomon",christ:"Wisdom incarnate",summary:"Practical wisdom for living"},
+                {name:"Ecclesiastes",chapters:12,author:"Solomon",years:"-935",major:"The Teacher",christ:"Vanity apart from God",summary:"Meaninglessness without God"},
+                {name:"Song of Songs",chapters:8,author:"Solomon",years:"-950",major:"Bridegroom & Bride",christ:"Christ and Church",summary:"Love between bridegroom and bride"},
+                {name:"Isaiah",chapters:66,author:"Isaiah",years:"-700",major:"Isaiah",christ:"Suffering Servant (53)",summary:"Judgment and salvation, Messiah"},
+                {name:"Jeremiah",chapters:52,author:"Jeremiah",years:"-600",major:"Jeremiah",christ:"New covenant (31:31)",summary:"Judgment on Judah, hope"},
+                {name:"Lamentations",chapters:5,author:"Jeremiah",years:"-586",major:"Jeremiah",christ:"Man of sorrows",summary:"Grief over Jerusalem's fall"},
+                {name:"Ezekiel",chapters:48,author:"Ezekiel",years:"-590",major:"Ezekiel",christ:"Glory departed/returned",summary:"Visions, exile, future temple"},
+                {name:"Daniel",chapters:12,author:"Daniel",years:"-530",major:"Daniel",christ:"Son of Man",summary:"Kingdom visions, faithfulness in exile"},
+                {name:"Hosea",chapters:14,author:"Hosea",years:"-750",major:"Hosea, Gomer",christ:"God's redeeming love",summary:"Unfaithful Israel, faithful God"},
+                {name:"Joel",chapters:3,author:"Joel",years:"-800?",major:"Joel",christ:"Day of the Lord",summary:"Locust plague, Spirit poured out"},
+                {name:"Amos",chapters:9,author:"Amos",years:"-760",major:"Amos",christ:"Justice and righteousness",summary:"Judgment on Israel"},
+                {name:"Obadiah",chapters:1,author:"Obadiah",years:"-586",major:"Obadiah",christ:"Kingdom shall be the Lord's",summary:"Judgment on Edom"},
+                {name:"Jonah",chapters:4,author:"Jonah",years:"-760",major:"Jonah",christ:"Resurrection sign",summary:"Mercy to Nineveh"},
+                {name:"Micah",chapters:7,author:"Micah",years:"-700",major:"Micah",christ:"Bethlehem prophecy (5:2)",summary:"Judgment and restoration"},
+                {name:"Nahum",chapters:3,author:"Nahum",years:"-650",major:"Nahum",christ:"Judgment on oppressors",summary:"Fall of Nineveh"},
+                {name:"Habakkuk",chapters:3,author:"Habakkuk",years:"-600",major:"Habakkuk",christ:"Righteous live by faith",summary:"Why evil prospers"},
+                {name:"Zephaniah",chapters:3,author:"Zephaniah",years:"-630",major:"Zephaniah",christ:"Day of the Lord",summary:"Coming judgment and joy"},
+                {name:"Haggai",chapters:2,author:"Haggai",years:"-520",major:"Haggai",christ:"Desire of nations",summary:"Rebuild the temple"},
+                {name:"Zechariah",chapters:14,author:"Zechariah",years:"-520",major:"Zechariah",christ:"Pierced One (12:10)",summary:"Messianic prophecies"},
+                {name:"Malachi",chapters:4,author:"Malachi",years:"-430",major:"Malachi",christ:"Sun of Righteousness",summary:"Final call to repentance"}
+            ],
+            nt: [
+                {name:"Matthew",chapters:28,author:"Matthew",years:"65-70",major:"Jesus, disciples",christ:"King of the Jews",summary:"Jesus as Messiah-King"},
+                {name:"Mark",chapters:16,author:"Mark",years:"60-65",major:"Jesus",christ:"Suffering Servant",summary:"Fast-paced account of Jesus' ministry"},
+                {name:"Luke",chapters:24,author:"Luke",years:"70-80",major:"Jesus",christ:"Son of Man",summary:"Jesus' humanity and compassion"},
+                {name:"John",chapters:21,author:"John",years:"85-90",major:"Jesus",christ:"Son of God",summary:"That you may believe"},
+                {name:"Acts",chapters:28,author:"Luke",years:"70-80",major:"Peter, Paul",christ:"Ascended Lord",summary:"Spread of the church"},
+                {name:"Romans",chapters:16,author:"Paul",years:"57",major:"Paul",christ:"Righteousness of God",summary:"Gospel of justification by faith"},
+                {name:"1 Corinthians",chapters:16,author:"Paul",years:"55",major:"Paul",christ:"Christ crucified",summary:"Church problems and order"},
+                {name:"2 Corinthians",chapters:13,author:"Paul",years:"56",major:"Paul",christ:"Comfort in suffering",summary:"Ministry defense and giving"},
+                {name:"Galatians",chapters:6,author:"Paul",years:"49",major:"Paul",christ:"Freedom in Christ",summary:"Justification by faith, not law"},
+                {name:"Ephesians",chapters:6,author:"Paul",years:"60-62",major:"Paul",christ:"Head of the Church",summary:"Unity and walk in Christ"},
+                {name:"Philippians",chapters:4,author:"Paul",years:"61",major:"Paul",christ:"Joy in suffering",summary:"Joy and humility"},
+                {name:"Colossians",chapters:4,author:"Paul",years:"60-62",major:"Paul",christ:"Preeminence",summary:"Christ's supremacy"},
+                {name:"1 Thessalonians",chapters:5,author:"Paul",years:"51",major:"Paul",christ:"Coming Lord",summary:"Hope and holiness"},
+                {name:"2 Thessalonians",chapters:3,author:"Paul",years:"52",major:"Paul",christ:"Day of the Lord",summary:"Correcting eschatology"},
+                {name:"1 Timothy",chapters:6,author:"Paul",years:"63-64",major:"Timothy",christ:"Savior",summary:"Church leadership"},
+                {name:"2 Timothy",chapters:4,author:"Paul",years:"66-67",major:"Timothy",christ:"Endurance",summary:"Final charge"},
+                {name:"Titus",chapters:3,author:"Paul",years:"64",major:"Titus",christ:"Grace",summary:"Church order in Crete"},
+                {name:"Philemon",chapters:1,author:"Paul",years:"60-62",major:"Philemon",christ:"Forgiveness",summary:"Plea for Onesimus"},
+                {name:"Hebrews",chapters:13,author:"Unknown",years:"65-70",major:"Jesus",christ:"Better High Priest",summary:"Superiority of Christ"},
+                {name:"James",chapters:5,author:"James",years:"45-50",major:"James",christ:"Lord Jesus Christ",summary:"Faith and works"},
+                {name:"1 Peter",chapters:5,author:"Peter",years:"62-64",major:"Peter",christ:"Chief Shepherd",summary:"Suffering and hope"},
+                {name:"2 Peter",chapters:3,author:"Peter",years:"65-67",major:"Peter",christ:"Coming Judge",summary:"False teachers and return"},
+                {name:"1 John",chapters:5,author:"John",years:"85-90",major:"John",christ:"Word of Life",summary:"Fellowship and love"},
+                {name:"2 John",chapters:1,author:"John",years:"90",major:"John",christ:"Truth",summary:"Walk in truth"},
+                {name:"3 John",chapters:1,author:"John",years:"90",major:"John",christ:"Truth",summary:"Hospitality"},
+                {name:"Jude",chapters:1,author:"Jude",years:"65-70",major:"Jude",christ:"Only Lord",summary:"Contend for the faith"},
+                {name:"Revelation",chapters:22,author:"John",years:"95",major:"John",christ:"Lamb, King of kings",summary:"Final victory of Christ"}
+            ]
+        };
+
+        // Approximate word counts by version
+        const wordCounts = {
+            kjv: {
+                ot: [38262,31403,27297,27898,24338,22173,18134,4373,24311,21179,27816,25638,15670,15353,11417,10430,6587,50879,22124,12392,7553,15314,27845,22284,10396,12536,15336,4230,2178,1718,2145,10440,3339,2550,2099,1825,1464,1568,2313,1069,2789,3051],
+                nt: [23670,18336,24657,21021,28369,13858,10396,8731,6103,7638,4379,6581,4372,3077,3003,2006,1597,437,10432,4372,4371,3331,2494,993,875,520,10483]
+            },
+            nkjv: {
+                ot: [39000,32000,28000,28500,25000,22500,18500,4400,24500,21500,28000,26000,16000,15500,11600,10600,6700,52000,22500,12500,7700,15500,28000,22500,10500,12700,15500,4300,2200,1750,2200,10600,3400,2600,2150,1850,1500,1600,2350,1100,2850,3100],
+                nt: [24000,18500,25000,21500,29000,14000,10500,8800,6200,7700,4400,6600,4400,3100,3050,2050,1600,440,10600,4400,4400,3350,2500,1000,880,530,10600]
+            },
+            esv: {
+                ot: [38500,31500,27500,28000,24500,22000,18200,4350,24200,21200,27700,25700,15700,15200,11500,10500,6600,51500,22300,12400,7600,15400,27900,22400,10400,12600,15400,4250,2180,1730,2180,10500,3380,2580,2130,1830,1480,1580,2330,1080,2830,3080],
+                nt: [23800,18400,24800,21200,28700,13900,10400,8750,6150,7650,4380,6580,4380,3080,3020,2030,1590,435,10500,4380,4380,3330,2480,990,870,525,10550]
+            },
+            niv: {
+                ot: [37500,30800,26800,27300,24000,21500,17800,4300,23800,20800,27200,25200,15400,14900,11200,10200,6500,50500,21800,12100,7400,15000,27200,21900,10100,12300,15000,4150,2130,1690,2130,10200,3300,2530,2080,1790,1440,1540,2280,1050,2770,3020],
+                nt: [23200,18000,24200,20800,28000,13600,10100,8550,6000,7500,4300,6450,4300,3000,2950,2000,1560,430,10300,4300,4300,3250,2430,970,850,510,10300]
+            },
+            nlt: {
+                ot: [40000,33000,29000,29500,26000,23500,19500,4500,25500,22500,29000,27000,16500,16000,12000,11000,7000,54000,23500,13000,8000,16000,29500,23500,11000,13000,16000,4500,2300,1800,2300,11000,3500,2700,2200,1900,1550,1650,2450,1150,2950,3200],
+                nt: [25000,19500,26000,22500,30500,14500,11000,9200,6500,8000,4600,6900,4600,3300,3200,2150,1700,460,11000,4600,4600,3500,2600,1050,920,550,11000]
+            },
+            nasb: {
+                ot: [38700,31700,27700,28200,24700,22200,18300,4370,24400,21400,27900,25900,15800,15300,11600,10600,6650,51800,22400,12450,7620,15450,28000,22450,10450,12650,15450,4270,2190,1740,2190,10550,3390,2590,2140,1840,1490,1590,2340,1090,2840,3090],
+                nt: [23900,18450,24900,21300,28800,13950,10450,8770,6170,7670,4390,6590,4390,3090,3030,2040,1595,437,10550,4390,4390,3340,2490,992,872,527,10580]
+            }
+        };
+
+        // === Charts ===
+        let otChart, ntChart, timelineChart;
+        let currentVersion = 'kjv';
+        let currentMetric = 'chapters';
+        let currentSort = 'canonical';
+        const fullMin = -1500;
+        const fullMax = 100;
+
+        // Helper to get word count array
+        function getWordCounts(testament, version) {
+            return wordCounts[version][testament === 'ot' ? 'ot' : 'nt'];
+        }
+
+        // Create OT Bar Chart
+        function createOTChart() {
+            const ctx = document.getElementById('otChart').getContext('2d');
+            let data = [...bibleData.ot];
+            let labels = data.map(b => b.name);
+            let values = currentMetric === 'chapters' 
+                ? data.map(b => b.chapters)
+                : getWordCounts('ot', currentVersion);
+
+            if (currentSort === 'ascending') {
+                const combined = data.map((book, i) => ({ book, value: values[i] }));
+                combined.sort((a, b) => a.value - b.value);
+                labels = combined.map(item => item.book.name);
+                values = combined.map(item => item.value);
+            }
+
+            if (otChart) otChart.destroy();
+            otChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: currentMetric === 'chapters' ? 'Chapters' : 'Word Count',
+                        data: values,
+                        backgroundColor: '#3498db',
+                        borderColor: '#2980b9',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    animation: { duration: 800 },
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: { display: true, text: currentMetric === 'chapters' ? 'Number of Chapters' : 'Word Count' }
+                        },
+                        x: {
+                            ticks: { maxRotation: 90, minRotation: 60 }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                afterLabel: function(context) {
+                                    const book = bibleData.ot.find(b => b.name === context.label) || {};
+                                    return `Author: ${book.author || ''}`;
+                                }
+                            }
+                        }
+                    }
+                },
+                plugins: [dataLabelPlugin]
+            });
+        }
+
+        // Create NT Bar Chart
+        function createNTChart() {
+            const ctx = document.getElementById('ntChart').getContext('2d');
+            let data = [...bibleData.nt];
+            let labels = data.map(b => b.name);
+            let values = currentMetric === 'chapters' 
+                ? data.map(b => b.chapters)
+                : getWordCounts('nt', currentVersion);
+
+            if (currentSort === 'ascending') {
+                const combined = data.map((book, i) => ({ book, value: values[i] }));
+                combined.sort((a, b) => a.value - b.value);
+                labels = combined.map(item => item.book.name);
+                values = combined.map(item => item.value);
+            }
+
+            if (ntChart) ntChart.destroy();
+            ntChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: currentMetric === 'chapters' ? 'Chapters' : 'Word Count',
+                        data: values,
+                        backgroundColor: '#e74c3c',
+                        borderColor: '#c0392b',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    animation: { duration: 800 },
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: { display: true, text: currentMetric === 'chapters' ? 'Number of Chapters' : 'Word Count' }
+                        },
+                        x: {
+                            ticks: { maxRotation: 90, minRotation: 60 }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                afterLabel: function(context) {
+                                    const book = bibleData.nt.find(b => b.name === context.label) || {};
+                                    return `Author: ${book.author || ''}`;
+                                }
+                            }
+                        }
+                    }
+                },
+                plugins: [dataLabelPlugin]
+            });
+        }
+
+        // Swim Lane Labels Plugin
+        const swimLanePlugin = {
+            id: 'swimLanePlugin',
+            beforeDraw: function(chart) {
+                const ctx = chart.ctx;
+                const xAxis = chart.scales.x;
+                const yAxis = chart.scales.y;
+
+                ctx.save();
+                ctx.font = 'bold 16px Arial';
+                ctx.fillStyle = '#333';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+
+                const otMid = yAxis.getPixelForValue(19.5);
+                ctx.fillText('Old Testament', xAxis.left + (xAxis.right - xAxis.left) / 2, otMid - 40);
+
+                const ntMid = yAxis.getPixelForValue(45.5);
+                ctx.fillText('New Testament', xAxis.left + (xAxis.right - xAxis.left) / 2, ntMid - 40);
+
+                ctx.restore();
+            }
+        };
+
+        // Create Timeline
+        function createTimeline() {
+            const ctx = document.getElementById('timelineChart').getContext('2d');
+            const otCount = bibleData.ot.length; // 39
+            const ntCount = bibleData.nt.length; // 27
+            const totalBooks = otCount + ntCount;
+
+            const allBooks = [
+                ...bibleData.ot.map((b, i) => ({...b, yPos: i + 0.5, testament: 'ot'})),
+                ...bibleData.nt.map((b, i) => ({...b, yPos: otCount + i + 1.5, testament: 'nt'}))
+            ];
+
+            const datasets = allBooks.map(book => {
+                const startYear = parseInt(book.years.split('-')[0]) || (book.testament === 'ot' ? -1000 : 60);
+                const endYear = book.years.includes('-') ? parseInt(book.years.split('-')[1]) || startYear + 20 : startYear;
+                const midYear = (startYear + endYear) / 2;
+                const wordCount = getWordCounts(book.testament, currentVersion)[book.testament === 'ot' ? book.yPos - 0.5 : book.yPos - otCount - 1.5];
+
+                return {
+                    label: book.name,
+                    data: [{
+                        x: midYear,
+                        y: book.yPos,
+                        book: book,
+                        wordCount: wordCount
+                    }],
+                    backgroundColor: book.testament === 'ot' ? '#3498db' : '#e74c3c',
+                    borderColor: book.testament === 'ot' ? '#2980b9' : '#c0392b',
+                    borderWidth: 1,
+                    barThickness: 16
+                };
+            });
+
+            if (timelineChart) timelineChart.destroy();
+            timelineChart = new Chart(ctx, {
+                type: 'bar',
+                data: { datasets: datasets },
+                options: {
+                    indexAxis: 'y',
+                    animation: { duration: 600 },
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            type: 'linear',
+                            position: 'top',
+                            min: fullMin,
+                            max: fullMax,
+                            title: { display: true, text: 'Approximate Year Written (BCE/CE)' },
+                            ticks: { 
+                                callback: value => value < 0 ? -value + ' BCE' : value + ' CE',
+                                font: { size: 12 }
+                            }
+                        },
+                        y: {
+                            type: 'linear',
+                            min: 0,
+                            max: totalBooks + 2,
+                            ticks: {
+                                stepSize: 1,
+                                callback: function(value) {
+                                    const index = Math.round(value - 0.5);
+                                    if (index >= 0 && index < allBooks.length) {
+                                        return allBooks[index].name;
+                                    }
+                                    return '';
+                                },
+                                font: { size: 11 },
+                                maxRotation: 0,
+                                autoSkip: false
+                            },
+                            grid: { display: false }
+                        }
+                    },
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                title: ctx => ctx[0].raw.book.name,
+                                label: ctx => [
+                                    `Author: ${ctx.raw.book.author}`,
+                                    `Years: ${ctx.raw.book.years}`,
+                                    `Word Count: ${ctx.raw.wordCount.toLocaleString()}`
+                                ]
+                            }
+                        },
+                        zoom: {
+                            pan: { enabled: true, mode: 'x' },
+                            zoom: { wheel: { enabled: true }, pinch: { enabled: true }, mode: 'x' },
+                            limits: { x: { min: fullMin, max: fullMax, minRange: 50 } }
+                        },
+                        legend: { display: false },
+                        swimLanePlugin: {}
+                    },
+                    onClick: (e, elements) => {
+                        if (elements.length > 0) {
+                            const book = elements[0].dataset.data[0].book;
+                            showBookModal(book);
+                        }
+                    }
+                },
+                plugins: [swimLanePlugin]
+            });
+        }
+
+        // Slider and Reset Zoom
+        const zoomSlider = document.getElementById('timelineZoomSlider');
+        let isSliding = false;
+
+        zoomSlider.addEventListener('mousedown', () => isSliding = true);
+        zoomSlider.addEventListener('mouseup', () => isSliding = false);
+        zoomSlider.addEventListener('mouseleave', () => isSliding = false);
+
+        zoomSlider.addEventListener('input', function() {
+            if (!timelineChart) return;
+            const value = parseInt(this.value);
+            const fullRange = fullMax - fullMin;
+            const zoomFactor = value / 100;
+            const newRange = fullRange * (1 - zoomFactor * 0.95);
+            const center = (timelineChart.scales.x.min + timelineChart.scales.x.max) / 2;
+            const halfRange = newRange / 2;
+
+            timelineChart.options.scales.x.min = Math.max(fullMin, center - halfRange);
+            timelineChart.options.scales.x.max = Math.min(fullMax, center + halfRange);
+            timelineChart.update('none');
+        });
+
+        const resetZoomBtn = document.getElementById('resetZoomBtn');
+        resetZoomBtn.addEventListener('click', () => {
+            if (timelineChart) {
+                timelineChart.options.scales.x.min = fullMin;
+                timelineChart.options.scales.x.max = fullMax;
+                timelineChart.update();
+                zoomSlider.value = 0;
+            }
+        });
+
+        // Modal
+        const modal = document.getElementById('bookModal');
+        const modalBody = document.getElementById('modalBody');
+        const closeBtn = document.getElementsByClassName('close')[0];
+
+        function showBookModal(book) {
+            const iconLetter = book.author.split(' ')[0][0].toUpperCase();
+            modalBody.innerHTML = `
+                <div class="author-icon">${iconLetter}</div>
+                <h2>${book.name}</h2>
+                <p><strong>Author:</strong> ${book.author}</p>
+                <p><strong>Approximate Date:</strong> ${book.years}</p>
+                <p><strong>Major Characters:</strong> ${book.major}</p>
+                <p><strong>Points to Christ:</strong> ${book.christ}</p>
+                <p><strong>Summary:</strong> ${book.summary}</p>
+            `;
+            modal.style.display = 'flex';
+        }
+
+        closeBtn.onclick = () => modal.style.display = 'none';
+        window.onclick = e => { if (e.target == modal) modal.style.display = 'none'; };
+
+        // Update all charts
+        function updateAllCharts() {
+            createOTChart();
+            createNTChart();
+            createTimeline();
+        }
+
+        // Event Listeners
+        document.getElementById('version').addEventListener('change', e => {
+            currentVersion = e.target.value;
+            updateAllCharts();
+        });
+
+        document.getElementById('metric').addEventListener('change', e => {
+            currentMetric = e.target.value;
+            updateAllCharts();
+        });
+
+        document.getElementById('sortOrder').addEventListener('change', e => {
+            currentSort = e.target.value;
+            createOTChart();
+            createNTChart();
+        });
+
+        // Initial render
+        updateAllCharts();
+    </script>
+</body>
+</html>
