@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paul's Churches Map - Biblical Chronologies</title>
+    <meta name="description" content="Interactive map showing the churches planted by Apostle Paul during his missionary journeys.">
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+          crossorigin=""/>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Georgia', serif;
+            background: #f5e9d1 url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600"><rect fill="%23f5e9d1" width="600" height="600"/><path d="M100,100 Q300,50 500,100 T500,500 Q300,550 100,500 T100,100" fill="none" stroke="%23d4b580" stroke-width="3" opacity="0.2"/><text x="300" y="320" font-size="80" text-anchor="middle" fill="%23a08040" opacity="0.1">Holy Scripture</text></svg>') fixed;
+            background-size: cover;
+            color: #3c2f2f;
+            min-height: 100vh;
+        }
+        header {
+            text-align: center;
+            padding: 60px 20px 40px;
+            background: linear-gradient(rgba(245,233,209,0.8), rgba(245,233,209,0.95));
+        }
+        h1 {
+            font-size: 3em;
+            color: #8b4513;
+            margin: 0;
+        }
+        p.subtitle {
+            font-size: 1.3em;
+            font-style: italic;
+            color: #654321;
+            max-width: 800px;
+            margin: 20px auto;
+        }
+        nav {
+            text-align: center;
+            padding: 20px;
+            background: rgba(139,69,19,0.1);
+        }
+        nav a {
+            margin: 0 20px;
+            color: #8b4513;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        nav a:hover { text-decoration: underline; }
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+        #paulMap {
+            height: 700px;
+            border: 4px solid #d4b580;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(139,69,19,0.3);
+        }
+        .leaflet-popup-content {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            min-width: 250px;
+        }
+        .leaflet-popup-content b {
+            color: #8b4513;
+        }
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: rgba(139,69,19,0.1);
+            color: #654321;
+            font-size: 0.9em;
+            margin-top: 50px;
+        }
+        @media (max-width: 768px) {
+            #paulMap { height: 500px; }
+            h1 { font-size: 2.5em; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Churches Planted by Apostle Paul</h1>
+        <p class="subtitle">Click on the large golden cross markers to learn about each church, the letter Paul wrote, and its modern population. The red dashed line shows the approximate path of his missionary journeys.</p>
+    </header>
+
+    <nav>
+        <a href="index.html">Home</a> |
+        <a href="chronologies.html">Chronologies</a> |
+        <a href="maps.html">Other Maps</a> |
+        <a href="jesus-map.html">Jesus' Travels</a> |
+        <strong>Paul's Churches</strong>
+    </nav>
+
+    <div class="container">
+        <div id="paulMap"></div>
+    </div>
+
+    <footer>
+        Biblical Chronologies • Tracing the spread of the early church • © 2025
+    </footer>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+            crossorigin=""></script>
+
+    <script>
+        // Large golden cross icon
+        const crossIcon = L.divIcon({
+            html: '<div style="font-size: 48px; color: #b8860b; text-shadow: 0 0 12px #ffd700;">✝</div>',
+            iconSize: [48, 48],
+            iconAnchor: [24, 48],
+            popupAnchor: [0, -48],
+            className: 'custom-cross-marker'
+        });
+
+        // Initialize map - centered on Mediterranean for Paul's journeys
+        const map = L.map('paulMap').setView([37.0, 23.0], 5);
+
+        // OpenStreetMap standard tiles - clear borders, roads, country lines
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            maxZoom: 19
+        }).addTo(map);
+
+        // Churches Paul planted or wrote to (in approximate chronological order)
+        const churches = [
+            { name: "Antioch (Syria)", lat: 36.200, lng: 36.160, letter: "Base church", details: "Starting point for Paul's missionary journeys with Barnabas.", population: "~2.5 million (Antakya)" },
+            { name: "Pisidian Antioch", lat: 38.306, lng: 31.188, letter: "Galatians", details: "Preached in synagogue; many Gentiles believed.", population: "~100,000 (Yalvaç)" },
+            { name: "Iconium", lat: 37.871, lng: 32.484, letter: "Galatians", details: "Great multitude believed despite opposition.", population: "~370,000 (Konya)" },
+            { name: "Lystra", lat: 37.600, lng: 32.333, letter: "Galatians", details: "Healed a lame man; stoned and left for dead.", population: "Small town" },
+            { name: "Derbe", lat: 37.350, lng: 33.300, letter: "Galatians", details: "Made many disciples after fleeing Lystra.", population: "Small town" },
+            { name: "Philippi", lat: 41.013, lng: 24.287, letter: "Philippians", details: "First European church; Lydia converted, jailer saved.", population: "~4,000 (ruins nearby)" },
+            { name: "Thessalonica", lat: 40.640, lng: 22.944, letter: "1 & 2 Thessalonians", details: "Preached 3 Sabbaths; many believed but faced riot.", population: "~1 million" },
+            { name: "Berea", lat: 40.524, lng: 22.203, letter: "None (commended)", details: "Nobly searched Scriptures daily.", population: "~45,000" },
+            { name: "Athens", lat: 37.983, lng: 23.727, letter: "None (preached on Mars Hill)", details: "Reasoned with philosophers; some believed.", population: "~3.1 million" },
+            { name: "Corinth", lat: 37.933, lng: 22.933, letter: "1 & 2 Corinthians, Romans", details: "Stayed 18 months; many baptized.", population: "~30,000 (ancient site)" },
+            { name: "Ephesus", lat: 37.941, lng: 27.341, letter: "Ephesians, 1 Timothy", details: "Stayed 3 years; extraordinary miracles.", population: "~300,000 (Selçuk area)" },
+            { name: "Colossae", lat: 37.350, lng: 29.250, letter: "Colossians, Philemon", details: "Church founded by Epaphras; Paul wrote from prison.", population: "Ruins" },
+            { name: "Troas", lat: 39.750, lng: 26.233, letter: "None (vision of Macedonian man)", details: "Received call to Macedonia.", population: "Small town" },
+            { name: "Rome", lat: 41.902, lng: 12.496, letter: "Romans", details: "Church already existed; Paul wrote before visiting.", population: "~2.8 million" }
+        ];
+
+        // Add markers
+        churches.forEach(church => {
+            L.marker([church.lat, church.lng], { icon: crossIcon })
+                .addTo(map)
+                .bindPopup(`
+                    <div>
+                        <h3 style="margin:0 0 10px; color:#8b4513;">${church.name}</h3>
+                        <p><strong>Letter(s):</strong> ${church.letter}</p>
+                        <p><strong>Context:</strong> ${church.details}</p>
+                        <p><strong>Modern Population:</strong> ${church.population}</p>
+                    </div>
+                `);
+        });
+
+        // Travel route line (approximate path of journeys)
+        const routeCoords = churches.map(c => [c.lat, c.lng]);
+        L.polyline(routeCoords, {
+            color: '#8b4513',
+            weight: 5,
+            opacity: 0.8,
+            dashArray: '15, 10',
+            lineCap: 'round'
+        }).addTo(map);
+
+        // Direction arrows along the route
+        const decorator = L.polylineDecorator(routeCoords, {
+            patterns: [
+                { offset: '50%', repeat: '200px', symbol: L.Symbol.arrowHead({pixelSize: 12, polygon: false, pathOptions: {stroke: true, color: '#8b4513', weight: 4, opacity: 0.8}}) }
+            ]
+        }).addTo(map);
+    </script>
+</body>
+</html>
