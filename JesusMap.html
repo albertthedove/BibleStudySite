@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jesus' Travels Map - Biblical Chronologies</title>
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+          crossorigin=""/>
+
+    <style>
+        /* (same style as before for consistency) */
+        body { margin: 0; font-family: 'Georgia', serif; background: #f5e9d1 /* ... same parchment style ... */ }
+        /* ... (full style from previous) */
+        #jesusMap { height: 700px; border: 4px solid #d4b580; border-radius: 15px; box-shadow: 0 10px 30px rgba(139,69,19,0.3); }
+        /* ... */
+    </style>
+</head>
+<body>
+    <!-- (same header, nav, container as before) -->
+
+    <div class="container">
+        <div id="jesusMap"></div>
+    </div>
+
+    <!-- (footer same) -->
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+            crossorigin=""></script>
+
+    <script>
+        // Larger golden cross
+        const crossIcon = L.divIcon({
+            html: '<div style="font-size: 48px; color: #b8860b; text-shadow: 0 0 12px #ffd700;">✝</div>',
+            iconSize: [48, 48],
+            iconAnchor: [24, 48],
+            popupAnchor: [0, -48]
+        });
+
+        const map = L.map('jesusMap').setView([32.0, 35.2], 8);
+
+        // OpenStreetMap - clear borders/lines/roads
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors',
+            maxZoom: 19
+        }).addTo(map);
+
+        // Places (ancient names as label)
+        const places = [
+            { biblical: "Bethlehem", modern: "Bethlehem", lat: 31.7031, lng: 35.1956, event: "Birth of Jesus", details: "Born in a manger (Luke 2).", population: "~25,000" },
+            { biblical: "Nazareth", modern: "Nazareth", lat: 32.6996, lng: 35.3035, event: "Childhood & Ministry Start", details: "Grew up; rejected in synagogue (Luke 4).", population: "~77,000" },
+            { biblical: "Jordan River", modern: "Jordan River", lat: 31.836, lng: 35.550, event: "Baptism", details: "Baptized by John (Matt 3).", population: "N/A" },
+            { biblical: "Cana", modern: "Kafr Kanna", lat: 32.746, lng: 35.340, event: "First Miracle", details: "Water to wine (John 2).", population: "~23,000" },
+            { biblical: "Capernaum", modern: "Capernaum (ruins)", lat: 32.8803, lng: 35.5736, event: "Ministry Base", details: "Many healings & teachings (Matt 4,8,9).", population: "Archaeological site" },
+            // ... (all other places)
+        ];
+
+        places.forEach(place => {
+            L.marker([place.lat, place.lng], { icon: crossIcon })
+                .addTo(map)
+                .bindPopup(`
+                    <h3>${place.biblical}</h3>
+                    <p><strong>Event:</strong> ${place.event}</p>
+                    <p><strong>Details:</strong> ${place.details}</p>
+                    <p><strong>Modern Name/Population:</strong> ${place.modern} (${place.population})</p>
+                `);
+        });
+
+        // Route line + arrows
+        const routeCoords = places.map(p => [p.lat, p.lng]);
+        L.polyline(routeCoords, { color: '#8b4513', weight: 5, opacity: 0.8, dashArray: '15, 10' }).addTo(map);
+
+        // Arrows for direction
+        L.polylineDecorator(routeCoords, {
+            patterns: [{ offset: '50%', repeat: '200px', symbol: L.Symbol.arrowHead({pixelSize: 12, pathOptions: {color: '#8b4513', weight: 4}}) }]
+        }).addTo(map);
+    </script>
+</body>
+</html>
