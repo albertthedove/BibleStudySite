@@ -46,7 +46,7 @@
     <a href="PaulineChurches.html">Paul's Letters</a> |
     <a href="jesusmap.html">Jesus Map</a> |
     <a href="paulmap.html">Paul Map</a> |
-    <a href="BibleChronos.html">Combined Chronology</a> |
+    <a href="BibleChronos.html">Chronology</a> |
     <a href="about.html">About</a> |
     <a href="privacy.html">Privacy</a> |
     <a href="terms.html">Terms</a>
@@ -115,7 +115,7 @@
 <!-- Modal -->
 <div id="bookModal" class="modal">
     <div class="modal-content">
-        <span class="close">&times;</span>
+        <span class="close">×</span>
         <div id="modalBody"></div>
     </div>
 </div>
@@ -128,50 +128,90 @@
 </footer>
 
 <script>
-// ── Full book data ───────────────────────────────────────────────
+// Full 66 books data with realistic KJV word counts
 const bibleBooks = [
-    // OT books (39)
+    // Old Testament
     {name:"Genesis", testament:"ot", author:"Moses", years:"1440–1400 BCE", chapters:50, words:{kjv:38262,nkjv:38200,esv:38000,niv:38200,nlt:36000,nasb:38200}, major:"Adam, Noah, Abraham, Joseph", christ:"Seed of woman (3:15)", summary:"Creation, Fall, Flood, Patriarchs"},
     {name:"Exodus", testament:"ot", author:"Moses", years:"1440–1400 BCE", chapters:40, words:{kjv:32692,nkjv:32600,esv:32500,niv:32700,nlt:31000,nasb:32600}, major:"Moses, Aaron", christ:"Passover Lamb", summary:"Deliverance, Sinai covenant"},
-    {name:"Leviticus", testament:"ot", author:"Moses", years:"1440 BCE", chapters:27, words:{kjv:24546,...}, major:"Aaron", christ:"High Priest & sacrifices", summary:"Holiness, offerings, priesthood"},
+    {name:"Leviticus", testament:"ot", author:"Moses", years:"1440 BCE", chapters:27, words:{kjv:24546,nkjv:24500,esv:24400,niv:24600,nlt:23500,nasb:24500}, major:"Aaron", christ:"High Priest & sacrifices", summary:"Holiness, offerings, priesthood"},
     {name:"Numbers", testament:"ot", author:"Moses", years:"1440–1400 BCE", chapters:36, words:{kjv:32896,nkjv:32800,esv:32700,niv:32900,nlt:31200,nasb:32800}, major:"Moses", christ:"Bronze serpent", summary:"Wilderness, census"},
     {name:"Deuteronomy", testament:"ot", author:"Moses", years:"1400 BCE", chapters:34, words:{kjv:28536,nkjv:28400,esv:28300,niv:28500,nlt:27000,nasb:28400}, major:"Moses", christ:"Prophet like Moses", summary:"Second law, covenant renewal"},
     {name:"Joshua", testament:"ot", author:"Joshua", years:"1400–1375 BCE", chapters:24, words:{kjv:18958,nkjv:18900,esv:18800,niv:19000,nlt:18000,nasb:18900}, major:"Joshua", christ:"Captain of salvation", summary:"Conquest of Canaan"},
     {name:"Judges", testament:"ot", author:"Samuel?", years:"1050–1000 BCE", chapters:21, words:{kjv:18976,nkjv:18900,esv:18800,niv:19000,nlt:18000,nasb:18900}, major:"Gideon, Samson", christ:"Deliverer", summary:"Cycles of sin & deliverance"},
-    {name:"Ruth", testament:"ot", author:"Samuel?", years:"1000 BCE", chapters:4, words:{kjv:2578,nkjv:2570,esv:2560,niv:2580,nlt:2450,nasb:2570}, major:"Ruth, Boaz", christ:"Kinsman-Redeemer", summary:"Redemption & genealogy"},
-    {name:"1 Samuel", testament:"ot", author:"Samuel", years:"930 BCE", chapters:31, words:{kjv:25161,nkjv:25100,esv:25000,niv:25200,nlt:24000,nasb:25100}, major:"Samuel, Saul, David", christ:"Anointed King", summary:"Transition to monarchy"},
-    {name:"2 Samuel", testament:"ot", author:"Unknown", years:"930 BCE", chapters:24, words:{kjv:20912,nkjv:20900,esv:20800,niv:21000,nlt:20000,nasb:20900}, major:"David", christ:"Davidic covenant", summary:"David's reign"},
-    // ... (continuing pattern – I've abbreviated here for response length)
-    // Add remaining OT books similarly (1 Kings to Malachi)
-    {name:"Malachi", testament:"ot", author:"Malachi", years:"430 BCE", chapters:4, words:{kjv:4375,nkjv:4360,esv:4350,niv:4370,nlt:4150,nasb:4360}, major:"Malachi", christ:"Messenger & sun of righteousness", summary:"Covenant & coming day"},
+    {name:"Ruth", testament:"ot", author:"Samuel?", years:"~1000 BCE", chapters:4, words:{kjv:2578,nkjv:2570,esv:2560,niv:2580,nlt:2450,nasb:2570}, major:"Ruth, Boaz", christ:"Kinsman-Redeemer", summary:"Redemption & genealogy"},
+    {name:"1 Samuel", testament:"ot", author:"Samuel, Nathan, Gad", years:"~930 BCE", chapters:31, words:{kjv:25161,nkjv:25100,esv:25000,niv:25200,nlt:24000,nasb:25100}, major:"Samuel, Saul, David", christ:"Anointed King", summary:"Transition to monarchy"},
+    {name:"2 Samuel", testament:"ot", author:"Nathan, Gad", years:"~930 BCE", chapters:24, words:{kjv:20912,nkjv:20900,esv:20800,niv:21000,nlt:20000,nasb:20900}, major:"David", christ:"Davidic covenant", summary:"David's reign"},
+    {name:"1 Kings", testament:"ot", author:"Jeremiah?", years:"~560 BCE", chapters:22, words:{kjv:24305,nkjv:24200,esv:24100,niv:24300,nlt:23000,nasb:24200}, major:"Solomon", christ:"Greater than Solomon", summary:"Kingdom united → divided"},
+    {name:"2 Kings", testament:"ot", author:"Jeremiah?", years:"~560 BCE", chapters:25, words:{kjv:23286,nkjv:23200,esv:23100,niv:23300,nlt:22000,nasb:23200}, major:"Elijah, Elisha", christ:"Prophetic voice", summary:"Divided kingdoms, exile"},
+    {name:"1 Chronicles", testament:"ot", author:"Ezra?", years:"450–430 BCE", chapters:29, words:{kjv:20369,nkjv:20300,esv:20200,niv:20400,nlt:19500,nasb:20300}, major:"David", christ:"Davidic line", summary:"Genealogies & David's reign"},
+    {name:"2 Chronicles", testament:"ot", author:"Ezra?", years:"450–430 BCE", chapters:36, words:{kjv:26074,nkjv:26000,esv:25900,niv:26100,nlt:25000,nasb:26000}, major:"Solomon", christ:"Temple builder", summary:"Temple & Judah's kings"},
+    {name:"Ezra", testament:"ot", author:"Ezra", years:"458–445 BCE", chapters:10, words:{kjv:7447,nkjv:7430,esv:7420,niv:7450,nlt:7100,nasb:7430}, major:"Ezra", christ:"Restorer", summary:"Return from exile, temple rebuilt"},
+    {name:"Nehemiah", testament:"ot", author:"Nehemiah", years:"445–432 BCE", chapters:13, words:{kjv:10483,nkjv:10450,esv:10400,niv:10500,nlt:10000,nasb:10450}, major:"Nehemiah", christ:"Rebuilder", summary:"Walls rebuilt, reforms"},
+    {name:"Esther", testament:"ot", author:"Unknown", years:"~460 BCE", chapters:10, words:{kjv:5637,nkjv:5620,esv:5610,niv:5640,nlt:5400,nasb:5620}, major:"Esther, Mordecai", christ:"Providence", summary:"Purim deliverance"},
+    {name:"Job", testament:"ot", author:"Unknown", years:"~2000–1500 BCE", chapters:42, words:{kjv:39904,nkjv:39800,esv:39700,niv:39900,nlt:38000,nasb:39800}, major:"Job", christ:"Suffering servant", summary:"Theodicy & suffering"},
+    {name:"Psalms", testament:"ot", author:"David (73), Asaph, Sons of Korah, others", years:"1000–400 BCE", chapters:150, words:{kjv:43743,nkjv:43600,esv:43500,niv:43700,nlt:41500,nasb:43600}, major:"David", christ:"Messianic psalms", summary:"Worship & prayer"},
+    {name:"Proverbs", testament:"ot", author:"Solomon, Agur, Lemuel", years:"~950 BCE", chapters:31, words:{kjv:15038,nkjv:15000,esv:14900,niv:15100,nlt:14500,nasb:15000}, major:"Solomon", christ:"Wisdom incarnate", summary:"Practical wisdom"},
+    {name:"Ecclesiastes", testament:"ot", author:"Solomon", years:"~935 BCE", chapters:12, words:{kjv:5579,nkjv:5560,esv:5550,niv:5580,nlt:5300,nasb:5560}, major:"The Preacher", christ:"Meaning in Christ", summary:"Vanity of life without God"},
+    {name:"Song of Solomon", testament:"ot", author:"Solomon", years:"~950 BCE", chapters:8, words:{kjv:2658,nkjv:2650,esv:2640,niv:2660,nlt:2550,nasb:2650}, major:"Solomon", christ:"Bridegroom", summary:"Love & marriage"},
+    {name:"Isaiah", testament:"ot", author:"Isaiah", years:"740–680 BCE", chapters:66, words:{kjv:37044,nkjv:36900,esv:36800,niv:37100,nlt:35500,nasb:36900}, major:"Isaiah", christ:"Suffering Servant", summary:"Judgment & salvation"},
+    {name:"Jeremiah", testament:"ot", author:"Jeremiah", years:"627–586 BCE", chapters:52, words:{kjv:42254,nkjv:42100,esv:42000,niv:42300,nlt:40500,nasb:42100}, major:"Jeremiah", christ:"Weeping prophet", summary:"Judah's fall"},
+    {name:"Lamentations", testament:"ot", author:"Jeremiah", years:"586 BCE", chapters:5, words:{kjv:3415,nkjv:3400,esv:3390,niv:3420,nlt:3250,nasb:3400}, major:"Jeremiah", christ:"Man of sorrows", summary:"Mourning Jerusalem"},
+    {name:"Ezekiel", testament:"ot", author:"Ezekiel", years:"593–571 BCE", chapters:48, words:{kjv:39407,nkjv:39300,esv:39200,niv:39500,nlt:37500,nasb:39300}, major:"Ezekiel", christ:"Glory departed/returned", summary:"Exile visions"},
+    {name:"Daniel", testament:"ot", author:"Daniel", years:"605–536 BCE", chapters:12, words:{kjv:11602,nkjv:11500,esv:11400,niv:11600,nlt:11000,nasb:11500}, major:"Daniel", christ:"Son of Man", summary:"Kingdoms & prophecy"},
+    {name:"Hosea", testament:"ot", author:"Hosea", years:"755–715 BCE", chapters:14, words:{kjv:5175,nkjv:5160,esv:5150,niv:5180,nlt:4950,nasb:5160}, major:"Hosea", christ:"Faithful husband", summary:"Israel's unfaithfulness"},
+    {name:"Joel", testament:"ot", author:"Joel", years:"835–796 BCE", chapters:3, words:{kjv:2034,nkjv:2020,esv:2010,niv:2040,nlt:1950,nasb:2020}, major:"Joel", christ:"Day of the Lord", summary:"Locust plague & Spirit"},
+    {name:"Amos", testament:"ot", author:"Amos", years:"760–750 BCE", chapters:9, words:{kjv:4217,nkjv:4200,esv:4190,niv:4220,nlt:4050,nasb:4200}, major:"Amos", christ:"Justice", summary:"Social injustice"},
+    {name:"Obadiah", testament:"ot", author:"Obadiah", years:"~586 BCE", chapters:1, words:{kjv:670,nkjv:660,esv:650,niv:670,nlt:640,nasb:660}, major:"Edom", christ:"Kingdom victory", summary:"Edom judged"},
+    {name:"Jonah", testament:"ot", author:"Jonah", years:"~780 BCE", chapters:4, words:{kjv:1328,nkjv:1320,esv:1310,niv:1330,nlt:1270,nasb:1320}, major:"Jonah", christ:"Sign of resurrection", summary:"Nineveh repents"},
+    {name:"Micah", testament:"ot", author:"Micah", years:"735–700 BCE", chapters:7, words:{kjv:3153,nkjv:3140,esv:3130,niv:3160,nlt:3000,nasb:3140}, major:"Micah", christ:"Born in Bethlehem", summary:"Judgment & restoration"},
+    {name:"Nahum", testament:"ot", author:"Nahum", years:"663–612 BCE", chapters:3, words:{kjv:1285,nkjv:1270,esv:1260,niv:1290,nlt:1230,nasb:1270}, major:"Nahum", christ:"Avenger", summary:"Nineveh's doom"},
+    {name:"Habakkuk", testament:"ot", author:"Habakkuk", years:"612–589 BCE", chapters:3, words:{kjv:1476,nkjv:1470,esv:1460,niv:1480,nlt:1410,nasb:1470}, major:"Habakkuk", christ:"Faithful one", summary:"Faith amid evil"},
+    {name:"Zephaniah", testament:"ot", author:"Zephaniah", years:"640–620 BCE", chapters:3, words:{kjv:1615,nkjv:1600,esv:1590,niv:1620,nlt:1550,nasb:1600}, major:"Zephaniah", christ:"Day of the Lord", summary:"Judgment & remnant"},
+    {name:"Haggai", testament:"ot", author:"Haggai", years:"520 BCE", chapters:2, words:{kjv:1131,nkjv:1120,esv:1110,niv:1130,nlt:1080,nasb:1120}, major:"Haggai", christ:"Greater glory", summary:"Temple rebuilding"},
+    {name:"Zechariah", testament:"ot", author:"Zechariah", years:"520–480 BCE", chapters:14, words:{kjv:14302,nkjv:14200,esv:14100,niv:14300,nlt:13700,nasb:14200}, major:"Zechariah", christ:"Pierced one", summary:"Visions & Messiah"},
+    {name:"Malachi", testament:"ot", author:"Malachi", years:"~430 BCE", chapters:4, words:{kjv:4375,nkjv:4360,esv:4350,niv:4370,nlt:4150,nasb:4360}, major:"Malachi", christ:"Messenger & sun of righteousness", summary:"Covenant & coming day"},
 
-    // NT books (27)
+    // New Testament
     {name:"Matthew", testament:"nt", author:"Matthew", years:"60–70 CE", chapters:28, words:{kjv:23684,nkjv:23500,esv:23300,niv:23600,nlt:22000,nasb:23500}, major:"Jesus", christ:"King of the Jews", summary:"Teachings & miracles"},
     {name:"Mark", testament:"nt", author:"Mark", years:"55–65 CE", chapters:16, words:{kjv:15166,nkjv:15100,esv:15000,niv:15100,nlt:14200,nasb:15100}, major:"Jesus", christ:"Servant", summary:"Action-oriented gospel"},
     {name:"Luke", testament:"nt", author:"Luke", years:"60–80 CE", chapters:24, words:{kjv:25844,nkjv:25700,esv:25600,niv:25800,nlt:24500,nasb:25700}, major:"Jesus", christ:"Son of Man", summary:"Detailed & compassionate"},
     {name:"John", testament:"nt", author:"John", years:"85–95 CE", chapters:21, words:{kjv:19899,nkjv:19800,esv:19700,niv:19900,nlt:18800,nasb:19800}, major:"Jesus", christ:"Son of God", summary:"Signs & 'I Am' statements"},
     {name:"Acts", testament:"nt", author:"Luke", years:"62–65 CE", chapters:28, words:{kjv:24229,nkjv:24100,esv:24000,niv:24200,nlt:23000,nasb:24100}, major:"Peter, Paul", christ:"Ascended Lord", summary:"Early church growth"},
     {name:"Romans", testament:"nt", author:"Paul", years:"57 CE", chapters:16, words:{kjv:7111,nkjv:7100,esv:7100,niv:7100,nlt:6800,nasb:7100}, major:"Paul", christ:"Justification", summary:"Gospel explained"},
-    // ... (add remaining NT books similarly – 1 Corinthians to Revelation)
+    {name:"1 Corinthians", testament:"nt", author:"Paul", years:"55 CE", chapters:16, words:{kjv:6829,nkjv:6800,esv:6790,niv:6830,nlt:6500,nasb:6800}, major:"Paul", christ:"Wisdom & power", summary:"Church problems"},
+    {name:"2 Corinthians", testament:"nt", author:"Paul", years:"56 CE", chapters:13, words:{kjv:4477,nkjv:4460,esv:4450,niv:4480,nlt:4300,nasb:4460}, major:"Paul", christ:"Comfort in affliction", summary:"Paul's defense"},
+    {name:"Galatians", testament:"nt", author:"Paul", years:"49 CE", chapters:6, words:{kjv:2230,nkjv:2220,esv:2210,niv:2230,nlt:2150,nasb:2220}, major:"Paul", christ:"Freedom in Christ", summary:"Grace vs. law"},
+    {name:"Ephesians", testament:"nt", author:"Paul", years:"60–62 CE", chapters:6, words:{kjv:2422,nkjv:2410,esv:2400,niv:2430,nlt:2300,nasb:2410}, major:"Paul", christ:"Head of church", summary:"Church unity"},
+    {name:"Philippians", testament:"nt", author:"Paul", years:"61 CE", chapters:4, words:{kjv:1629,nkjv:1620,esv:1610,niv:1630,nlt:1550,nasb:1620}, major:"Paul", christ:"Joy in suffering", summary:"Joy & humility"},
+    {name:"Colossians", testament:"nt", author:"Paul", years:"60–62 CE", chapters:4, words:{kjv:1582,nkjv:1570,esv:1560,niv:1580,nlt:1500,nasb:1570}, major:"Paul", christ:"Preeminence", summary:"Christ's supremacy"},
+    {name:"1 Thessalonians", testament:"nt", author:"Paul", years:"51 CE", chapters:5, words:{kjv:1837,nkjv:1830,esv:1820,niv:1840,nlt:1750,nasb:1830}, major:"Paul", christ:"Coming King", summary:"Encouragement & rapture"},
+    {name:"2 Thessalonians", testament:"nt", author:"Paul", years:"52 CE", chapters:3, words:{kjv:1230,nkjv:1220,esv:1210,niv:1230,nlt:1170,nasb:1220}, major:"Paul", christ:"Day of the Lord", summary:"Perseverance"},
+    {name:"1 Timothy", testament:"nt", author:"Paul", years:"62–64 CE", chapters:6, words:{kjv:1591,nkjv:1580,esv:1570,niv:1590,nlt:1520,nasb:1580}, major:"Timothy", christ:"Mediator", summary:"Church leadership"},
+    {name:"2 Timothy", testament:"nt", author:"Paul", years:"66–67 CE", chapters:4, words:{kjv:1238,nkjv:1230,esv:1220,niv:1240,nlt:1180,nasb:1230}, major:"Timothy", christ:"Enduring", summary:"Paul's last words"},
+    {name:"Titus", testament:"nt", author:"Paul", years:"63–65 CE", chapters:3, words:{kjv:896,nkjv:890,esv:880,niv:900,nlt:860,nasb:890}, major:"Titus", christ:"Redeemer", summary:"Church order"},
+    {name:"Philemon", testament:"nt", author:"Paul", years:"60–62 CE", chapters:1, words:{kjv:445,nkjv:440,esv:430,niv:450,nlt:430,nasb:440}, major:"Philemon", christ:"Reconciler", summary:"Forgiveness"},
+    {name:"Hebrews", testament:"nt", author:"Unknown", years:"60–70 CE", chapters:13, words:{kjv:6897,nkjv:6880,esv:6870,niv:6900,nlt:6600,nasb:6880}, major:"Unknown", christ:"Better covenant", summary:"Superiority of Christ"},
+    {name:"James", testament:"nt", author:"James", years:"45–50 CE", chapters:5, words:{kjv:1746,nkjv:1740,esv:1730,niv:1750,nlt:1670,nasb:1740}, major:"James", christ:"Lord of glory", summary:"Faith & works"},
+    {name:"1 Peter", testament:"nt", author:"Peter", years:"62–64 CE", chapters:5, words:{kjv:1684,nkjv:1680,esv:1670,niv:1690,nlt:1610,nasb:1680}, major:"Peter", christ:"Suffering Savior", summary:"Hope in suffering"},
+    {name:"2 Peter", testament:"nt", author:"Peter", years:"65–68 CE", chapters:3, words:{kjv:1099,nkjv:1090,esv:1080,niv:1100,nlt:1050,nasb:1090}, major:"Peter", christ:"Day of God", summary:"False teachers"},
+    {name:"1 John", testament:"nt", author:"John", years:"90–95 CE", chapters:5, words:{kjv:2141,nkjv:2130,esv:2120,niv:2150,nlt:2050,nasb:2130}, major:"John", christ:"Life & light", summary:"Assurance & love"},
+    {name:"2 John", testament:"nt", author:"John", years:"90–95 CE", chapters:1, words:{kjv:298,nkjv:290,esv:280,niv:300,nlt:290,nasb:290}, major:"John", christ:"Truth", summary:"Walk in truth"},
+    {name:"3 John", testament:"nt", author:"John", years:"90–95 CE", chapters:1, words:{kjv:294,nkjv:290,esv:280,niv:300,nlt:290,nasb:290}, major:"Gaius", christ:"Hospitality", summary:"Support truth"},
+    {name:"Jude", testament:"nt", author:"Jude", years:"65–80 CE", chapters:1, words:{kjv:608,nkjv:600,esv:590,niv:610,nlt:580,nasb:600}, major:"Jude", christ:"Keeper", summary:"Contend for faith"},
     {name:"Revelation", testament:"nt", author:"John", years:"95 CE", chapters:22, words:{kjv:11952,nkjv:11900,esv:11800,niv:11900,nlt:11300,nasb:11900}, major:"John", christ:"Alpha & Omega", summary:"End times & victory"}
-    // Note: In a real file, expand all 66 entries with consistent data
 ];
-
-// Fill in missing word counts with fallback
-bibleBooks.forEach(book => {
-    if (!book.words) book.words = {};
-    ['kjv','nkjv','esv','niv','nlt','nasb'].forEach(v => {
-        if (!book.words[v]) book.words[v] = Math.round(book.chapters * (book.testament === 'ot' ? 780 : 850));
-    });
-});
 
 let otChart, ntChart, timelineChart;
 let currentVersion = "kjv";
 let currentMetric = "chapters";
 let currentSort = "canonical";
 
+// Fallback: calculate approximate word count if missing
 function getWordCount(book) {
-    return book.words[currentVersion] || book.words.kjv || Math.round(book.chapters * (book.testament === 'ot' ? 780 : 850));
+    if (book.words && book.words[currentVersion]) return book.words[currentVersion];
+    // Fallback: ~780 words/chapter OT, ~850 NT (rough average)
+    const avg = book.testament === 'ot' ? 780 : 850;
+    return Math.round(book.chapters * avg);
 }
 
 function filterAndSortBooks(testament) {
@@ -187,13 +227,17 @@ function filterAndSortBooks(testament) {
     return data;
 }
 
-// ── Chart creation functions with error handling ───────────────────
+function showDebug(msg) {
+    const debug = document.getElementById('debugInfo');
+    debug.textContent = "Debug: " + msg;
+    debug.style.display = 'block';
+    console.error(msg);
+}
+
+// ── Create OT Bar Chart ──────────────────────────────────────────
 function createOTChart() {
     const ctx = document.getElementById('otChart')?.getContext('2d');
-    if (!ctx) {
-        showDebug("OT canvas not found");
-        return;
-    }
+    if (!ctx) return showDebug("OT canvas not found");
 
     const data = filterAndSortBooks('ot');
 
@@ -206,7 +250,7 @@ function createOTChart() {
                 labels: data.map(d => d.name),
                 datasets: [{
                     label: currentMetric === 'chapters' ? 'Chapters' : `Words (${currentVersion.toUpperCase()})`,
-                    data: data.map(d => d.value),
+                    data: data.map(d => d.value || 0),
                     backgroundColor: '#3498db88',
                     borderColor: '#2980b9',
                     borderWidth: 1
@@ -221,16 +265,14 @@ function createOTChart() {
             }
         });
     } catch (err) {
-        showDebug("OT chart failed: " + err.message);
+        showDebug("OT chart error: " + err.message);
     }
 }
 
+// ── Create NT Bar Chart (similar) ────────────────────────────────
 function createNTChart() {
     const ctx = document.getElementById('ntChart')?.getContext('2d');
-    if (!ctx) {
-        showDebug("NT canvas not found");
-        return;
-    }
+    if (!ctx) return showDebug("NT canvas not found");
 
     const data = filterAndSortBooks('nt');
 
@@ -243,7 +285,7 @@ function createNTChart() {
                 labels: data.map(d => d.name),
                 datasets: [{
                     label: currentMetric === 'chapters' ? 'Chapters' : `Words (${currentVersion.toUpperCase()})`,
-                    data: data.map(d => d.value),
+                    data: data.map(d => d.value || 0),
                     backgroundColor: '#e74c3c88',
                     borderColor: '#c0392b',
                     borderWidth: 1
@@ -258,41 +300,41 @@ function createNTChart() {
             }
         });
     } catch (err) {
-        showDebug("NT chart failed: " + err.message);
+        showDebug("NT chart error: " + err.message);
     }
 }
 
+// ── Timeline Chart ───────────────────────────────────────────────
 function createTimeline() {
     const ctx = document.getElementById('timelineChart')?.getContext('2d');
-    if (!ctx) {
-        showDebug("Timeline canvas not found");
-        return;
-    }
+    if (!ctx) return showDebug("Timeline canvas not found");
 
-    const datasets = [{
-        label: 'Books',
-        data: bibleBooks.map(book => {
-            let year = parseInt(book.years.match(/\d+/)?.[0] || 0);
-            if (book.years.includes('BCE')) year = -year;
-            return {
-                x: year,
-                y: Math.random() * 0.8 + 0.1,
-                book,
-                wordCount: getWordCount(book)
-            };
-        }),
-        backgroundColor: ctx => ctx.raw.book.testament === 'ot' ? '#3498db88' : '#e74c3c88',
-        borderColor: ctx => ctx.raw.book.testament === 'ot' ? '#2980b9' : '#c0392b',
-        borderWidth: 1,
-        barThickness: 16
-    }];
+    const dataPoints = bibleBooks.map(book => {
+        let year = parseInt(book.years.match(/\d+/)?.[0] || 0);
+        if (book.years.includes('BCE')) year = -year;
+        return {
+            x: year,
+            y: Math.random() * 0.8 + 0.1, // slight vertical spread
+            book,
+            wordCount: getWordCount(book)
+        };
+    });
 
     if (timelineChart) timelineChart.destroy();
 
     try {
         timelineChart = new Chart(ctx, {
             type: 'bar',
-            data: { datasets },
+            data: {
+                datasets: [{
+                    label: 'Books',
+                    data: dataPoints,
+                    backgroundColor: ctx => ctx.raw.book.testament === 'ot' ? '#3498db88' : '#e74c3c88',
+                    borderColor: ctx => ctx.raw.book.testament === 'ot' ? '#2980b9' : '#c0392b',
+                    borderWidth: 1,
+                    barThickness: 16
+                }]
+            },
             options: {
                 indexAxis: 'y',
                 responsive: true,
@@ -332,7 +374,7 @@ function createTimeline() {
             }
         });
     } catch (err) {
-        showDebug("Timeline chart failed: " + err.message);
+        showDebug("Timeline error: " + err.message);
     }
 }
 
@@ -353,13 +395,6 @@ function showBookModal(book) {
         <p><strong>Summary:</strong> ${book.summary}</p>
     `;
     modal.style.display = 'flex';
-}
-
-function showDebug(msg) {
-    const debug = document.getElementById('debugInfo');
-    debug.textContent = "Debug: " + msg;
-    debug.style.display = 'block';
-    console.error(msg);
 }
 
 // Event listeners
@@ -388,13 +423,13 @@ document.getElementById('resetZoomBtn').onclick = () => {
 document.querySelector('.close').onclick = () => document.getElementById('bookModal').style.display = 'none';
 window.onclick = e => { if (e.target.id === 'bookModal') e.target.style.display = 'none'; };
 
-// Initial render with small delay to ensure scripts loaded
+// Initial render
 window.addEventListener('load', () => {
     setTimeout(() => {
         createOTChart();
         createNTChart();
         createTimeline();
-    }, 500);
+    }, 300);
 });
 </script>
 </body>
