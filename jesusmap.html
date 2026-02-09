@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jesus' Travels Map - Biblical Chronologies</title>
+    <meta name="description" content="Interactive map tracing the journeys of Jesus and major events in His ministry.">
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+          crossorigin=""/>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: white;
+            color: #333;
+        }
+        nav {
+            background: #f8f9fa;
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+        nav a {
+            margin: 0 14px;
+            color: #007bff;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #eee;
+        }
+        h1 {
+            font-size: 2.4em;
+            margin: 0;
+            color: #222;
+        }
+        p.subtitle {
+            font-size: 1.15em;
+            color: #555;
+            max-width: 800px;
+            margin: 12px auto 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        #jesusMap {
+            height: 700px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .leaflet-popup-content {
+            line-height: 1.6;
+            min-width: 260px;
+            font-size: 0.95em;
+        }
+        .leaflet-popup-content h3 {
+            margin: 0 0 10px;
+            color: #007bff;
+        }
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: #666;
+            border-top: 1px solid #eee;
+            font-size: 0.92em;
+        }
+        footer a {
+            color: #007bff;
+            text-decoration: none;
+            margin: 0 8px;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 768px) {
+            #jesusMap { height: 500px; }
+            h1 { font-size: 2em; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html">Home</a> |
+        <a href="KingsJudaIsrael.html">Kings</a> |
+        <a href="PaulineChurches.html">Paul's Letters</a> |
+        <a href="paulmap.html">Paul Map</a> |
+        <a href="BooksGraphs.html">Book Graphs</a> |
+        <a href="BibleChronos.html">Combined Chronology</a> |
+        <a href="about.html">About</a> |
+        <a href="privacy.html">Privacy</a> |
+        <a href="terms.html">Terms</a>
+    </nav>
+
+    <header>
+        <h1>Jesus' Journeys Map</h1>
+        <p class="subtitle">Interactive map tracing the major locations and events in the life and ministry of Jesus Christ, from His birth to the resurrection and ascension.</p>
+    </header>
+
+    <div class="container">
+        <div id="jesusMap"></div>
+    </div>
+
+    <footer>
+        Biblical Chronologies • For personal Bible study • © 2026 • 
+        <a href="about.html">About</a> • 
+        <a href="privacy.html">Privacy Policy</a> • 
+        <a href="terms.html">Terms of Service</a>
+    </footer>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+            crossorigin=""></script>
+
+    <script>
+        // Standard blue marker icon (clean & simple)
+        const blueIcon = L.icon({
+            iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+            shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowSize: [41, 41]
+        });
+
+        // Initialize map centered on Israel / Palestine region
+        const map = L.map('jesusMap').setView([31.8, 35.2], 8);
+
+        // OpenStreetMap tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            maxZoom: 19
+        }).addTo(map);
+
+        // Key places in Jesus' life and ministry (with approximate coordinates)
+        const places = [
+            {
+                name: "Bethlehem",
+                lat: 31.7031,
+                lng: 35.1956,
+                event: "Birth of Jesus",
+                details: "Born in a manger (Luke 2:1–20). Visited by shepherds and Magi.",
+                modern: "Bethlehem, West Bank (~25,000 pop.)"
+            },
+            {
+                name: "Nazareth",
+                lat: 32.6996,
+                lng: 35.3035,
+                event: "Childhood & Early Ministry",
+                details: "Jesus grew up here; rejected in synagogue (Luke 4:16–30).",
+                modern: "Nazareth, Israel (~77,000 pop.)"
+            },
+            {
+                name: "Jordan River (near Bethany beyond Jordan)",
+                lat: 31.836,
+                lng: 35.55,
+                event: "Baptism by John",
+                details: "Baptized by John the Baptist; Holy Spirit descended (Matt 3; Mark 1).",
+                modern: "Baptism site near Jericho"
+            },
+            {
+                name: "Cana",
+                lat: 32.746,
+                lng: 35.34,
+                event: "First Miracle",
+                details: "Water turned into wine at wedding (John 2:1–11).",
+                modern: "Kafr Kanna, Israel (~23,000 pop.)"
+            },
+            {
+                name: "Capernaum",
+                lat: 32.8803,
+                lng: 35.5736,
+                event: "Ministry Base",
+                details: "Called disciples; many healings & teachings (Matt 4,8,9; Mark 1–2).",
+                modern: "Capernaum ruins, Israel"
+            },
+            {
+                name: "Sea of Galilee",
+                lat: 32.833,
+                lng: 35.583,
+                event: "Miracles & Teachings",
+                details: "Calmed storm; walked on water; fed 5,000 (Matt 14; Mark 4–6).",
+                modern: "Sea of Galilee / Lake Kinneret"
+            },
+            {
+                name: "Mount of Beatitudes",
+                lat: 32.881,
+                lng: 35.551,
+                event: "Sermon on the Mount",
+                details: "Delivered Beatitudes & Lord's Prayer (Matt 5–7).",
+                modern: "Near Capernaum"
+            },
+            {
+                name: "Caesarea Philippi",
+                lat: 33.248,
+                lng: 35.694,
+                event: "Peter's Confession",
+                details: "Peter declared 'You are the Christ' (Matt 16:13–20).",
+                modern: "Banias, Golan Heights"
+            },
+            {
+                name: "Jericho",
+                lat: 31.871,
+                lng: 35.444,
+                event: "Zacchaeus & Blind Bartimaeus",
+                details: "Zacchaeus climbed tree; blind man healed (Luke 19; Mark 10).",
+                modern: "Jericho, West Bank (~20,000 pop.)"
+            },
+            {
+                name: "Jerusalem",
+                lat: 31.7683,
+                lng: 35.2137,
+                event: "Triumphal Entry, Passion Week",
+                details: "Palm Sunday; Last Supper; Crucifixion; Resurrection (all Gospels).",
+                modern: "Jerusalem (~900,000 pop.)"
+            },
+            {
+                name: "Golgotha / Calvary",
+                lat: 31.7784,
+                lng: 35.2300,
+                event: "Crucifixion",
+                details: "Jesus crucified (Matt 27; Mark 15; Luke 23; John 19).",
+                modern: "Church of the Holy Sepulchre area"
+            },
+            {
+                name: "Garden Tomb / Resurrection Site",
+                lat: 31.7839,
+                lng: 35.2302,
+                event: "Resurrection",
+                details: "Empty tomb discovered (Matt 28; Mark 16; Luke 24; John 20).",
+                modern: "Garden Tomb (alternative site)"
+            },
+            {
+                name: "Mount of Olives",
+                lat: 31.778,
+                lng: 35.245,
+                event: "Ascension",
+                details: "Jesus ascended to heaven (Luke 24:50–53; Acts 1).",
+                modern: "Mount of Olives, Jerusalem"
+            }
+        ];
+
+        // Add markers with popups
+        places.forEach(place => {
+            L.marker([place.lat, place.lng], { icon: blueIcon })
+                .addTo(map)
+                .bindPopup(`
+                    <h3>${place.name}</h3>
+                    <p><strong>Event:</strong> ${place.event}</p>
+                    <p><strong>Details:</strong> ${place.details}</p>
+                    <p><strong>Modern:</strong> ${place.modern}</p>
+                `);
+        });
+
+        // Approximate route connecting the main locations in chronological order
+        const routeCoords = [
+            [31.7031, 35.1956],   // Bethlehem
+            [32.6996, 35.3035],   // Nazareth
+            [31.836, 35.55],      // Jordan River
+            [32.746, 35.34],      // Cana
+            [32.8803, 35.5736],   // Capernaum
+            [32.833, 35.583],     // Sea of Galilee
+            [32.881, 35.551],     // Mount of Beatitudes
+            [33.248, 35.694],     // Caesarea Philippi
+            [31.871, 35.444],     // Jericho
+            [31.7683, 35.2137],   // Jerusalem
+            [31.7784, 35.2300],   // Golgotha
+            [31.7839, 35.2302],   // Resurrection site
+            [31.778, 35.245]      // Mount of Olives (Ascension)
+        ];
+
+        // Draw dashed polyline for journey path
+        L.polyline(routeCoords, {
+            color: '#007bff',
+            weight: 4,
+            opacity: 0.7,
+            dashArray: '10, 10'
+        }).addTo(map);
+
+        // Optional: Add arrows along the path (requires Leaflet.PolylineDecorator or similar)
+        // For simplicity, omitted here – you can add leaflet-arrowheads plugin if desired
+
+        // Fit bounds to show all points nicely
+        map.fitBounds(routeCoords);
+    </script>
+</body>
+</html>

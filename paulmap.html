@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paul's Churches Map - Biblical Chronologies</title>
-    <meta name="description" content="Interactive map showing the churches planted by Apostle Paul during his missionary journeys.">
+    <title>Paul's Missionary Journeys Map - Biblical Chronologies</title>
+    <meta name="description" content="Interactive map of churches founded by Apostle Paul during his missionary journeys, with letters and modern locations.">
 
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -14,95 +14,111 @@
     <style>
         body {
             margin: 0;
-            font-family: 'Georgia', serif;
-            background: #f5e9d1 url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600"><rect fill="%23f5e9d1" width="600" height="600"/><path d="M100,100 Q300,50 500,100 T500,500 Q300,550 100,500 T100,100" fill="none" stroke="%23d4b580" stroke-width="3" opacity="0.2"/><text x="300" y="320" font-size="80" text-anchor="middle" fill="%23a08040" opacity="0.1">Holy Scripture</text></svg>') fixed;
-            background-size: cover;
-            color: #3c2f2f;
-            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: white;
+            color: #333;
+        }
+        nav {
+            background: #f8f9fa;
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+        nav a {
+            margin: 0 14px;
+            color: #007bff;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        nav a:hover {
+            text-decoration: underline;
         }
         header {
             text-align: center;
-            padding: 60px 20px 40px;
-            background: linear-gradient(rgba(245,233,209,0.8), rgba(245,233,209,0.95));
+            padding: 40px 20px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #eee;
         }
         h1 {
-            font-size: 3em;
-            color: #8b4513;
+            font-size: 2.4em;
             margin: 0;
+            color: #222;
         }
         p.subtitle {
-            font-size: 1.3em;
-            font-style: italic;
-            color: #654321;
-            max-width: 800px;
-            margin: 20px auto;
+            font-size: 1.15em;
+            color: #555;
+            max-width: 900px;
+            margin: 12px auto 0;
         }
-        nav {
-            text-align: center;
-            padding: 20px;
-            background: rgba(139,69,19,0.1);
-        }
-        nav a {
-            margin: 0 20px;
-            color: #8b4513;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.1em;
-        }
-        nav a:hover { text-decoration: underline; }
         .container {
             max-width: 1200px;
             margin: 40px auto;
-            padding: 20px;
+            padding: 0 20px;
         }
         #paulMap {
             height: 700px;
-            border: 4px solid #d4b580;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(139,69,19,0.3);
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
         .leaflet-popup-content {
-            font-family: 'Georgia', serif;
             line-height: 1.6;
-            min-width: 250px;
+            min-width: 280px;
+            font-size: 0.95em;
         }
-        .leaflet-popup-content b {
-            color: #8b4513;
+        .leaflet-popup-content h3 {
+            margin: 0 0 10px;
+            color: #007bff;
         }
         footer {
             text-align: center;
-            padding: 30px;
-            background: rgba(139,69,19,0.1);
-            color: #654321;
-            font-size: 0.9em;
-            margin-top: 50px;
+            padding: 30px 20px;
+            color: #666;
+            border-top: 1px solid #eee;
+            font-size: 0.92em;
+        }
+        footer a {
+            color: #007bff;
+            text-decoration: none;
+            margin: 0 8px;
+        }
+        footer a:hover {
+            text-decoration: underline;
         }
         @media (max-width: 768px) {
             #paulMap { height: 500px; }
-            h1 { font-size: 2.5em; }
+            h1 { font-size: 2em; }
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Churches Planted by Apostle Paul</h1>
-        <p class="subtitle">Click on the large golden cross markers to learn about each church, the letter Paul wrote, and its modern population. The red dashed line shows the approximate path of his missionary journeys.</p>
-    </header>
 
     <nav>
         <a href="index.html">Home</a> |
-        <a href="chronologies.html">Chronologies</a> |
-        <a href="maps.html">Other Maps</a> |
-        <a href="jesus-map.html">Jesus' Travels</a> |
-        <strong>Paul's Churches</strong>
+        <a href="KingsJudaIsrael.html">Kings</a> |
+        <a href="PaulineChurches.html">Paul's Letters</a> |
+        <a href="jesusmap.html">Jesus Map</a> |
+        <a href="BooksGraphs.html">Book Graphs</a> |
+        <a href="BibleChronos.html">Combined Chronology</a> |
+        <a href="about.html">About</a> |
+        <a href="privacy.html">Privacy</a> |
+        <a href="terms.html">Terms</a>
     </nav>
+
+    <header>
+        <h1>Paul's Missionary Journeys Map</h1>
+        <p class="subtitle">Interactive map showing churches planted or significantly influenced by Apostle Paul, with associated letters, historical context, and modern population info. The dashed line approximates his travel paths.</p>
+    </header>
 
     <div class="container">
         <div id="paulMap"></div>
     </div>
 
     <footer>
-        Biblical Chronologies • Tracing the spread of the early church • © 2025
+        Biblical Chronologies • Tracing the spread of the early church • © 2026 • 
+        <a href="about.html">About</a> • 
+        <a href="privacy.html">Privacy Policy</a> • 
+        <a href="terms.html">Terms of Service</a>
     </footer>
 
     <!-- Leaflet JS -->
@@ -111,72 +127,178 @@
             crossorigin=""></script>
 
     <script>
-        // Large golden cross icon
+        // Custom golden cross icon
         const crossIcon = L.divIcon({
-            html: '<div style="font-size: 48px; color: #b8860b; text-shadow: 0 0 12px #ffd700;">✝</div>',
+            html: '<div style="font-size:40px; color:#b8860b; text-shadow:0 0 8px #ffd700;">✝</div>',
             iconSize: [48, 48],
             iconAnchor: [24, 48],
             popupAnchor: [0, -48],
             className: 'custom-cross-marker'
         });
 
-        // Initialize map - centered on Mediterranean for Paul's journeys
-        const map = L.map('paulMap').setView([37.0, 23.0], 5);
+        // Initialize map centered on the Mediterranean / Near East
+        const map = L.map('paulMap').setView([38.0, 28.0], 5);
 
-        // OpenStreetMap standard tiles - clear borders, roads, country lines
+        // OpenStreetMap tiles
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
             maxZoom: 19
         }).addTo(map);
 
-        // Churches Paul planted or wrote to (in approximate chronological order)
-        const churches = [
-            { name: "Antioch (Syria)", lat: 36.200, lng: 36.160, letter: "Base church", details: "Starting point for Paul's missionary journeys with Barnabas.", population: "~2.5 million (Antakya)" },
-            { name: "Pisidian Antioch", lat: 38.306, lng: 31.188, letter: "Galatians", details: "Preached in synagogue; many Gentiles believed.", population: "~100,000 (Yalvaç)" },
-            { name: "Iconium", lat: 37.871, lng: 32.484, letter: "Galatians", details: "Great multitude believed despite opposition.", population: "~370,000 (Konya)" },
-            { name: "Lystra", lat: 37.600, lng: 32.333, letter: "Galatians", details: "Healed a lame man; stoned and left for dead.", population: "Small town" },
-            { name: "Derbe", lat: 37.350, lng: 33.300, letter: "Galatians", details: "Made many disciples after fleeing Lystra.", population: "Small town" },
-            { name: "Philippi", lat: 41.013, lng: 24.287, letter: "Philippians", details: "First European church; Lydia converted, jailer saved.", population: "~4,000 (ruins nearby)" },
-            { name: "Thessalonica", lat: 40.640, lng: 22.944, letter: "1 & 2 Thessalonians", details: "Preached 3 Sabbaths; many believed but faced riot.", population: "~1 million" },
-            { name: "Berea", lat: 40.524, lng: 22.203, letter: "None (commended)", details: "Nobly searched Scriptures daily.", population: "~45,000" },
-            { name: "Athens", lat: 37.983, lng: 23.727, letter: "None (preached on Mars Hill)", details: "Reasoned with philosophers; some believed.", population: "~3.1 million" },
-            { name: "Corinth", lat: 37.933, lng: 22.933, letter: "1 & 2 Corinthians, Romans", details: "Stayed 18 months; many baptized.", population: "~30,000 (ancient site)" },
-            { name: "Ephesus", lat: 37.941, lng: 27.341, letter: "Ephesians, 1 Timothy", details: "Stayed 3 years; extraordinary miracles.", population: "~300,000 (Selçuk area)" },
-            { name: "Colossae", lat: 37.350, lng: 29.250, letter: "Colossians, Philemon", details: "Church founded by Epaphras; Paul wrote from prison.", population: "Ruins" },
-            { name: "Troas", lat: 39.750, lng: 26.233, letter: "None (vision of Macedonian man)", details: "Received call to Macedonia.", population: "Small town" },
-            { name: "Rome", lat: 41.902, lng: 12.496, letter: "Romans", details: "Church already existed; Paul wrote before visiting.", population: "~2.8 million" }
+        // Churches / key locations from Paul's journeys
+        const locations = [
+            {
+                name: "Antioch (Syria)",
+                lat: 36.202,
+                lng: 36.161,
+                letter: "Base church",
+                details: "Paul's home church; launch point for all three journeys (Acts 13:1–3).",
+                modern: "Antakya, Turkey (~300,000 pop.)"
+            },
+            {
+                name: "Cyprus (Salamis & Paphos)",
+                lat: 35.167,
+                lng: 33.917,
+                letter: "None direct",
+                details: "First journey with Barnabas & John Mark; confronted Elymas (Acts 13).",
+                modern: "Cyprus island"
+            },
+            {
+                name: "Pisidian Antioch",
+                lat: 38.306,
+                lng: 31.188,
+                letter: "Galatians",
+                details: "First major sermon to Gentiles; many believed (Acts 13:14–52).",
+                modern: "Yalvaç, Turkey (~10,000 pop.)"
+            },
+            {
+                name: "Iconium",
+                lat: 37.871,
+                lng: 32.484,
+                letter: "Galatians",
+                details: "Preached with signs; plot to stone them (Acts 14:1–7).",
+                modern: "Konya, Turkey (~2.2 million pop.)"
+            },
+            {
+                name: "Lystra",
+                lat: 37.579,
+                lng: 32.453,
+                letter: "Galatians",
+                details: "Healed lame man; stoned Paul (Acts 14:8–20). Home of Timothy.",
+                modern: "Near Hatunsaray, Turkey"
+            },
+            {
+                name: "Derbe",
+                lat: 37.367,
+                lng: 33.267,
+                letter: "Galatians",
+                details: "Preached and made many disciples (Acts 14:20–21).",
+                modern: "Near Karaman, Turkey"
+            },
+            {
+                name: "Philippi",
+                lat: 41.013,
+                lng: 24.287,
+                letter: "Philippians",
+                details: "First European church; Lydia & jailer converted (Acts 16).",
+                modern: "Filippoi ruins, Greece"
+            },
+            {
+                name: "Thessalonica",
+                lat: 40.640,
+                lng: 22.944,
+                letter: "1 & 2 Thessalonians",
+                details: "Preached 3 Sabbaths; riot; noble Bereans nearby (Acts 17).",
+                modern: "Thessaloniki, Greece (~1 million pop.)"
+            },
+            {
+                name: "Berea",
+                lat: 40.514,
+                lng: 22.203,
+                letter: "None direct",
+                details: "Nobly searched Scriptures daily (Acts 17:10–15).",
+                modern: "Veroia, Greece (~66,000 pop.)"
+            },
+            {
+                name: "Athens",
+                lat: 37.983,
+                lng: 23.727,
+                letter: "None",
+                details: "Mars Hill sermon to philosophers (Acts 17:16–34).",
+                modern: "Athens, Greece (~3.1 million pop.)"
+            },
+            {
+                name: "Corinth",
+                lat: 37.933,
+                lng: 22.933,
+                letter: "1 & 2 Corinthians, Romans",
+                details: "Stayed 18 months; tentmaking with Aquila & Priscilla (Acts 18).",
+                modern: "Korinthos, Greece (~30,000 pop.)"
+            },
+            {
+                name: "Ephesus",
+                lat: 37.941,
+                lng: 27.341,
+                letter: "Ephesians, 1 Timothy",
+                details: "Three-year ministry; miracles; riot over Artemis (Acts 19).",
+                modern: "Selçuk area, Turkey"
+            },
+            {
+                name: "Colossae / Laodicea",
+                lat: 37.835,
+                lng: 29.108,
+                letter: "Colossians, Philemon",
+                details: "Founded by Epaphras; Paul wrote from prison (Col 1:7).",
+                modern: "Honaz area, Turkey (ruins)"
+            },
+            {
+                name: "Rome",
+                lat: 41.902,
+                lng: 12.496,
+                letter: "Romans",
+                details: "Church already existed; Paul wrote before arrival; later imprisoned.",
+                modern: "Rome, Italy (~2.8 million pop.)"
+            }
         ];
 
         // Add markers
-        churches.forEach(church => {
-            L.marker([church.lat, church.lng], { icon: crossIcon })
+        locations.forEach(loc => {
+            L.marker([loc.lat, loc.lng], { icon: crossIcon })
                 .addTo(map)
                 .bindPopup(`
-                    <div>
-                        <h3 style="margin:0 0 10px; color:#8b4513;">${church.name}</h3>
-                        <p><strong>Letter(s):</strong> ${church.letter}</p>
-                        <p><strong>Context:</strong> ${church.details}</p>
-                        <p><strong>Modern Population:</strong> ${church.population}</p>
-                    </div>
+                    <h3>${loc.name}</h3>
+                    <p><strong>Letter(s):</strong> ${loc.letter}</p>
+                    <p><strong>Context:</strong> ${loc.details}</p>
+                    <p><strong>Modern:</strong> ${loc.modern}</p>
                 `);
         });
 
-        // Travel route line (approximate path of journeys)
-        const routeCoords = churches.map(c => [c.lat, c.lng]);
-        L.polyline(routeCoords, {
-            color: '#8b4513',
-            weight: 5,
-            opacity: 0.8,
-            dashArray: '15, 10',
-            lineCap: 'round'
+        // Route path (approximate chronological order)
+        const routeCoords = locations.map(loc => [loc.lat, loc.lng]);
+
+        // Dashed polyline
+        const routeLine = L.polyline(routeCoords, {
+            color: '#c0392b',
+            weight: 4,
+            opacity: 0.7,
+            dashArray: '10, 10'
         }).addTo(map);
 
-        // Direction arrows along the route
-        const decorator = L.polylineDecorator(routeCoords, {
-            patterns: [
-                { offset: '50%', repeat: '200px', symbol: L.Symbol.arrowHead({pixelSize: 12, polygon: false, pathOptions: {stroke: true, color: '#8b4513', weight: 4, opacity: 0.8}}) }
-            ]
-        }).addTo(map);
+        // Add direction arrows (simple repeating pattern)
+        routeLine.on('add', function() {
+            const decorator = L.polylineDecorator(routeLine, {
+                patterns: [
+                    { offset: '50%', repeat: 150, symbol: L.Symbol.arrowHead({
+                        pixelSize: 12,
+                        polygon: false,
+                        pathOptions: { stroke: true, color: '#c0392b', weight: 3, opacity: 0.9 }
+                    })}
+                ]
+            }).addTo(map);
+        });
+
+        // Fit map to show all points nicely
+        map.fitBounds(routeLine.getBounds(), { padding: [50, 50] });
     </script>
 </body>
 </html>

@@ -1,141 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2312819120954428"
-     crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Biblical Chronologies </title>
+    <title>Biblical Chronologies</title>
     <meta name="description" content="Interactive timelines and tables for studying the kings of Israel & Judah and the churches founded by Apostle Paul.">
     <style>
         body {
             margin: 0;
-            font-family: 'Georgia', serif;
-            background: #f5e9d1 url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600"><rect fill="%23f5e9d1" width="600" height="600"/><path d="M100,100 Q300,50 500,100 T500,500 Q300,550 100,500 T100,100" fill="none" stroke="%23d4b580" stroke-width="3" opacity="0.2"/><text x="300" y="320" font-size="80" text-anchor="middle" fill="%23a08040" opacity="0.1">Holy Scripture</text></svg>') fixed;
-            background-size: cover;
-            color: #3c2f2f;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: white;
+            color: #333;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
         }
         header {
             text-align: center;
-            padding: 80px 20px 60px;
-            background: linear-gradient(rgba(245,233,209,0.8), rgba(245,233,209,0.95));
-            box-shadow: 0 4px 20px rgba(139,69,19,0.2);
+            padding: 40px 20px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #ddd;
         }
         h1 {
-            font-size: 3.5em;
-            color: #8b4513;
+            font-size: 2.5em;
             margin: 0;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
         p.tagline {
-            font-size: 1.4em;
-            font-style: italic;
-            color: #654321;
-            margin: 20px 0 40px;
+            font-size: 1.2em;
+            color: #666;
+            margin: 10px 0 20px;
             max-width: 800px;
             margin-left: auto;
             margin-right: auto;
         }
+        nav {
+            background: #f8f9fa;
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+        nav a {
+            margin: 0 15px;
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
         .btn {
             display: inline-block;
-            padding: 16px 40px;
-            font-size: 1.3em;
-            background: #8b4513;
+            padding: 12px 30px;
+            font-size: 1.1em;
+            background: #007bff;
             color: white;
             text-decoration: none;
-            border-radius: 50px;
-            box-shadow: 0 6px 15px rgba(139,69,19,0.3);
-            transition: all 0.3s;
+            border-radius: 5px;
+            transition: background 0.3s;
         }
         .btn:hover {
-            background: #a0522d;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(139,69,19,0.4);
+            background: #0056b3;
         }
         main {
             flex: 1;
-            padding: 60px 20px;
+            padding: 40px 20px;
             text-align: center;
         }
         .features {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 40px;
+            gap: 20px;
             max-width: 1000px;
             margin: 0 auto;
         }
         .feature {
             flex: 1;
             min-width: 280px;
-            background: rgba(255,255,255,0.8);
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
         }
         .feature h2 {
-            color: #8b4513;
+            color: #333;
             margin-top: 0;
         }
         footer {
             text-align: center;
-            padding: 30px;
-            background: rgba(139,69,19,0.1);
-            color: #654321;
+            padding: 20px;
+            color: #666;
+            border-top: 1px solid #ddd;
             font-size: 0.9em;
         }
-        @media (max-width: 768px) {
-            h1 { font-size: 2.8em; }
-            .btn { font-size: 1.1em; padding: 14px 30px; }
+        footer a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
         }
     </style>
-
 </head>
 <body>
+    <nav>
+        <a href="index.html">Home</a> |
+        <a href="KingsJudaIsrael.html">Kings of Judah/Israel</a> |
+        <a href="PaulineChurches.html">Paul's Churches</a> |
+        <a href="jesusmap.html">Jesus' Journeys</a> |
+        <a href="paulmap.html">Paul's Journeys</a> |
+        <a href="BooksGraphs.html">Books Graphs</a> |
+        <a href="BibleChronos.html">Combined Chronos</a> |
+        <a href="about.html">About</a> |
+        <a href="privacy.html">Privacy</a> |
+        <a href="terms.html">Terms</a>
+    </nav>
     <header>
         <h1>Biblical Chronologies</h1>
         <p class="tagline">Explore the timeline of the kings of Israel and Judah before and after the kingdom split, and the churches planted by the Apostle Paul — with interactive tables and visual timelines.</p>
-        <a href="KingsJudaIsrael.html" class="btn">Enter the Chronologies</a>
     </header>
 
     <main>
-	<div class="feature">
-                <h2> <a href="Booksgraphs.html" class="btn"> Books Graphs </a></h2>
-                <p> Chapter counts for each book in new and old testaments </p>
-            </div>
         <div class="features">
             <div class="feature">
-                <h2> <a href="KingsJudaIsrael.html" class="btn"> Old Testament Kings</a></h2>
+                <h2><a href="KingsJudaIsrael.html" class="btn">Old Testament Kings</a></h2>
                 <p>Detailed chronology of every king of the United and Divided Monarchy, with spiritual evaluation, contemporary prophets, key events, and Scripture references.</p>
             </div>
-			<div class="feature">
-                <h2> <a href="PaulineChurches.html" class="btn"> Paul letters </a></h2>
-                <p> List of churches that Paul founded during his ministry </p>
+            <div class="feature">
+                <h2><a href="PaulineChurches.html" class="btn">Paul's Letters</a></h2>
+                <p>List of churches that Paul founded during his ministry.</p>
             </div>
-			 <div class="feature">
-                <h2> <a href="Jesusmap.html" class="btn"> Journeys of Jesus </a></h2>
+            <div class="feature">
+                <h2><a href="jesusmap.html" class="btn">Journeys of Jesus</a></h2>
                 <p>Trace the journeys of Jesus and see major events that took place.</p>
             </div>
             <div class="feature">
-                <h2> <a href="paulmap.html" class="btn"> Paul's Journey </a></h2>
+                <h2><a href="paulmap.html" class="btn">Paul's Journey</a></h2>
                 <p>Trace the founding of churches during Paul's missionary journeys and when each letter was written — including verification that all Pauline epistles predate the Gospels.</p>
             </div>
             <div class="feature">
-                <h2>Interactive Tools</h2>
-                <p>Search, filter, export to CSV, view visual timelines, toggle dark mode, and share — all designed for deep Bible study.</p>
+                <h2><a href="BooksGraphs.html" class="btn">Books Graphs</a></h2>
+                <p>Chapter counts for each book in new and old testaments.</p>
+            </div>
+            <div class="feature">
+                <h2><a href="BibleChronos.html" class="btn">Combined Chronologies</a></h2>
+                <p>Combined view of Old and New Testament chronologies.</p>
             </div>
         </div>
     </main>
 
     <footer>
-        Built with reverence for the Word of God • © 2025 • For personal and group Bible study
+        Built with reverence for the Word of God • © 2026 • For personal and group Bible study | <a href="about.html">About</a> | <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Service</a>
     </footer>
 </body>
-
 </html>
-
-
-

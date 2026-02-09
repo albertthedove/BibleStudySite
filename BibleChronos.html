@@ -1,482 +1,282 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2312819120954428"
-     crossorigin="anonymous"></script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Biblical Chronologies: Kings & Paul's Churches</title>
-    <!-- DataTables CSS -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <!-- vis.js CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/vis-timeline@latest/styles/vis-timeline-graph2d.min.css">
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <style>
-        body { font-family: Arial, sans-serif; background-color: #f8f9fa; color: #212529; padding-bottom: 50px; }
-        .container { max-width: 1400px; margin: auto; padding: 20px; }
-        h1, h2 { text-align: center; color: #2c3e50; }
-        .section { margin-bottom: 40px; }
-        p.intro { text-align:center; font-size:1.1em; max-width:900px; margin:20px auto; }
-        /* Enhanced table styles */
-        table.display {
-            border-collapse: separate;
-            border-spacing: 0;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            border-radius: 8px;
-            overflow: hidden;
-        }
-        table.display thead th {
-            background-color: #343a40;
-            color: white;
-            font-weight: bold;
-            text-align: center;
-            padding: 12px;
-        }
-        table.display tbody td {
-            padding: 10px;
-            text-align: center;
-            border-bottom: 1px solid #dee2e6;
-        }
-        table.display tbody tr:nth-child(even) { background-color: #f8f9fa; }
-        table.display tbody tr:hover { background-color: #e2e6ea; }
-        /* Row color coding for OT */
-        .united { background-color: #cfe2ff !important; color: #000 !important; }
-        .faithful { background-color: #d1e7dd !important; color: #000 !important; }
-        .partial { background-color: #fff3cd !important; color: #000 !important; }
-        .evil { background-color: #f8d7da !important; color: #000 !important; }
-        .highlight { outline: 3px solid #ffc107 !important; outline-offset: -3px; }
-        #filters { margin: 20px 0; display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; align-items: center; }
-        #timeline, #paulTimeline { height: 550px; border: 1px solid #ddd; margin-top: 30px; background: #fff; }
-        .vis-item { font-weight: bold; }
-        #darkModeToggle { position: fixed; top: 20px; right: 20px; z-index: 1000; background: #343a40; color: white; border: none; width: 50px; height: 50px; border-radius: 50%; font-size: 1.4em; box-shadow: 0 4px 8px rgba(0,0,0,0.2); cursor: pointer; }
-        body.dark-mode #darkModeToggle { background: #f1c40f; color: #000; }
-        body.dark-mode { background-color: #121212; color: #e0e0e0; }
-        body.dark-mode .container { background: #1e1e1e; }
-        body.dark-mode table.display { background: #2d2d2d; }
-        body.dark-mode table.display thead th { background-color: #1f1f1f; }
-        body.dark-mode table.display tbody tr:nth-child(even) { background-color: #1e1e1e; }
-        body.dark-mode table.display tbody tr:hover { background-color: #3a3a3a; }
-        .table-responsive-note { font-style: italic; color: #666; margin-bottom: 10px; text-align: center; }
-        body.dark-mode .table-responsive-note { color: #aaa; }
-        .controls { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin: 20px 0; }
-        .search-box { flex: 1; min-width: 200px; }
-        .action-buttons button { margin-left: 8px; }
-        footer { text-align: center; padding: 20px; margin-top: 50px; font-size: 0.9em; color: #666; border-top: 1px solid #dee2e6; }
-        body.dark-mode footer { color: #999; border-top-color: #333; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bible Chronology - Books by Writing Date</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: white;
+      color: #333;
+      padding-bottom: 60px;
+    }
+    nav {
+      background: #f8f9fa;
+      padding: 12px;
+      text-align: center;
+      border-bottom: 1px solid #ddd;
+    }
+    nav a {
+      margin: 0 14px;
+      color: #007bff;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    .container {
+      max-width: 1400px;
+      margin: auto;
+      padding: 20px;
+    }
+    h1, h2 {
+      text-align: center;
+      color: #222;
+    }
+    .intro {
+      text-align: center;
+      font-size: 1.1em;
+      max-width: 900px;
+      margin: 20px auto;
+      color: #555;
+    }
+    table.display {
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    table.display thead th {
+      background: #f8f9fa;
+      color: #333;
+      padding: 12px;
+      font-weight: 600;
+    }
+    table.display tbody td {
+      padding: 10px;
+      text-align: center;
+      border-bottom: 1px solid #eee;
+    }
+    table.display tbody tr:nth-child(even) {
+      background: #f9f9f9;
+    }
+    table.display tbody tr:hover {
+      background: #f0f4f8;
+    }
+    .note {
+      font-style: italic;
+      color: #666;
+      text-align: center;
+      margin: 12px 0;
+    }
+    footer {
+      text-align: center;
+      padding: 30px 0;
+      color: #666;
+      border-top: 1px solid #eee;
+      font-size: 0.95em;
+    }
+    footer a {
+      color: #007bff;
+      text-decoration: none;
+      margin: 0 8px;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
-    <button id="darkModeToggle" title="Toggle Dark Mode">🌙</button>
-    <div class="container">
-        <h1>Biblical Chronologies</h1>
-        <p class="intro">
-            Explore the kings of Israel and Judah in the Old Testament tab, or the churches founded by Apostle Paul in the New Testament tab.
-        </p>
-        <div class="controls">
-            <div class="search-box">
-                <input type="text" id="globalSearch" class="form-control" placeholder="Search kings, churches, letters, prophets...">
-            </div>
-            <div class="action-buttons">
-                <button id="printBtn" class="btn btn-outline-secondary"><i class="fas fa-print"></i> Print</button>
-                <button id="shareX" class="btn btn-outline-primary"><i class="fab fa-x-twitter"></i> X</button>
-                <button id="shareFB" class="btn btn-outline-primary"><i class="fab fa-facebook"></i> FB</button>
-                <button id="shareWA" class="btn btn-outline-success"><i class="fab fa-whatsapp"></i> WA</button>
-                <button id="shareCopy" class="btn btn-outline-info"><i class="fas fa-link"></i> Copy Link</button>
-            </div>
-        </div>
-        <ul class="nav nav-tabs" role="tablist">
-            <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="ot-tab" data-bs-toggle="tab" data-bs-target="#ot" type="button" role="tab">Old Testament (Kings)</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="nt-tab" data-bs-toggle="tab" data-bs-target="#nt" type="button" role="tab">New Testament (Paul's Churches)</button>
-            </li>
-        </ul>
-        <div class="tab-content">
-            <div class="tab-pane fade show active" id="ot" role="tabpanel">
-                <p class="table-responsive-note">On mobile: swipe left/right to see all columns →</p>
-                <div id="filters">
-                    <select id="kingdomFilter" class="form-select d-inline-block w-auto me-2">
-                        <option value="">All Periods/Kingdoms</option>
-                        <option value="United Monarchy">United Monarchy</option>
-                        <option value="Israel">Israel (Northern)</option>
-                        <option value="Judah">Judah (Southern)</option>
-                    </select>
-                    <select id="evalFilter" class="form-select d-inline-block w-auto me-2">
-                        <option value="">All Evaluations</option>
-                        <option value="Faithful">Faithful</option>
-                        <option value="Partially Faithful">Partially Faithful</option>
-                        <option value="Evil">Evil</option>
-                    </select>
-                    <select id="prophetFilter" class="form-select d-inline-block w-auto me-2">
-                        <option value="">Select Prophet</option>
-                    </select>
-                    <button id="exportCsv" class="btn btn-outline-primary btn-sm">Export to CSV</button>
-                </div>
-                <table id="kingsTable" class="display responsive nowrap" width="100%">
-                    <thead>
-                        <tr>
-                            <th>King Name</th>
-                            <th>Father</th>
-                            <th>Period / Kingdom</th>
-                            <th>Monarchical Order</th>
-                            <th>Chronological Start (BCE)</th>
-                            <th>End (BCE)</th>
-                            <th>Length (years)</th>
-                            <th>Capital</th>
-                            <th>Spiritual Evaluation</th>
-                            <th>Key Acts / Notes</th>
-                            <th>Contemporary Prophets</th>
-                            <th>Primary References</th>
-                            <th>Significant Events</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-                <h2 class="section">Chronological Timeline</h2>
-                <div id="timeline"></div>
-            </div>
-            <div class="tab-pane fade" id="nt" role="tabpanel">
-                <p class="table-responsive-note">On mobile: swipe left/right to see all columns →</p>
-                <table id="paulTable" class="display responsive nowrap" width="100%">
-                    <thead>
-                        <tr>
-                            <th>Order</th>
-                            <th>Letter Written</th>
-                            <th>Year Letter Written</th>
-                            <th>Years After Founding</th>
-                            <th>Ancient City / Church</th>
-                            <th>Roman Province</th>
-                            <th>Modern-day City / Country</th>
-                            <th>Continent</th>
-                            <th>Year Church Founded</th>
-                            <th>Before the Gospels?</th>
-                            <th>Location Paul Wrote From</th>
-                            <th>Imprisoned?</th>
-                            <th>Local Leaders / Elders</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-                <h2 class="section">Timeline of Paul's Letters vs. Gospels</h2>
-                <div id="paulTimeline"></div>
-                <h2 class="section">Verification Summary</h2>
-                <p>All Paul's letters (AD 49–64) were written before or overlapping only slightly with the earliest Gospel (Mark, AD 65). This demonstrates that the Pauline epistles predate the written Gospels.</p>
-            </div>
-        </div>
-        <footer>
-            Built with ❤️ for Bible study • © 2025 • All Scripture references from public domain / standard chronologies
-        </footer>
+
+  <nav>
+    <a href="index.html">Home</a> |
+    <a href="KingsJudaIsrael.html">Kings</a> |
+    <a href="PaulineChurches.html">Paul's Letters</a> |
+    <a href="jesusmap.html">Jesus Map</a> |
+    <a href="paulmap.html">Paul Map</a> |
+    <a href="BooksGraphs.html">Book Graphs</a> |
+    <a href="about.html">About</a> |
+    <a href="privacy.html">Privacy</a> |
+    <a href="terms.html">Terms</a>
+  </nav>
+
+  <div class="container">
+    <h1>Bible Chronology – Books by Approximate Writing Date</h1>
+    <p class="intro">
+      Books ordered roughly by when they were written (conservative scholarship). 
+      The "Canonical Order" column shows the book's position in the standard Bible (Genesis = 1, Revelation = 66).
+      Multiple contributors are listed where applicable.
+    </p>
+
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
+      <input type="text" id="globalSearch" class="form-control w-100 w-md-50" placeholder="Search books, authors, dates...">
+      <button id="printBtn" class="btn btn-outline-secondary"><i class="fas fa-print"></i> Print</button>
     </div>
-    <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://unpkg.com/vis-timeline@latest/standalone/umd/vis-timeline-graph2d.min.js"></script>
-    <script>
-        // Dark Mode
-        const toggleBtn = document.getElementById('darkModeToggle');
-        toggleBtn.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-            toggleBtn.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
-            localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
-        });
-        if (localStorage.getItem('darkMode') === 'true') {
-            document.body.classList.add('dark-mode');
-            toggleBtn.textContent = '☀️';
-        }
-        // Global Search
-        $('#globalSearch').on('keyup', function() {
-            const value = this.value;
-            $('#kingsTable').DataTable().search(value).draw();
-            $('#paulTable').DataTable().search(value).draw();
-        });
-        // Print
-        document.getElementById('printBtn').addEventListener('click', () => window.print());
-        // Share
-        const url = encodeURIComponent(window.location.href);
-        const title = encodeURIComponent(document.title);
-        document.getElementById('shareX').onclick = () => window.open(`https://x.com/intent/post?url=${url}&text=${title}`);
-        document.getElementById('shareFB').onclick = () => window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`);
-        document.getElementById('shareWA').onclick = () => window.open(`https://api.whatsapp.com/send?text=${title}%20${url}`);
-        document.getElementById('shareCopy').onclick = () => {
-            navigator.clipboard.writeText(window.location.href).then(() => alert('Link copied!'));
-        };
-        // Prophet Tribes Map
-        const prophetTribes = {
-            'Samuel': 'Levi',
-            'Nathan': 'Unknown',
-            'Gad': 'Unknown',
-            'Ahijah': 'Unknown',
-            'Shemaiah': 'Unknown',
-            'Jehu son of Hanani': 'Unknown',
-            'Azariah': 'Unknown',
-            'Hanani': 'Unknown',
-            'Jahaziel': 'Levi',
-            'Micaiah': 'Unknown',
-            'Elijah': 'Unknown',
-            'Elisha': 'Unknown',
-            'Zechariah son of Jehoiada': 'Levi',
-            'Jonah': 'Zebulun',
-            'Amos': 'Judah',
-            'Hosea': 'Unknown',
-            'Isaiah': 'Judah',
-            'Micah': 'Judah',
-            'Huldah': 'Unknown',
-            'Zephaniah': 'Judah',
-            'Jeremiah': 'Levi'
-        };
-        // Full Kings Data with Fathers
-        const kingsData = [
-            { name: 'Saul', father: 'Kish', kingdom: 'United Monarchy', order: 1, start: 1050, end: 1010, length: 40, capital: 'Gibeah', evaluation: 'Partially Faithful', keyActs: 'First king; disobeyed God at times (e.g., Amalek, witch of Endor).', prophets: ['Samuel'], refs: '1 Samuel 9–31; 1 Chronicles 10', events: 'Anointed by Samuel; battles with Philistines; death at Mount Gilboa.' },
-            { name: 'David', father: 'Jesse', kingdom: 'United Monarchy', order: 2, start: 1010, end: 970, length: 40, capital: 'Hebron → Jerusalem', evaluation: 'Faithful', keyActs: 'Man after God’s own heart; conquered Jerusalem; brought Ark.', prophets: ['Samuel', 'Nathan', 'Gad'], refs: '2 Samuel; 1 Kings 1–2; 1 Chronicles 11–29', events: 'Defeated Goliath; adultery with Bathsheba; Absalom rebellion.' },
-            { name: 'Solomon', father: 'David', kingdom: 'United Monarchy', order: 3, start: 970, end: 931, length: 40, capital: 'Jerusalem', evaluation: 'Partially Faithful', keyActs: 'Built Temple; great wisdom; later idolatry due to foreign wives.', prophets: ['Nathan', 'Ahijah'], refs: '1 Kings 1–11; 2 Chronicles 1–9', events: 'Temple dedication; visit by Queen of Sheba; kingdom division foretold.' },
-            { name: 'Rehoboam', father: 'Solomon', kingdom: 'Judah', order: 1, start: 931, end: 913, length: 17, capital: 'Jerusalem', evaluation: 'Evil', keyActs: 'Divided kingdom; did evil.', prophets: ['Shemaiah'], refs: '1 Kings 11:42–14:31; 2 Chr 9:31–12:16', events: 'Kingdom split; Shishak invasion.' },
-            { name: 'Abijah', father: 'Rehoboam', kingdom: 'Judah', order: 2, start: 913, end: 911, length: 3, capital: 'Jerusalem', evaluation: 'Evil', keyActs: 'War with Jeroboam; sins like father.', prophets: ['Shemaiah'], refs: '1 Kings 14:31–15:8; 2 Chr 13', events: 'Victory over Israel.' },
-            { name: 'Asa', father: 'Abijah', kingdom: 'Judah', order: 3, start: 911, end: 870, length: 41, capital: 'Jerusalem', evaluation: 'Faithful', keyActs: 'Removed idols; did right.', prophets: ['Azariah', 'Hanani'], refs: '1 Kings 15:8-24; 2 Chr 14–16', events: 'Reforms; victory over Cushites.' },
-            { name: 'Jehoshaphat', father: 'Asa', kingdom: 'Judah', order: 4, start: 873, end: 848, length: 25, capital: 'Jerusalem', evaluation: 'Faithful', keyActs: 'Did right; judicial reforms.', prophets: ['Jahaziel', 'Micaiah'], refs: '1 Kings 22:41-50; 2 Chr 17–20', events: 'Alliance with Ahab.' },
-            { name: 'Jehoram', father: 'Jehoshaphat', kingdom: 'Judah', order: 5, start: 853, end: 841, length: 8, capital: 'Jerusalem', evaluation: 'Evil', keyActs: 'Idolatry; married Ahab’s daughter.', prophets: ['Elijah'], refs: '2 Kings 8:16-24; 2 Chr 21', events: 'Revolts of Edom and Libnah.' },
-            { name: 'Ahaziah', father: 'Jehoram', kingdom: 'Judah', order: 6, start: 841, end: 841, length: 1, capital: 'Jerusalem', evaluation: 'Evil', keyActs: 'Walked in ways of Ahab.', prophets: [], refs: '2 Kings 8:24–9:29; 2 Chr 22:1-9', events: 'Killed by Jehu.' },
-            { name: 'Athaliah (Queen)', father: 'Omri', kingdom: 'Judah', order: 7, start: 841, end: 835, length: 6, capital: 'Jerusalem', evaluation: 'Evil', keyActs: 'Usurped throne; Baal worship.', prophets: [], refs: '2 Kings 11; 2 Chr 22:10–23:21', events: 'Overthrown; Joash crowned.' },
-            { name: 'Joash', father: 'Ahaziah', kingdom: 'Judah', order: 8, start: 835, end: 796, length: 40, capital: 'Jerusalem', evaluation: 'Partially Faithful', keyActs: 'Repaired Temple; later turned to idolatry.', prophets: ['Zechariah son of Jehoiada'], refs: '2 Kings 11–12; 2 Chr 24', events: 'Temple restoration.' },
-            { name: 'Amaziah', father: 'Joash', kingdom: 'Judah', order: 9, start: 796, end: 767, length: 29, capital: 'Jerusalem', evaluation: 'Partially Faithful', keyActs: 'Did right but not wholeheartedly.', prophets: [], refs: '2 Kings 14:1-20; 2 Chr 25', events: 'Victory over Edom; defeated by Israel.' },
-            { name: 'Uzziah (Azariah)', father: 'Amaziah', kingdom: 'Judah', order: 10, start: 790, end: 740, length: 52, capital: 'Jerusalem', evaluation: 'Faithful', keyActs: 'Prospered; became leprous for pride.', prophets: ['Isaiah'], refs: '2 Kings 15:1-7; 2 Chr 26', events: 'Earthquake in his reign.' },
-            { name: 'Jotham', father: 'Uzziah', kingdom: 'Judah', order: 11, start: 750, end: 732, length: 16, capital: 'Jerusalem', evaluation: 'Faithful', keyActs: 'Did right; built gates.', prophets: ['Isaiah', 'Micah'], refs: '2 Kings 15:32-38; 2 Chr 27', events: 'War with Rezin and Pekah began.' },
-            { name: 'Ahaz', father: 'Jotham', kingdom: 'Judah', order: 12, start: 735, end: 716, length: 16, capital: 'Jerusalem', evaluation: 'Evil', keyActs: 'Idolatry; child sacrifice; altar from Damascus.', prophets: ['Isaiah', 'Micah'], refs: '2 Kings 16; 2 Chr 28', events: 'Syro-Ephraimite War.' },
-            { name: 'Hezekiah', father: 'Ahaz', kingdom: 'Judah', order: 13, start: 715, end: 686, length: 29, capital: 'Jerusalem', evaluation: 'Faithful', keyActs: 'Great reforms; destroyed high places.', prophets: ['Isaiah', 'Micah'], refs: '2 Kings 18–20; 2 Chr 29–32', events: 'Sennacherib invasion; miraculous deliverance.' },
-            { name: 'Manasseh', father: 'Hezekiah', kingdom: 'Judah', order: 14, start: 695, end: 642, length: 55, capital: 'Jerusalem', evaluation: 'Evil', keyActs: 'Worst idolatry; later repented in captivity.', prophets: [], refs: '2 Kings 21:1-18; 2 Chr 33', events: 'Taken captive to Babylon; repentance.' },
-            { name: 'Amon', father: 'Manasseh', kingdom: 'Judah', order: 15, start: 642, end: 640, length: 2, capital: 'Jerusalem', evaluation: 'Evil', keyActs: 'Followed father’s early evil.', prophets: [], refs: '2 Kings 21:19-26; 2 Chr 33:21-25', events: 'Assassinated.' },
-            { name: 'Josiah', father: 'Amon', kingdom: 'Judah', order: 16, start: 640, end: 609, length: 31, capital: 'Jerusalem', evaluation: 'Faithful', keyActs: 'Major revival; found Book of the Law.', prophets: ['Huldah', 'Zephaniah', 'Jeremiah'], refs: '2 Kings 22–23; 2 Chr 34–35', events: 'Passover revival; killed at Megiddo.' },
-            { name: 'Jehoahaz', father: 'Josiah', kingdom: 'Judah', order: 17, start: 609, end: 609, length: 0.25, capital: 'Jerusalem', evaluation: 'Evil', keyActs: 'Did evil.', prophets: ['Jeremiah'], refs: '2 Kings 23:31-34; 2 Chr 36:1-4', events: 'Deposed by Neco.' },
-            { name: 'Jehoiakim', father: 'Josiah', kingdom: 'Judah', order: 18, start: 609, end: 598, length: 11, capital: 'Jerusalem', evaluation: 'Evil', keyActs: 'Burned Jeremiah’s scroll.', prophets: ['Jeremiah'], refs: '2 Kings 23:34–24:6; 2 Chr 36:5-8', events: 'Vassal to Babylon.' },
-            { name: 'Jehoiachin', father: 'Jehoiakim', kingdom: 'Judah', order: 19, start: 598, end: 597, length: 0.25, capital: 'Jerusalem', evaluation: 'Evil', keyActs: 'Taken captive.', prophets: ['Jeremiah'], refs: '2 Kings 24:8-17; 2 Chr 36:9-10', events: 'First deportation.' },
-            { name: 'Zedekiah', father: 'Josiah', kingdom: 'Judah', order: 20, start: 597, end: 586, length: 11, capital: 'Jerusalem', evaluation: 'Evil', keyActs: 'Rebelled against Babylon.', prophets: ['Jeremiah'], refs: '2 Kings 24:18–25:21; 2 Chr 36:11-21', events: 'Fall of Jerusalem; Temple destroyed.' },
-            { name: 'Jeroboam I', father: 'Nebat', kingdom: 'Israel', order: 1, start: 931, end: 910, length: 22, capital: 'Shechem → Tirzah', evaluation: 'Evil', keyActs: 'Golden calves at Bethel and Dan.', prophets: ['Ahijah'], refs: '1 Kings 11:26–14:20', events: 'Led rebellion; kingdom split.' },
-            { name: 'Nadab', father: 'Jeroboam I', kingdom: 'Israel', order: 2, start: 910, end: 909, length: 2, capital: 'Tirzah', evaluation: 'Evil', keyActs: 'Continued father’s sins.', prophets: [], refs: '1 Kings 15:25-31', events: 'Killed by Baasha.' },
-            { name: 'Baasha', father: 'Ahijah', kingdom: 'Israel', order: 3, start: 909, end: 886, length: 24, capital: 'Tirzah', evaluation: 'Evil', keyActs: 'Wiped out Jeroboam’s house.', prophets: ['Jehu son of Hanani'], refs: '1 Kings 15:27–16:7', events: 'War with Asa of Judah.' },
-            { name: 'Elah', father: 'Baasha', kingdom: 'Israel', order: 4, start: 886, end: 885, length: 2, capital: 'Tirzah', evaluation: 'Evil', keyActs: 'Drunk when killed.', prophets: [], refs: '1 Kings 16:8-14', events: 'Assassinated by Zimri.' },
-            { name: 'Zimri', father: 'N/A (Usurper)', kingdom: 'Israel', order: 5, start: 885, end: 885, length: 0.02, capital: 'Tirzah', evaluation: 'Evil', keyActs: 'Reigned 7 days.', prophets: [], refs: '1 Kings 16:15-20', events: 'Burned palace over himself.' },
-            { name: 'Omri', father: 'N/A (Usurper)', kingdom: 'Israel', order: 6, start: 885, end: 874, length: 12, capital: 'Samaria (founded)', evaluation: 'Evil', keyActs: 'Worse than all before him.', prophets: [], refs: '1 Kings 16:21-28', events: 'Established Samaria as capital.' },
-            { name: 'Ahab', father: 'Omri', kingdom: 'Israel', order: 7, start: 874, end: 853, length: 22, capital: 'Samaria', evaluation: 'Evil', keyActs: 'Married Jezebel; promoted Baal worship.', prophets: ['Elijah', 'Micaiah'], refs: '1 Kings 16:29–22:40', events: 'Naboth’s vineyard; death at Ramoth-Gilead.' },
-            { name: 'Ahaziah', father: 'Ahab', kingdom: 'Israel', order: 8, start: 853, end: 852, length: 2, capital: 'Samaria', evaluation: 'Evil', keyActs: 'Served Baal.', prophets: ['Elijah'], refs: '1 Kings 22:51–2 Kings 1', events: 'Fell through lattice.' },
-            { name: 'Joram (Jehoram)', father: 'Ahab', kingdom: 'Israel', order: 9, start: 852, end: 841, length: 12, capital: 'Samaria', evaluation: 'Evil', keyActs: 'Removed Baal pillar but kept calves.', prophets: ['Elisha'], refs: '2 Kings 3–9', events: 'Killed by Jehu.' },
-            { name: 'Jehu', father: 'Nimshi', kingdom: 'Israel', order: 10, start: 841, end: 814, length: 28, capital: 'Samaria', evaluation: 'Partially Faithful', keyActs: 'Destroyed Baal worship in Israel.', prophets: ['Elisha'], refs: '2 Kings 9–10', events: 'Anointed by Elisha’s servant; massacre of Ahab’s house.' },
-            { name: 'Jehoahaz', father: 'Jehu', kingdom: 'Israel', order: 11, start: 814, end: 798, length: 17, capital: 'Samaria', evaluation: 'Evil', keyActs: 'Followed Jeroboam’s sins.', prophets: ['Elisha'], refs: '2 Kings 13:1-9', events: 'Oppressed by Hazael.' },
-            { name: 'Jehoash (Joash)', father: 'Jehoahaz', kingdom: 'Israel', order: 12, start: 798, end: 782, length: 16, capital: 'Samaria', evaluation: 'Evil', keyActs: 'Defeated Aram three times.', prophets: [], refs: '2 Kings 13:10-25', events: 'Defeated Amaziah of Judah.' },
-            { name: 'Jeroboam II', father: 'Jehoash', kingdom: 'Israel', order: 13, start: 793, end: 753, length: 41, capital: 'Samaria', evaluation: 'Evil', keyActs: 'Restored borders; prosperity but idolatry.', prophets: ['Jonah', 'Amos', 'Hosea'], refs: '2 Kings 14:23-29', events: 'Golden age materially.' },
-            { name: 'Zechariah', father: 'Jeroboam II', kingdom: 'Israel', order: 14, start: 753, end: 752, length: 0.5, capital: 'Samaria', evaluation: 'Evil', keyActs: 'Did evil.', prophets: [], refs: '2 Kings 15:8-12', events: 'Assassinated; end of Jehu dynasty.' },
-            { name: 'Shallum', father: 'Jabesh', kingdom: 'Israel', order: 15, start: 752, end: 752, length: 0.08, capital: 'Samaria', evaluation: 'Evil', keyActs: 'Usurper.', prophets: [], refs: '2 Kings 15:13-15', events: 'Reigned one month.' },
-            { name: 'Menahem', father: 'Gadi', kingdom: 'Israel', order: 16, start: 752, end: 742, length: 10, capital: 'Samaria', evaluation: 'Evil', keyActs: 'Paid tribute to Assyria.', prophets: [], refs: '2 Kings 15:17-22', events: 'Sacked Tiphsah.' },
-            { name: 'Pekahiah', father: 'Menahem', kingdom: 'Israel', order: 17, start: 742, end: 740, length: 2, capital: 'Samaria', evaluation: 'Evil', keyActs: 'Did evil.', prophets: [], refs: '2 Kings 15:23-26', events: 'Killed by Pekah.' },
-            { name: 'Pekah', father: 'Remaliah', kingdom: 'Israel', order: 18, start: 752, end: 732, length: 20, capital: 'Samaria', evaluation: 'Evil', keyActs: 'Alliance with Rezin against Judah.', prophets: [], refs: '2 Kings 15:27-31', events: 'Lost territory to Tiglath-Pileser.' },
-            { name: 'Hoshea', father: 'Elah', kingdom: 'Israel', order: 19, start: 732, end: 722, length: 9, capital: 'Samaria', evaluation: 'Evil', keyActs: 'Last king; rebelled against Assyria.', prophets: ['Hosea'], refs: '2 Kings 17', events: 'Fall of Samaria; exile of Israel.' }
-        ];
-        // Populate kings table
-        const kingsTableBody = $('#kingsTable tbody');
-        kingsData.forEach(king => {
-            const rowClass = king.kingdom === 'United Monarchy' ? 'united' :
-                             king.evaluation === 'Faithful' ? 'faithful' :
-                             king.evaluation === 'Partially Faithful' ? 'partial' : 'evil';
-            const prophetsStr = king.prophets.length > 0 ? king.prophets.map(p => `${p} (${prophetTribes[p] || 'Unknown'})`).join(', ') : 'None';
-            kingsTableBody.append(`
-                <tr class="${rowClass}" data-kingdom="${king.kingdom}" data-prophets="${king.prophets.join(',')}">
-                    <td>${king.name}</td>
-                    <td>${king.father || 'N/A'}</td>
-                    <td>${king.kingdom}</td>
-                    <td>${king.order}</td>
-                    <td>${king.start}</td>
-                    <td>${king.end}</td>
-                    <td>${king.length}</td>
-                    <td>${king.capital}</td>
-                    <td>${king.evaluation}</td>
-                    <td>${king.keyActs}</td>
-                    <td>${prophetsStr}</td>
-                    <td>${king.refs}</td>
-                    <td>${king.events}</td>
-                </tr>
-            `);
-        });
-        $('#kingsTable').DataTable({
-            responsive: true,
-            paging: false,
-            info: false,
-            order: [[4, 'desc']]  // Adjusted index for start year after adding Father column
-        });
-        // Populate prophet filter
-        const allProphets = [...new Set(kingsData.flatMap(k => k.prophets))].sort();
-        const prophetSelect = $('#prophetFilter');
-        allProphets.forEach(p => prophetSelect.append(`<option value="${p}">${p}</option>`));
-        // OT filters
-        $('#kingdomFilter').on('change', function() { $('#kingsTable').DataTable().column(2).search(this.value).draw(); });  // Adjusted column index
-        $('#evalFilter').on('change', function() { $('#kingsTable').DataTable().column(8).search(this.value).draw(); });  // Adjusted
-        $('#prophetFilter').on('change', function() {
-            const prophet = this.value;
-            $('#kingsTable tbody tr').removeClass('highlight');
-            if (prophet) {
-                $('#kingsTable tbody tr').each(function() {
-                    if ($(this).data('prophets').includes(prophet)) $(this).addClass('highlight');
-                });
-            }
-        });
-        // Export CSV
-        $('#exportCsv').on('click', function() {
-            let csv = 'Name,Father,Period/Kingdom,Order,Start BCE,End BCE,Length,Capital,Evaluation,Key Acts,Prophets,References,Events\n';
-            kingsData.forEach(k => {
-                csv += `"${k.name}","${k.father || 'N/A'}","${k.kingdom}",${k.order},${k.start},${k.end},${k.length},"${k.capital}","${k.evaluation}","${k.keyActs}","${k.prophets.map(p => `${p} (${prophetTribes[p] || 'Unknown'})`).join(';')}","${k.refs}","${k.events}"\n`;
-            });
-            const blob = new Blob([csv], { type: 'text/csv' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url; a.download = 'kings.csv'; a.click();
-        });
-        // OT Timeline
-        const container = document.getElementById('timeline');
-        const groups = new vis.DataSet([
-            { id: 'united', content: 'United Monarchy' },
-            { id: 'judah', content: 'Judah (Southern)' },
-            { id: 'israel', content: 'Israel (Northern)' },
-            { id: 'events', content: 'Major Events' }
-        ]);
-        const items = new vis.DataSet();
-        kingsData.forEach((king, i) => {
-            const groupId = king.kingdom === 'United Monarchy' ? 'united' :
-                            king.kingdom === 'Judah' ? 'judah' : 'israel';
-            items.add({
-                id: i,
-                group: groupId,
-                content: `${king.name} (${king.start}–${king.end} BCE)`,
-                start: -king.start,
-                end: -king.end + 1,
-                className: groupId
-            });
-        });
-        const eventsData = [
-            { content: 'Kingdom Split', start: -931, group: 'events', type: 'point' },
-            { content: 'Fall of Samaria (Israel)', start: -722, group: 'events', type: 'point' },
-            { content: 'Fall of Jerusalem (Judah)', start: -586, group: 'events', type: 'point' }
-        ];
-        eventsData.forEach((e, i) => items.add({ id: 'event' + i, ...e, className: 'event' }));
-        const options = {
-            start: -1100,
-            end: -500,
-            height: '100%',
-            zoomable: true,
-            orientation: 'top',
-            format: {
-                minorLabels: { year: 'YYYY BCE' },
-                majorLabels: { year: 'YYYY BCE' }
-            },
-            showCurrentTime: false
-        };
-        new vis.Timeline(container, items, groups, options);
-        // Paul's Churches - COMPLETE
-        const paulsChurches = [
-            { order: 1, letter: 'Galatians', letterYear: 49, yearsAfter: 2, city: 'Pisidian Antioch', province: 'Galatia', modern: 'Yalvaç, Turkey', continent: 'Asia', founded: 47, beforeGospels: 'Yes', writtenFrom: 'Antioch (Syria)', imprisoned: 'No', leaders: 'Elders (Acts 14:23)' },
-            { order: 2, letter: 'Galatians', letterYear: 49, yearsAfter: 2, city: 'Iconium', province: 'Galatia', modern: 'Konya, Turkey', continent: 'Asia', founded: 47, beforeGospels: 'Yes', writtenFrom: 'Antioch (Syria)', imprisoned: 'No', leaders: 'Elders (Acts 14:23)' },
-            { order: 3, letter: 'Galatians', letterYear: 49, yearsAfter: 2, city: 'Lystra', province: 'Galatia', modern: 'Hatunsaray, Turkey', continent: 'Asia', founded: 47, beforeGospels: 'Yes', writtenFrom: 'Antioch (Syria)', imprisoned: 'No', leaders: 'Elders (Acts 14:23)' },
-            { order: 4, letter: 'Galatians', letterYear: 49, yearsAfter: 2, city: 'Derbe', province: 'Galatia', modern: 'Karaman, Turkey', continent: 'Asia', founded: 47, beforeGospels: 'Yes', writtenFrom: 'Antioch (Syria)', imprisoned: 'No', leaders: 'Elders (Acts 14:23)' },
-            { order: 5, letter: 'Philippians', letterYear: 61, yearsAfter: 12, city: 'Philippi', province: 'Macedonia', modern: 'Filippoi, Greece', continent: 'Europe', founded: 49, beforeGospels: 'Yes', writtenFrom: 'Rome', imprisoned: 'Yes', leaders: 'Bishops and deacons (Phil 1:1)' },
-            { order: 6, letter: '1 & 2 Thessalonians', letterYear: '51, 52', yearsAfter: '1–2', city: 'Thessalonica', province: 'Macedonia', modern: 'Thessaloniki, Greece', continent: 'Europe', founded: 50, beforeGospels: 'Yes', writtenFrom: 'Corinth', imprisoned: 'No', leaders: 'N/A' },
-            { order: 7, letter: '1 & 2 Corinthians', letterYear: '55, 56', yearsAfter: '4–5', city: 'Corinth', province: 'Achaia', modern: 'Korinthos, Greece', continent: 'Europe', founded: 51, beforeGospels: 'Yes', writtenFrom: 'Ephesus / Macedonia', imprisoned: 'No', leaders: 'N/A' },
-            { order: 8, letter: 'Ephesians / 1 Timothy', letterYear: '61 / 64', yearsAfter: '8 / 11', city: 'Ephesus', province: 'Asia', modern: 'Selçuk, Turkey', continent: 'Asia', founded: 53, beforeGospels: 'Yes', writtenFrom: 'Rome / Macedonia', imprisoned: 'Yes / No', leaders: 'Elders (Acts 20), Timothy' },
-            { order: 9, letter: 'Colossians / Philemon', letterYear: 61, yearsAfter: 6, city: 'Colossae', province: 'Asia', modern: 'Honaz, Turkey', continent: 'Asia', founded: 55, beforeGospels: 'Yes', writtenFrom: 'Rome', imprisoned: 'Yes', leaders: 'Epaphras, Archippus' },
-            { order: 10, letter: 'Romans', letterYear: 57, yearsAfter: 'N/A', city: 'Rome', province: 'Italy', modern: 'Rome, Italy', continent: 'Europe', founded: 'Pre-Paul', beforeGospels: 'Yes', writtenFrom: 'Corinth', imprisoned: 'No', leaders: 'N/A' },
-            { order: 11, letter: 'Titus', letterYear: 64, yearsAfter: 1, city: 'Crete churches', province: 'Crete', modern: 'Crete, Greece', continent: 'Europe', founded: 63, beforeGospels: 'Yes', writtenFrom: 'Macedonia', imprisoned: 'No', leaders: 'Titus to appoint elders (Titus 1:5)' }
-        ];
-        // Populate Paul's table
-        const paulTableBody = $('#paulTable tbody');
-        paulsChurches.forEach(church => {
-            paulTableBody.append(`
-                <tr>
-                    <td>${church.order}</td>
-                    <td><strong>${church.letter}</strong></td>
-                    <td>${church.letterYear}</td>
-                    <td>${church.yearsAfter}</td>
-                    <td>${church.city}</td>
-                    <td>${church.province}</td>
-                    <td>${church.modern}</td>
-                    <td>${church.continent}</td>
-                    <td>${church.founded}</td>
-                    <td>${church.beforeGospels}</td>
-                    <td>${church.writtenFrom}</td>
-                    <td>${church.imprisoned}</td>
-                    <td>${church.leaders}</td>
-                </tr>
-            `);
-        });
-        $('#paulTable').DataTable({
-            responsive: true,
-            paging: false,
-            info: false
-        });
-        // NT Timeline
-        const paulContainer = document.getElementById('paulTimeline');
-        const paulGroups = new vis.DataSet([
-            { id: 'letters', content: "Paul's Letters" },
-            { id: 'gospels', content: 'Gospels' }
-        ]);
-        const paulItems = new vis.DataSet();
-        const paulLetters = [
-            { name: 'Galatians', year: 49, prison: false },
-            { name: '1 Thessalonians', year: 51, prison: false },
-            { name: '2 Thessalonians', year: 52, prison: false },
-            { name: '1 Corinthians', year: 55, prison: false },
-            { name: '2 Corinthians', year: 56, prison: false },
-            { name: 'Romans', year: 57, prison: false },
-            { name: 'Ephesians', year: 61, prison: true },
-            { name: 'Philippians', year: 61, prison: true },
-            { name: 'Colossians', year: 61, prison: true },
-            { name: 'Philemon', year: 61, prison: true },
-            { name: 'Titus', year: 64, prison: false },
-            { name: '1 Timothy', year: 64, prison: false }
-        ];
-        paulLetters.forEach((letter, i) => {
-            const className = letter.prison ? 'prison' : 'paul-letter';
-            paulItems.add({
-                id: 'letter' + i,
-                group: 'letters',
-                content: letter.name + ' (' + letter.year + ' AD)',
-                start: letter.year,
-                type: 'point',
-                className: className
-            });
-        });
-        const gospels = [
-            { name: 'Mark', year: 65 },
-            { name: 'Matthew', year: 70 },
-            { name: 'Luke', year: 80 },
-            { name: 'John', year: 90 }
-        ];
-        gospels.forEach((g, i) => {
-            paulItems.add({
-                id: 'gospel' + i,
-                group: 'gospels',
-                content: g.name + ' (' + g.year + ' AD)',
-                start: g.year,
-                type: 'point',
-                className: 'gospel'
-            });
-        });
-        const paulOptions = {
-            start: 45,
-            end: 100,
-            height: '100%',
-            zoomable: true,
-            orientation: 'top',
-            format: {
-                minorLabels: { year: 'YYYY AD' },
-                majorLabels: { year: 'YYYY AD' }
-            },
-            showCurrentTime: false
-        };
-        new vis.Timeline(paulContainer, paulItems, paulGroups, paulOptions);
-    </script>
+
+    <p class="note">On mobile: swipe left/right to view all columns →</p>
+
+    <ul class="nav nav-tabs mb-4" id="chronologyTabs" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="ot-tab" data-bs-toggle="tab" data-bs-target="#ot" type="button" role="tab">Old Testament</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="nt-tab" data-bs-toggle="tab" data-bs-target="#nt" type="button" role="tab">New Testament</button>
+      </li>
+    </ul>
+
+    <div class="tab-content">
+      <!-- Old Testament Tab -->
+      <div class="tab-pane fade show active" id="ot" role="tabpanel">
+        <h2>Old Testament – Approximate Order of Writing</h2>
+        <table id="otTable" class="display responsive nowrap" style="width:100%">
+          <thead>
+            <tr>
+              <th>Chronological Order</th>
+              <th>Canonical Order</th>
+              <th>Book</th>
+              <th>Author(s)</th>
+              <th>Approx. Date</th>
+              <th>Chapters</th>
+              <th>Key Theme / Note</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>18</td><td>Job</td><td>Unknown (possibly Moses or earlier)</td><td>~2000–1500 BCE</td><td>42</td><td>Suffering & God's sovereignty</td></tr>
+            <tr><td>2</td><td>1</td><td>Genesis</td><td>Moses (primary)</td><td>1440–1400 BCE</td><td>50</td><td>Creation to patriarchs</td></tr>
+            <tr><td>3</td><td>2</td><td>Exodus</td><td>Moses (primary)</td><td>1440–1400 BCE</td><td>40</td><td>Deliverance & Law</td></tr>
+            <tr><td>4</td><td>3</td><td>Leviticus</td><td>Moses (primary)</td><td>1440 BCE</td><td>27</td><td>Holiness & sacrifices</td></tr>
+            <tr><td>5</td><td>4</td><td>Numbers</td><td>Moses (primary)</td><td>1440–1400 BCE</td><td>36</td><td>Wilderness wanderings</td></tr>
+            <tr><td>6</td><td>5</td><td>Deuteronomy</td><td>Moses (primary)</td><td>1400 BCE</td><td>34</td><td>Covenant renewal</td></tr>
+            <tr><td>7</td><td>6</td><td>Joshua</td><td>Joshua (primary)</td><td>1400–1375 BCE</td><td>24</td><td>Conquest of Canaan</td></tr>
+            <tr><td>8</td><td>7</td><td>Judges</td><td>Samuel (primary)</td><td>1050–1000 BCE</td><td>21</td><td>Cycles of apostasy & deliverance</td></tr>
+            <tr><td>9</td><td>8</td><td>Ruth</td><td>Samuel (traditional)</td><td>~1000 BCE</td><td>4</td><td>Redemption story</td></tr>
+            <tr><td>10</td><td>9</td><td>1 Samuel</td><td>Samuel, Nathan, Gad</td><td>~930 BCE</td><td>31</td><td>Transition to monarchy</td></tr>
+            <tr><td>11</td><td>10</td><td>2 Samuel</td><td>Nathan, Gad (primary contributors)</td><td>~930 BCE</td><td>24</td><td>David's reign</td></tr>
+            <tr><td>12</td><td>19</td><td>Psalms</td><td>David (73), Asaph (12), Sons of Korah (11), Solomon, Moses, Heman, Ethan, anonymous</td><td>1000–400 BCE</td><td>150</td><td>Worship & prayer collection</td></tr>
+            <tr><td>13</td><td>20</td><td>Proverbs</td><td>Solomon (primary), Agur, Lemuel</td><td>~950 BCE</td><td>31</td><td>Wisdom sayings</td></tr>
+            <tr><td>14</td><td>21</td><td>Ecclesiastes</td><td>Solomon (traditional)</td><td>~935 BCE</td><td>12</td><td>Vanity without God</td></tr>
+            <tr><td>15</td><td>22</td><td>Song of Solomon</td><td>Solomon (traditional)</td><td>~950 BCE</td><td>8</td><td>Love & marriage</td></tr>
+            <tr><td>16</td><td>11</td><td>1 Kings</td><td>Jeremiah (possible compiler)</td><td>~560 BCE</td><td>22</td><td>Solomon to divided kingdom</td></tr>
+            <tr><td>17</td><td>12</td><td>2 Kings</td><td>Jeremiah (possible compiler)</td><td>~560 BCE</td><td>25</td><td>Fall of Israel & Judah</td></tr>
+            <tr><td>18</td><td>23</td><td>Isaiah</td><td>Isaiah son of Amoz</td><td>740–680 BCE</td><td>66</td><td>Judgment & Messianic hope</td></tr>
+            <tr><td>19</td><td>30</td><td>Amos</td><td>Amos</td><td>760–750 BCE</td><td>9</td><td>Social justice</td></tr>
+            <tr><td>20</td><td>28</td><td>Hosea</td><td>Hosea</td><td>755–715 BCE</td><td>14</td><td>Unfaithful Israel</td></tr>
+            <tr><td>21</td><td>33</td><td>Micah</td><td>Micah</td><td>735–700 BCE</td><td>7</td><td>Judgment & restoration</td></tr>
+            <tr><td>22</td><td>34</td><td>Nahum</td><td>Nahum</td><td>663–612 BCE</td><td>3</td><td>Nineveh's doom</td></tr>
+            <tr><td>23</td><td>36</td><td>Zephaniah</td><td>Zephaniah</td><td>640–620 BCE</td><td>3</td><td>Day of the Lord</td></tr>
+            <tr><td>24</td><td>35</td><td>Habakkuk</td><td>Habakkuk</td><td>612–589 BCE</td><td>3</td><td>Faith amid evil</td></tr>
+            <tr><td>25</td><td>31</td><td>Obadiah</td><td>Obadiah</td><td>~586 BCE</td><td>1</td><td>Edom judged</td></tr>
+            <tr><td>26</td><td>24</td><td>Jeremiah</td><td>Jeremiah (Baruch scribe)</td><td>627–586 BCE</td><td>52</td><td>Judah's fall</td></tr>
+            <tr><td>27</td><td>25</td><td>Lamentations</td><td>Jeremiah</td><td>586 BCE</td><td>5</td><td>Mourning Jerusalem</td></tr>
+            <tr><td>28</td><td>26</td><td>Ezekiel</td><td>Ezekiel</td><td>593–571 BCE</td><td>48</td><td>Exile visions</td></tr>
+            <tr><td>29</td><td>29</td><td>Joel</td><td>Joel</td><td>~835–500 BCE (disputed)</td><td>3</td><td>Locust plague & Spirit</td></tr>
+            <tr><td>30</td><td>32</td><td>Jonah</td><td>Jonah</td><td>~780 BCE</td><td>4</td><td>Nineveh repents</td></tr>
+            <tr><td>31</td><td>37</td><td>Haggai</td><td>Haggai</td><td>520 BCE</td><td>2</td><td>Temple rebuilding</td></tr>
+            <tr><td>32</td><td>38</td><td>Zechariah</td><td>Zechariah</td><td>520–480 BCE</td><td>14</td><td>Visions & Messiah</td></tr>
+            <tr><td>33</td><td>27</td><td>Daniel</td><td>Daniel</td><td>605–536 BCE</td><td>12</td><td>Kingdoms & prophecy</td></tr>
+            <tr><td>34</td><td>15</td><td>Ezra</td><td>Ezra</td><td>458–445 BCE</td><td>10</td><td>Return & temple rebuilt</td></tr>
+            <tr><td>35</td><td>13</td><td>1 Chronicles</td><td>Ezra (traditional)</td><td>450–430 BCE</td><td>29</td><td>Genealogies & David's reign</td></tr>
+            <tr><td>36</td><td>14</td><td>2 Chronicles</td><td>Ezra (traditional)</td><td>450–430 BCE</td><td>36</td><td>Temple & Judah's kings</td></tr>
+            <tr><td>37</td><td>16</td><td>Nehemiah</td><td>Nehemiah</td><td>445–432 BCE</td><td>13</td><td>Walls rebuilt, reforms</td></tr>
+            <tr><td>38</td><td>17</td><td>Esther</td><td>Unknown (Mordecai?)</td><td>~460 BCE</td><td>10</td><td>Purim deliverance</td></tr>
+            <tr><td>39</td><td>39</td><td>Malachi</td><td>Malachi</td><td>~430 BCE</td><td>4</td><td>Final OT prophecy</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- New Testament Tab -->
+      <div class="tab-pane fade" id="nt" role="tabpanel">
+        <h2>New Testament – Approximate Order of Writing</h2>
+        <table id="ntTable" class="display responsive nowrap" style="width:100%">
+          <thead>
+            <tr>
+              <th>Chronological Order</th>
+              <th>Canonical Order</th>
+              <th>Book</th>
+              <th>Author(s)</th>
+              <th>Approx. Date</th>
+              <th>Chapters</th>
+              <th>Key Theme / Note</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>59</td><td>James</td><td>James (brother of Jesus)</td><td>45–50 CE</td><td>5</td><td>Faith & works</td></tr>
+            <tr><td>2</td><td>48</td><td>Galatians</td><td>Paul</td><td>49 CE</td><td>6</td><td>Grace vs. law</td></tr>
+            <tr><td>3</td><td>52</td><td>1 Thessalonians</td><td>Paul</td><td>51 CE</td><td>5</td><td>Second coming encouragement</td></tr>
+            <tr><td>4</td><td>53</td><td>2 Thessalonians</td><td>Paul</td><td>52 CE</td><td>3</td><td>Day of the Lord clarification</td></tr>
+            <tr><td>5</td><td>46</td><td>1 Corinthians</td><td>Paul</td><td>55 CE</td><td>16</td><td>Church order & problems</td></tr>
+            <tr><td>6</td><td>47</td><td>2 Corinthians</td><td>Paul</td><td>56 CE</td><td>13</td><td>Paul's defense & comfort</td></tr>
+            <tr><td>7</td><td>45</td><td>Romans</td><td>Paul</td><td>57 CE</td><td>16</td><td>Systematic gospel</td></tr>
+            <tr><td>8</td><td>41</td><td>Mark</td><td>John Mark (with Peter's influence)</td><td>60–65 CE</td><td>16</td><td>Earliest Gospel</td></tr>
+            <tr><td>9</td><td>49</td><td>Ephesians</td><td>Paul</td><td>60–62 CE</td><td>6</td><td>Church unity</td></tr>
+            <tr><td>10</td><td>51</td><td>Colossians</td><td>Paul</td><td>60–62 CE</td><td>4</td><td>Christ's supremacy</td></tr>
+            <tr><td>11</td><td>57</td><td>Philemon</td><td>Paul</td><td>60–62 CE</td><td>1</td><td>Forgiveness</td></tr>
+            <tr><td>12</td><td>50</td><td>Philippians</td><td>Paul</td><td>61 CE</td><td>4</td><td>Joy in suffering</td></tr>
+            <tr><td>13</td><td>54</td><td>1 Timothy</td><td>Paul</td><td>62–64 CE</td><td>6</td><td>Church leadership</td></tr>
+            <tr><td>14</td><td>56</td><td>Titus</td><td>Paul</td><td>63–65 CE</td><td>3</td><td>Church order</td></tr>
+            <tr><td>15</td><td>60</td><td>1 Peter</td><td>Peter (Silvanus scribe?)</td><td>62–64 CE</td><td>5</td><td>Hope in suffering</td></tr>
+            <tr><td>16</td><td>55</td><td>2 Timothy</td><td>Paul</td><td>66–67 CE</td><td>4</td><td>Paul's final charge</td></tr>
+            <tr><td>17</td><td>61</td><td>2 Peter</td><td>Peter</td><td>65–68 CE</td><td>3</td><td>False teachers</td></tr>
+            <tr><td>18</td><td>58</td><td>Hebrews</td><td>Unknown (Paul, Barnabas, Apollos proposed)</td><td>60–70 CE</td><td>13</td><td>Christ's superiority</td></tr>
+            <tr><td>19</td><td>40</td><td>Matthew</td><td>Matthew</td><td>60–70 CE</td><td>28</td><td>Jesus as King</td></tr>
+            <tr><td>20</td><td>42</td><td>Luke</td><td>Luke</td><td>60–80 CE</td><td>24</td><td>Jesus as Son of Man</td></tr>
+            <tr><td>21</td><td>44</td><td>Acts</td><td>Luke</td><td>62–65 CE</td><td>28</td><td>Early church expansion</td></tr>
+            <tr><td>22</td><td>65</td><td>Jude</td><td>Jude (brother of Jesus)</td><td>65–80 CE</td><td>1</td><td>Contend for the faith</td></tr>
+            <tr><td>23</td><td>43</td><td>John</td><td>John</td><td>85–95 CE</td><td>21</td><td>Jesus as Son of God</td></tr>
+            <tr><td>24</td><td>62</td><td>1 John</td><td>John</td><td>90–95 CE</td><td>5</td><td>Assurance & love</td></tr>
+            <tr><td>25</td><td>63</td><td>2 John</td><td>John</td><td>90–95 CE</td><td>1</td><td>Walk in truth</td></tr>
+            <tr><td>26</td><td>64</td><td>3 John</td><td>John</td><td>90–95 CE</td><td>1</td><td>Hospitality</td></tr>
+            <tr><td>27</td><td>66</td><td>Revelation</td><td>John</td><td>95 CE</td><td>22</td><td>End times & victory</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <footer>
+      Approximate dates & authorship based on conservative scholarship • For Bible study • © 2026 • 
+      <a href="about.html">About</a> • 
+      <a href="privacy.html">Privacy Policy</a> • 
+      <a href="terms.html">Terms of Service</a>
+    </footer>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    $(document).ready(function() {
+      const otTable = $('#otTable').DataTable({
+        responsive: true,
+        paging: false,
+        info: false,
+        order: [[0, 'asc']],  // sort by chronological order
+        searching: false
+      });
+
+      const ntTable = $('#ntTable').DataTable({
+        responsive: true,
+        paging: false,
+        info: false,
+        order: [[0, 'asc']],
+        searching: false
+      });
+
+      $('#globalSearch').on('keyup', function() {
+        otTable.search(this.value).draw();
+        ntTable.search(this.value).draw();
+      });
+
+      document.getElementById('printBtn').onclick = () => window.print();
+    });
+  </script>
 </body>
 </html>
-
-

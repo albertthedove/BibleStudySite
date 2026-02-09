@@ -15,49 +15,82 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <style>
-    body { font-family: system-ui, -apple-system, sans-serif; background: #f8f9fa; color: #212529; padding-bottom: 60px; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: white;
+      color: #333;
+      padding-bottom: 60px;
+    }
+    nav {
+      background: #f8f9fa;
+      padding: 12px;
+      text-align: center;
+      border-bottom: 1px solid #ddd;
+    }
+    nav a {
+      margin: 0 14px;
+      color: #007bff;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
     .container { max-width: 1450px; margin: auto; padding: 20px; }
-    h1, h2 { text-align: center; color: #2c3e50; }
+    h1, h2 { text-align: center; color: #222; }
     .intro { text-align: center; font-size: 1.1em; max-width: 900px; margin: 20px auto; color: #555; }
     table.display {
-      border-collapse: separate; border-spacing: 0;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      border-radius: 8px; overflow: hidden;
+      border-collapse: separate;
+      border-spacing: 0;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      overflow: hidden;
     }
     table.display thead th {
-      background: #343a40; color: white; text-align: center; padding: 12px; font-weight: 600;
+      background: #f8f9fa;
+      color: #333;
+      text-align: center;
+      padding: 12px;
+      font-weight: 600;
     }
-    table.display tbody td { padding: 10px; text-align: center; border-bottom: 1px solid #dee2e6; }
+    table.display tbody td {
+      padding: 10px;
+      text-align: center;
+      border-bottom: 1px solid #eee;
+    }
     table.display tbody tr:nth-child(even) { background: #f9f9f9; }
-    table.display tbody tr:hover { background: #e9ecef; }
+    table.display tbody tr:hover { background: #f0f4f8; }
     /* Evaluation colors */
     .faithful   { background-color: #d4edda !important; color: #155724; }
     .partial    { background-color: #fff3cd !important; color: #856404; }
     .evil       { background-color: #f8d7da !important; color: #721c24; }
     .united     { background-color: #e2e3ff !important; }
     #timeline   { height: 520px; border: 1px solid #ddd; margin: 30px 0; background: white; border-radius: 6px; overflow: hidden; }
-    #darkModeToggle {
-      position: fixed; top: 16px; right: 16px; z-index: 999;
-      background: #343a40; color: white; border: none;
-      width: 48px; height: 48px; border-radius: 50%;
-      font-size: 1.4em; box-shadow: 0 3px 10px rgba(0,0,0,0.3); cursor: pointer;
-    }
-    body.dark-mode #darkModeToggle { background: #ffc107; color: #000; }
-    body.dark-mode { background: #121212; color: #e0e0e0; }
-    body.dark-mode .container { background: #1e1e1e; }
-    body.dark-mode table.display { background: #222; }
-    body.dark-mode table.display thead th { background: #111; }
-    body.dark-mode table.display tbody tr:nth-child(even) { background: #1a1a1a; }
-    body.dark-mode table.display tbody tr:hover { background: #333; }
     .note { font-style: italic; color: #666; text-align: center; margin: 12px 0; }
-    body.dark-mode .note { color: #aaa; }
-    footer { text-align: center; padding: 30px 0; color: #777; border-top: 1px solid #eee; font-size: 0.95em; }
-    body.dark-mode footer { color: #999; border-top-color: #444; }
+    footer {
+      text-align: center;
+      padding: 30px 0;
+      color: #666;
+      border-top: 1px solid #eee;
+      font-size: 0.95em;
+    }
+    footer a { color: #007bff; text-decoration: none; margin: 0 8px; }
+    footer a:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
 
-  <button id="darkModeToggle" title="Toggle Dark Mode">🌙</button>
+  <nav>
+    <a href="index.html">Home</a> |
+    <a href="PaulineChurches.html">Paul's Letters</a> |
+    <a href="jesusmap.html">Jesus Map</a> |
+    <a href="paulmap.html">Paul Map</a> |
+    <a href="BooksGraphs.html">Book Graphs</a> |
+    <a href="BibleChronos.html">Combined Chronology</a> |
+    <a href="about.html">About</a> |
+    <a href="privacy.html">Privacy</a> |
+    <a href="terms.html">Terms</a>
+  </nav>
 
   <div class="container">
     <h1>Kings of Israel and Judah</h1>
@@ -89,52 +122,184 @@
       </thead>
       <tbody>
         <!-- United Monarchy -->
-        <tr class="united"><td>United</td><td>Saul</td><td>Kish</td><td>1050</td><td>1010</td><td>40</td><td class="partial">Partially Faithful</td><td>First king; battles with Philistines; disobedience</td><td>Samuel</td><td>1 Sam 9–31</td></tr>
-        <tr class="united"><td>United</td><td>David</td><td>Jesse</td><td>1010</td><td>970</td><td>40</td><td class="faithful">Faithful</td><td>Man after God's heart; conquered Jerusalem; brought Ark</td><td>Samuel, Nathan, Gad</td><td>2 Sam; 1 Chr 11–29</td></tr>
-        <tr class="united"><td>United</td><td>Solomon</td><td>David</td><td>970</td><td>931</td><td>40</td><td class="partial">Partially Faithful</td><td>Built Temple; wisdom; later idolatry</td><td>Nathan, Ahijah</td><td>1 Kgs 1–11; 2 Chr 1–9</td></tr>
+        <tr class="united">
+          <td>United</td><td>Saul</td><td>Kish</td><td>1050</td><td>1010</td><td>40</td>
+          <td class="partial">Partially Faithful</td>
+          <td>First king; battles with Philistines; disobedience led to rejection</td>
+          <td>Samuel</td><td>1 Sam 9–31</td>
+        </tr>
+        <tr class="united">
+          <td>United</td><td>David</td><td>Jesse</td><td>1010</td><td>970</td><td>40</td>
+          <td class="faithful">Faithful</td>
+          <td>Man after God's heart; united tribes; covenant promise</td>
+          <td>Nathan, Gad</td><td>2 Sam; 1 Kgs 1–2; 1 Chr 11–29</td>
+        </tr>
+        <tr class="united">
+          <td>United</td><td>Solomon</td><td>David</td><td>970</td><td>931</td><td>40</td>
+          <td class="partial">Partially Faithful</td>
+          <td>Wisdom; temple built; later idolatry & foreign wives</td>
+          <td>Ahijah</td><td>1 Kgs 1–11; 2 Chr 1–9</td>
+        </tr>
 
-        <!-- Judah (Southern Kingdom) -->
-        <tr><td>Judah</td><td>Rehoboam</td><td>Solomon</td><td>931</td><td>913</td><td>17</td><td class="evil">Evil</td><td>Kingdom divided; Shishak invasion</td><td>Shemaiah</td><td>1 Kgs 11:42–14:31; 2 Chr 9–12</td></tr>
-        <tr><td>Judah</td><td>Abijah</td><td>Rehoboam</td><td>913</td><td>911</td><td>3</td><td class="evil">Evil</td><td>War with Jeroboam</td><td>—</td><td>1 Kgs 15:1–8; 2 Chr 13</td></tr>
-        <tr><td>Judah</td><td>Asa</td><td>Abijah</td><td>911</td><td>870</td><td>41</td><td class="faithful">Faithful</td><td>Reforms; removed idols</td><td>Azariah, Hanani</td><td>1 Kgs 15:9–24; 2 Chr 14–16</td></tr>
-        <tr><td>Judah</td><td>Jehoshaphat</td><td>Asa</td><td>870</td><td>848</td><td>25</td><td class="faithful">Faithful</td><td>Judicial reforms; alliance with Ahab</td><td>Jahaziel, Micaiah</td><td>1 Kgs 22:41–50; 2 Chr 17–20</td></tr>
-        <tr><td>Judah</td><td>Jehoram</td><td>Jehoshaphat</td><td>848</td><td>841</td><td>8</td><td class="evil">Evil</td><td>Married Ahab's daughter; idolatry</td><td>Elijah, Elisha</td><td>2 Kgs 8:16–24; 2 Chr 21</td></tr>
-        <tr><td>Judah</td><td>Ahaziah</td><td>Jehoram</td><td>841</td><td>841</td><td>1</td><td class="evil">Evil</td><td>Killed by Jehu</td><td>—</td><td>2 Kgs 8:25–9:29; 2 Chr 22</td></tr>
-        <tr><td>Judah</td><td>Athaliah (Queen)</td><td>— (Omri line)</td><td>841</td><td>835</td><td>6</td><td class="evil">Evil</td><td>Usurper; Baal worship</td><td>—</td><td>2 Kgs 11; 2 Chr 22–23</td></tr>
-        <tr><td>Judah</td><td>Joash</td><td>Ahaziah</td><td>835</td><td>796</td><td>40</td><td class="partial">Partially Faithful</td><td>Temple repaired; later idolatry</td><td>Zechariah (son of Jehoiada)</td><td>2 Kgs 11–12; 2 Chr 24</td></tr>
-        <tr><td>Judah</td><td>Amaziah</td><td>Joash</td><td>796</td><td>767</td><td>29</td><td class="partial">Partially Faithful</td><td>Victory over Edom; defeated by Israel</td><td>—</td><td>2 Kgs 14:1–20; 2 Chr 25</td></tr>
-        <tr><td>Judah</td><td>Uzziah (Azariah)</td><td>Amaziah</td><td>767</td><td>740</td><td>52</td><td class="faithful">Faithful</td><td>Prosperity; struck with leprosy</td><td>Isaiah, Amos</td><td>2 Kgs 15:1–7; 2 Chr 26</td></tr>
-        <tr><td>Judah</td><td>Jotham</td><td>Uzziah</td><td>750</td><td>735</td><td>16</td><td class="faithful">Faithful</td><td>Built gates; did right</td><td>Isaiah, Micah</td><td>2 Kgs 15:32–38; 2 Chr 27</td></tr>
-        <tr><td>Judah</td><td>Ahaz</td><td>Jotham</td><td>735</td><td>715</td><td>16</td><td class="evil">Evil</td><td>Idolatry; Syro-Ephraimite war</td><td>Isaiah, Micah</td><td>2 Kgs 16; 2 Chr 28</td></tr>
-        <tr><td>Judah</td><td>Hezekiah</td><td>Ahaz</td><td>715</td><td>686</td><td>29</td><td class="faithful">Faithful</td><td>Great reforms; Sennacherib deliverance</td><td>Isaiah, Micah</td><td>2 Kgs 18–20; 2 Chr 29–32</td></tr>
-        <tr><td>Judah</td><td>Manasseh</td><td>Hezekiah</td><td>686</td><td>642</td><td>55</td><td class="evil">Evil</td><td>Worst idolatry; later repented</td><td>—</td><td>2 Kgs 21:1–18; 2 Chr 33</td></tr>
-        <tr><td>Judah</td><td>Amon</td><td>Manasseh</td><td>642</td><td>640</td><td>2</td><td class="evil">Evil</td><td>Assassinated</td><td>—</td><td>2 Kgs 21:19–26; 2 Chr 33</td></tr>
-        <tr><td>Judah</td><td>Josiah</td><td>Amon</td><td>640</td><td>609</td><td>31</td><td class="faithful">Faithful</td><td>Book of Law found; major revival</td><td>Zephaniah, Jeremiah</td><td>2 Kgs 22–23; 2 Chr 34–35</td></tr>
-        <tr><td>Judah</td><td>Jehoahaz</td><td>Josiah</td><td>609</td><td>609</td><td>0.25</td><td class="evil">Evil</td><td>Deposed by Neco</td><td>Jeremiah</td><td>2 Kgs 23:31–34</td></tr>
-        <tr><td>Judah</td><td>Jehoiakim</td><td>Josiah</td><td>609</td><td>598</td><td>11</td><td class="evil">Evil</td><td>Burned Jeremiah's scroll</td><td>Jeremiah</td><td>2 Kgs 23:34–24:6</td></tr>
-        <tr><td>Judah</td><td>Jehoiachin</td><td>Jehoiakim</td><td>598</td><td>597</td><td>0.25</td><td class="evil">Evil</td><td>First deportation to Babylon</td><td>Jeremiah</td><td>2 Kgs 24:8–17</td></tr>
-        <tr><td>Judah</td><td>Zedekiah</td><td>Josiah</td><td>597</td><td>586</td><td>11</td><td class="evil">Evil</td><td>Fall of Jerusalem; Temple destroyed</td><td>Jeremiah</td><td>2 Kgs 24:18–25:21</td></tr>
+        <!-- Judah (South) -->
+        <tr>
+          <td>Judah</td><td>Rehoboam</td><td>Solomon</td><td>931</td><td>913</td><td>17</td>
+          <td class="evil">Evil</td><td>Harsh policies; kingdom split</td><td>Shemaiah</td><td>1 Kgs 12,14; 2 Chr 10–12</td>
+        </tr>
+        <tr>
+          <td>Judah</td><td>Abijah / Abijam</td><td>Rehoboam</td><td>913</td><td>911</td><td>3</td>
+          <td class="evil">Evil</td><td>War with Jeroboam</td><td>—</td><td>1 Kgs 15; 2 Chr 13</td>
+        </tr>
+        <tr>
+          <td>Judah</td><td>Asa</td><td>Abijah</td><td>911</td><td>870</td><td>41</td>
+          <td class="faithful">Faithful</td><td>Removed idols; covenant renewal</td><td>Azariah, Hanani</td><td>1 Kgs 15; 2 Chr 14–16</td>
+        </tr>
+        <tr>
+          <td>Judah</td><td>Jehoshaphat</td><td>Asa</td><td>870</td><td>848</td><td>25</td>
+          <td class="faithful">Faithful</td><td>Teaching tours; alliance with Ahab</td><td>Elijah, Elisha, Jehu</td><td>1 Kgs 22; 2 Chr 17–20</td>
+        </tr>
+        <tr>
+          <td>Judah</td><td>Jehoram / Joram</td><td>Jehoshaphat</td><td>848</td><td>841</td><td>8</td>
+          <td class="evil">Evil</td><td>Married Ahab's daughter; killed brothers</td><td>Elijah, Elisha</td><td>2 Kgs 8; 2 Chr 21</td>
+        </tr>
+        <tr>
+          <td>Judah</td><td>Ahaziah</td><td>Jehoram</td><td>841</td><td>841</td><td>1</td>
+          <td class="evil">Evil</td><td>Killed by Jehu</td><td>—</td><td>2 Kgs 8–9; 2 Chr 22</td>
+        </tr>
+        <tr>
+          <td>Judah</td><td>Athaliah (Queen)</td><td>—</td><td>841</td><td>835</td><td>6</td>
+          <td class="evil">Evil</td><td>Usurper; killed royal seed</td><td>—</td><td>2 Kgs 11; 2 Chr 22–23</td>
+        </tr>
+        <tr>
+          <td>Judah</td><td>Joash / Jehoash</td><td>Ahaziah</td><td>835</td><td>796</td><td>40</td>
+          <td class="partial">Partially Faithful</td><td>Repaired temple; later turned away</td><td>Jehoiada, Zechariah</td><td>2 Kgs 12; 2 Chr 24</td>
+        </tr>
+        <tr>
+          <td>Judah</td><td>Amaziah</td><td>Joash</td><td>796</td><td>767</td><td>29</td>
+          <td class="partial">Partially Faithful</td><td>Did right but not wholeheartedly</td><td>—</td><td>2 Kgs 14; 2 Chr 25</td>
+        </tr>
+        <tr>
+          <td>Judah</td><td>Uzziah / Azariah</td><td>Amaziah</td><td>767</td><td>740</td><td>52</td>
+          <td class="partial">Partially Faithful</td><td>Prosperous; struck with leprosy for pride</td><td>Isaiah, Amos</td><td>2 Kgs 15; 2 Chr 26</td>
+        </tr>
+        <tr>
+          <td>Judah</td><td>Jotham</td><td>Uzziah</td><td>740</td><td>732</td><td>16</td>
+          <td class="faithful">Faithful</td><td>Strengthened defenses</td><td>Isaiah, Micah</td><td>2 Kgs 15; 2 Chr 27</td>
+        </tr>
+        <tr>
+          <td>Judah</td><td>Ahaz</td><td>Jotham</td><td>732</td><td>716</td><td>16</td>
+          <td class="evil">Evil</td><td>Idolatry; Assyrian alliance</td><td>Isaiah, Micah, Oded</td><td>2 Kgs 16; 2 Chr 28</td>
+        </tr>
+        <tr>
+          <td>Judah</td><td>Hezekiah</td><td>Ahaz</td><td>716</td><td>687</td><td>29</td>
+          <td class="faithful">Faithful</td><td>Revival; destroyed idols; Assyrian deliverance</td><td>Isaiah, Micah</td><td>2 Kgs 18–20; 2 Chr 29–32</td>
+        </tr>
+        <tr>
+          <td>Judah</td><td>Manasseh</td><td>Hezekiah</td><td>687</td><td>642</td><td>55</td>
+          <td class="evil">Evil</td><td>Worst king; later repented (2 Chr)</td><td>—</td><td>2 Kgs 21; 2 Chr 33</td>
+        </tr>
+        <tr>
+          <td>Judah</td><td>Amon</td><td>Manasseh</td><td>642</td><td>640</td><td>2</td>
+          <td class="evil">Evil</td><td>Assassinated</td><td>—</td><td>2 Kgs 21; 2 Chr 33</td>
+        </tr>
+        <tr>
+          <td>Judah</td><td>Josiah</td><td>Amon</td><td>640</td><td>609</td><td>31</td>
+          <td class="faithful">Faithful</td><td>Great reform; book of law found</td><td>Zephaniah, Jeremiah</td><td>2 Kgs 22–23; 2 Chr 34–35</td>
+        </tr>
+        <tr>
+          <td>Judah</td><td>Jehoahaz</td><td>Josiah</td><td>609</td><td>609</td><td>3 mo</td>
+          <td class="evil">Evil</td><td>Deposed by Egypt</td><td>Jeremiah</td><td>2 Kgs 23; 2 Chr 36</td>
+        </tr>
+        <tr>
+          <td>Judah</td><td>Jehoiakim</td><td>Josiah</td><td>609</td><td>597</td><td>11</td>
+          <td class="evil">Evil</td><td>Burned Jeremiah's scroll; Babylonian vassal</td><td>Jeremiah, Daniel</td><td>2 Kgs 23–24; 2 Chr 36</td>
+        </tr>
+        <tr>
+          <td>Judah</td><td>Jehoiachin</td><td>Jehoiakim</td><td>597</td><td>597</td><td>3 mo</td>
+          <td class="evil">Evil</td><td>Exiled to Babylon</td><td>Jeremiah, Ezekiel</td><td>2 Kgs 24; 2 Chr 36</td>
+        </tr>
+        <tr>
+          <td>Judah</td><td>Zedekiah</td><td>Josiah</td><td>597</td><td>586</td><td>11</td>
+          <td class="evil">Evil</td><td>Rebelled; Jerusalem destroyed</td><td>Jeremiah, Ezekiel</td><td>2 Kgs 24–25; 2 Chr 36; Jer 52</td>
+        </tr>
 
-        <!-- Israel (Northern Kingdom) -->
-        <tr><td>Israel</td><td>Jeroboam I</td><td>— (usurper)</td><td>931</td><td>910</td><td>22</td><td class="evil">Evil</td><td>Golden calves at Bethel & Dan</td><td>Ahijah</td><td>1 Kgs 11:26–14:20</td></tr>
-        <tr><td>Israel</td><td>Nadab</td><td>Jeroboam I</td><td>910</td><td>909</td><td>2</td><td class="evil">Evil</td><td>Assassinated</td><td>—</td><td>1 Kgs 15:25–31</td></tr>
-        <tr><td>Israel</td><td>Baasha</td><td>—</td><td>909</td><td>886</td><td>24</td><td class="evil">Evil</td><td>Wiped out Jeroboam's house</td><td>Jehu son of Hanani</td><td>1 Kgs 15:27–16:7</td></tr>
-        <tr><td>Israel</td><td>Elah</td><td>Baasha</td><td>886</td><td>885</td><td>2</td><td class="evil">Evil</td><td>Assassinated</td><td>—</td><td>1 Kgs 16:8–14</td></tr>
-        <tr><td>Israel</td><td>Zimri</td><td>—</td><td>885</td><td>885</td><td>0.007</td><td class="evil">Evil</td><td>Reigned 7 days; suicide</td><td>—</td><td>1 Kgs 16:15–20</td></tr>
-        <tr><td>Israel</td><td>Omri</td><td>—</td><td>885</td><td>874</td><td>12</td><td class="evil">Evil</td><td>Founded Samaria</td><td>—</td><td>1 Kgs 16:21–28</td></tr>
-        <tr><td>Israel</td><td>Ahab</td><td>Omri</td><td>874</td><td>853</td><td>22</td><td class="evil">Evil</td><td>Married Jezebel; Baal worship</td><td>Elijah, Micaiah</td><td>1 Kgs 16:29–22:40</td></tr>
-        <tr><td>Israel</td><td>Ahaziah</td><td>Ahab</td><td>853</td><td>852</td><td>2</td><td class="evil">Evil</td><td>Fell through lattice</td><td>Elijah</td><td>1 Kgs 22:51–2 Kgs 1</td></tr>
-        <tr><td>Israel</td><td>Jehoram</td><td>Ahab</td><td>852</td><td>841</td><td>12</td><td class="evil">Evil</td><td>Killed by Jehu</td><td>Elisha</td><td>2 Kgs 3–9</td></tr>
-        <tr><td>Israel</td><td>Jehu</td><td>—</td><td>841</td><td>814</td><td>28</td><td class="partial">Partially Faithful</td><td>Destroyed Baal worship</td><td>Elisha</td><td>2 Kgs 9–10</td></tr>
-        <tr><td>Israel</td><td>Jehoahaz</td><td>Jehu</td><td>814</td><td>798</td><td>17</td><td class="evil">Evil</td><td>Oppressed by Aram</td><td>Elisha</td><td>2 Kgs 13:1–9</td></tr>
-        <tr><td>Israel</td><td>Jehoash</td><td>Jehoahaz</td><td>798</td><td>782</td><td>16</td><td class="evil">Evil</td><td>Defeated Judah</td><td>—</td><td>2 Kgs 13:10–25</td></tr>
-        <tr><td>Israel</td><td>Jeroboam II</td><td>Jehoash</td><td>782</td><td>753</td><td>41</td><td class="evil">Evil</td><td>Prosperity but idolatry</td><td>Jonah, Amos, Hosea</td><td>2 Kgs 14:23–29</td></tr>
-        <tr><td>Israel</td><td>Zechariah</td><td>Jeroboam II</td><td>753</td><td>752</td><td>0.5</td><td class="evil">Evil</td><td>Assassinated</td><td>—</td><td>2 Kgs 15:8–12</td></tr>
-        <tr><td>Israel</td><td>Shallum</td><td>—</td><td>752</td><td>752</td><td>0.08</td><td class="evil">Evil</td><td>Reigned 1 month</td><td>—</td><td>2 Kgs 15:13–15</td></tr>
-        <tr><td>Israel</td><td>Menahem</td><td>—</td><td>752</td><td>742</td><td>10</td><td class="evil">Evil</td><td>Paid tribute to Assyria</td><td>—</td><td>2 Kgs 15:17–22</td></tr>
-        <tr><td>Israel</td><td>Pekahiah</td><td>Menahem</td><td>742</td><td>740</td><td>2</td><td class="evil">Evil</td><td>Assassinated</td><td>—</td><td>2 Kgs 15:23–26</td></tr>
-        <tr><td>Israel</td><td>Pekah</td><td>—</td><td>740</td><td>732</td><td>20</td><td class="evil">Evil</td><td>Alliance against Judah</td><td>—</td><td>2 Kgs 15:27–31</td></tr>
-        <tr><td>Israel</td><td>Hoshea</td><td>—</td><td>732</td><td>722</td><td>9</td><td class="evil">Evil</td><td>Fall of Samaria; exile</td><td>Hosea</td><td>2 Kgs 17</td></tr>
+        <!-- Israel (North) -->
+        <tr>
+          <td>Israel</td><td>Jeroboam I</td><td>—</td><td>931</td><td>910</td><td>22</td>
+          <td class="evil">Evil</td><td>Golden calves; sin that persisted</td><td>Ahijah</td><td>1 Kgs 11–14</td>
+        </tr>
+        <tr>
+          <td>Israel</td><td>Nadab</td><td>Jeroboam I</td><td>910</td><td>909</td><td>2</td>
+          <td class="evil">Evil</td><td>Assassinated</td><td>—</td><td>1 Kgs 15</td>
+        </tr>
+        <tr>
+          <td>Israel</td><td>Baasha</td><td>—</td><td>909</td><td>886</td><td>24</td>
+          <td class="evil">Evil</td><td>Exterminated Jeroboam's house</td><td>Jehu son of Hanani</td><td>1 Kgs 15–16</td>
+        </tr>
+        <tr>
+          <td>Israel</td><td>Elah</td><td>Baasha</td><td>886</td><td>885</td><td>2</td>
+          <td class="evil">Evil</td><td>Assassinated</td><td>—</td><td>1 Kgs 16</td>
+        </tr>
+        <tr>
+          <td>Israel</td><td>Zimri</td><td>—</td><td>885</td><td>885</td><td>7 days</td>
+          <td class="evil">Evil</td><td>Burned palace; suicide</td><td>—</td><td>1 Kgs 16</td>
+        </tr>
+        <tr>
+          <td>Israel</td><td>Omri</td><td>—</td><td>885</td><td>874</td><td>12</td>
+          <td class="evil">Evil</td><td>Founded Samaria</td><td>—</td><td>1 Kgs 16</td>
+        </tr>
+        <tr>
+          <td>Israel</td><td>Ahab</td><td>Omri</td><td>874</td><td>853</td><td>22</td>
+          <td class="evil">Evil</td><td>Married Jezebel; Baal worship</td><td>Elijah</td><td>1 Kgs 16–22</td>
+        </tr>
+        <tr>
+          <td>Israel</td><td>Ahaziah</td><td>Ahab</td><td>853</td><td>852</td><td>2</td>
+          <td class="evil">Evil</td><td>Fell through lattice</td><td>Elijah, Elisha</td><td>1 Kgs 22; 2 Kgs 1</td>
+        </tr>
+        <tr>
+          <td>Israel</td><td>Joram / Jehoram</td><td>Ahab</td><td>852</td><td>841</td><td>12</td>
+          <td class="evil">Evil</td><td>Killed by Jehu</td><td>Elisha</td><td>2 Kgs 3–8</td>
+        </tr>
+        <tr>
+          <td>Israel</td><td>Jehu</td><td>—</td><td>841</td><td>814</td><td>28</td>
+          <td class="partial">Partially Faithful</td><td>Destroyed Baal worship; continued calves</td><td>Elisha</td><td>2 Kgs 9–10</td>
+        </tr>
+        <tr>
+          <td>Israel</td><td>Jehoahaz</td><td>Jehu</td><td>814</td><td>798</td><td>17</td>
+          <td class="evil">Evil</td><td>Oppressed by Aram</td><td>—</td><td>2 Kgs 13</td>
+        </tr>
+        <tr>
+          <td>Israel</td><td>Jehoash / Joash</td><td>Jehoahaz</td><td>798</td><td>782</td><td>16</td>
+          <td class="evil">Evil</td><td>Defeated Amaziah</td><td>—</td><td>2 Kgs 13–14</td>
+        </tr>
+        <tr>
+          <td>Israel</td><td>Jeroboam II</td><td>Jehoash</td><td>782</td><td>753</td><td>41</td>
+          <td class="evil">Evil</td><td>Prosperity; ignored sin</td><td>Amos, Hosea</td><td>2 Kgs 14</td>
+        </tr>
+        <tr>
+          <td>Israel</td><td>Zechariah</td><td>Jeroboam II</td><td>753</td><td>752</td><td>6 mo</td>
+          <td class="evil">Evil</td><td>Assassinated</td><td>—</td><td>2 Kgs 15</td>
+        </tr>
+        <tr>
+          <td>Israel</td><td>Shallum</td><td>—</td><td>752</td><td>752</td><td>1 mo</td>
+          <td class="evil">Evil</td><td>Assassinated</td><td>—</td><td>2 Kgs 15</td>
+        </tr>
+        <tr>
+          <td>Israel</td><td>Menahem</td><td>—</td><td>752</td><td>742</td><td>10</td>
+          <td class="evil">Evil</td><td>Paid tribute to Assyria</td><td>—</td><td>2 Kgs 15</td>
+        </tr>
+        <tr>
+          <td>Israel</td><td>Pekahiah</td><td>Menahem</td><td>742</td><td>740</td><td>2</td>
+          <td class="evil">Evil</td><td>Assassinated</td><td>—</td><td>2 Kgs 15</td>
+        </tr>
+        <tr>
+          <td>Israel</td><td>Pekah</td><td>—</td><td>740</td><td>732</td><td>20</td>
+          <td class="evil">Evil</td><td>Alliance against Judah</td><td>—</td><td>2 Kgs 15–16</td>
+        </tr>
+        <tr>
+          <td>Israel</td><td>Hoshea</td><td>—</td><td>732</td><td>722</td><td>9</td>
+          <td class="evil">Evil</td><td>Fall of Samaria; exile to Assyria</td><td>Hosea</td><td>2 Kgs 17</td>
+        </tr>
       </tbody>
     </table>
 
@@ -142,7 +307,8 @@
     <div id="timeline"></div>
 
     <footer>
-      Biblical chronology (approximate dates) • Data compiled from 1–2 Kings, 1–2 Chronicles • For study purposes
+      Biblical chronology (approximate dates) • Data compiled from 1–2 Kings, 1–2 Chronicles • For study purposes • © 2026 • 
+      <a href="about.html">About</a> • <a href="privacy.html">Privacy Policy</a> • <a href="terms.html">Terms of Service</a>
     </footer>
   </div>
 
@@ -154,19 +320,8 @@
   <script src="https://unpkg.com/vis-timeline@latest/standalone/umd/vis-timeline-graph2d.min.js"></script>
 
   <script>
-    // Dark Mode
-    const toggle = document.getElementById('darkModeToggle');
-    toggle.onclick = () => {
-      document.body.classList.toggle('dark-mode');
-      toggle.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
-      localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
-    };
-    if (localStorage.getItem('darkMode') === 'true') {
-      document.body.classList.add('dark-mode');
-      toggle.textContent = '☀️';
-    }
+    // Dark Mode removed - keeping light theme only
 
-    // Table
     const table = $('#kingsTable').DataTable({
       responsive: true,
       paging: false,
@@ -192,18 +347,18 @@
 
       const items = new vis.DataSet();
 
-      // Add items from table rows (manual for simplicity)
+      // Key selected kings shown on timeline (full list in table above)
       const kings = [
         // United
         {group:'united', content:'Saul', start:-1050, end:-1010, className:'partial'},
         {group:'united', content:'David', start:-1010, end:-970, className:'faithful'},
         {group:'united', content:'Solomon', start:-970, end:-931, className:'partial'},
-        // Judah (selected major ones shown; add more as needed)
+        // Judah
         {group:'judah', content:'Rehoboam', start:-931, end:-913, className:'evil'},
         {group:'judah', content:'Asa', start:-911, end:-870, className:'faithful'},
-        {group:'judah', content:'Hezekiah', start:-715, end:-686, className:'faithful'},
+        {group:'judah', content:'Hezekiah', start:-716, end:-687, className:'faithful'},
         {group:'judah', content:'Josiah', start:-640, end:-609, className:'faithful'},
-        {group:'judah', content:'Zedekiah (fall)', start:-597, end:-586, className:'evil'},
+        {group:'judah', content:'Zedekiah', start:-597, end:-586, className:'evil'},
         // Israel
         {group:'israel', content:'Jeroboam I', start:-931, end:-910, className:'evil'},
         {group:'israel', content:'Ahab', start:-874, end:-853, className:'evil'},
@@ -229,7 +384,7 @@
       new vis.Timeline(container, items, groups, options);
     } catch(e) {
       console.error("Timeline error:", e);
-      document.getElementById('timeline').innerHTML = '<p class="text-danger text-center p-5">Timeline failed to load. Check console.</p>';
+      document.getElementById('timeline').innerHTML = '<p class="text-danger text-center p-5">Timeline failed to load. Check browser console.</p>';
     }
   </script>
 </body>
