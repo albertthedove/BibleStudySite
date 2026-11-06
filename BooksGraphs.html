@@ -3,16 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bible Dashboard - Books, Chapters & Timeline</title>
+    <title>Bible Dashboard: Books, Chapters and Word Counts | VizBible</title>
+  <meta name="description" content="Chapters, word counts and approximate writing dates for all 66 books of the Bible, with interactive charts.">
+  <link rel="canonical" href="https://vizbible.com/BooksGraphs.html">
+  <meta property="og:type" content="website"><meta property="og:site_name" content="VizBible">
+  <meta property="og:title" content="Bible Dashboard: Books, Chapters and Word Counts">
+  <meta property="og:description" content="Chapters, word counts and approximate writing dates for all 66 books of the Bible, with interactive charts.">
+  <meta property="og:url" content="https://vizbible.com/BooksGraphs.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.1/dist/chartjs-plugin-zoom.min.js"></script>
+    <script src="vendor/chartjs/chart.umd.js"></script>
+    <script src="vendor/chartjs/chartjs-plugin-zoom.min.js"></script>
 
     <style>
-        body { margin:0; font-family:'Segoe UI',sans-serif; background:white; color:#333; }
-        nav { background:#f8f9fa; padding:12px; text-align:center; border-bottom:1px solid #ddd; }
-        nav a { margin:0 14px; color:#007bff; text-decoration:none; font-weight:500; }
-        nav a:hover { text-decoration:underline; }
         header { text-align:center; padding:40px 20px 20px; background:#f8f9fa; border-bottom:1px solid #eee; }
         h1 { margin:0; font-size:2.5em; color:#222; }
         .controls { display:flex; justify-content:center; gap:20px; margin:20px 0; flex-wrap:wrap; align-items:center; }
@@ -32,25 +36,13 @@
         .close { position:absolute; top:10px; right:20px; font-size:32px; cursor:pointer; color:#888; }
         .close:hover { color:#333; }
         .author-icon { width:60px; height:60px; border-radius:50%; background:#007bff; color:white; display:flex; align-items:center; justify-content:center; font-size:24px; font-weight:bold; float:left; margin-right:16px; }
-        footer { text-align:center; padding:30px 20px; color:#666; border-top:1px solid #eee; font-size:0.92em; }
-        footer a { color:#007bff; text-decoration:none; margin:0 8px; }
-        footer a:hover { text-decoration:underline; }
         #debugInfo { background:#fff3cd; color:#856404; padding:12px; margin:10px auto; max-width:800px; border:1px solid #ffeeba; border-radius:6px; display:none; }
     </style>
+  <link rel="stylesheet" href="assets/site.css">
 </head>
-<body>
+<body class="legacy">
 
-<nav>
-    <a href="index.html">Home</a> |
-    <a href="KingsJudaIsrael.html">Kings</a> |
-    <a href="PaulineChurches.html">Paul's Letters</a> |
-    <a href="jesusmap.html">Jesus Map</a> |
-    <a href="paulmap.html">Paul Map</a> |
-    <a href="BibleChronos.html">Chronology</a> |
-    <a href="about.html">About</a> |
-    <a href="privacy.html">Privacy</a> |
-    <a href="terms.html">Terms</a>
-</nav>
+<div id="site-nav"></div>
 
 <header>
     <h1>Bible Dashboard</h1>
@@ -120,12 +112,7 @@
     </div>
 </div>
 
-<footer>
-    Approximate dates & word counts (KJV base) • For personal Bible study • © 2026 • 
-    <a href="about.html">About</a> • 
-    <a href="privacy.html">Privacy Policy</a> • 
-    <a href="terms.html">Terms of Service</a>
-</footer>
+<div id="site-footer"></div>
 
 <script>
 // Full 66 books data with realistic KJV word counts
@@ -241,6 +228,7 @@ function createOTChart() {
 
     const data = filterAndSortBooks('ot');
 
+    ctx.canvas.parentElement.style.height = Math.max(400, data.length * 22 + 70) + 'px';
     if (otChart) otChart.destroy();
 
     try {
@@ -260,7 +248,7 @@ function createOTChart() {
                 indexAxis: 'y',
                 responsive: true,
                 maintainAspectRatio: false,
-                scales: { x: { beginAtZero: true } },
+                scales: { x: { beginAtZero: true }, y: { ticks: { autoSkip: false, font: { size: 11 } } } },
                 plugins: { legend: { display: false } }
             }
         });
@@ -276,6 +264,7 @@ function createNTChart() {
 
     const data = filterAndSortBooks('nt');
 
+    ctx.canvas.parentElement.style.height = Math.max(400, data.length * 22 + 70) + 'px';
     if (ntChart) ntChart.destroy();
 
     try {
@@ -295,7 +284,7 @@ function createNTChart() {
                 indexAxis: 'y',
                 responsive: true,
                 maintainAspectRatio: false,
-                scales: { x: { beginAtZero: true } },
+                scales: { x: { beginAtZero: true }, y: { ticks: { autoSkip: false, font: { size: 11 } } } },
                 plugins: { legend: { display: false } }
             }
         });
@@ -309,12 +298,12 @@ function createTimeline() {
     const ctx = document.getElementById('timelineChart')?.getContext('2d');
     if (!ctx) return showDebug("Timeline canvas not found");
 
-    const dataPoints = bibleBooks.map(book => {
+    const dataPoints = bibleBooks.map((book, idx) => {
         let year = parseInt(book.years.match(/\d+/)?.[0] || 0);
         if (book.years.includes('BCE')) year = -year;
         return {
             x: year,
-            y: Math.random() * 0.8 + 0.1, // slight vertical spread
+            y: ((idx * 7) % 10) / 12 + 0.1, // fixed vertical spread (same every time)
             book,
             wordCount: getWordCount(book)
         };
@@ -432,5 +421,6 @@ window.addEventListener('load', () => {
     }, 300);
 });
 </script>
+<script src="assets/site.js"></script>
 </body>
 </html>

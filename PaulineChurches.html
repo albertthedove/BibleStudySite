@@ -1,205 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Churches & Letters of Paul • New Testament Chronology</title>
-  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
-  <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://unpkg.com/vis-timeline@latest/styles/vis-timeline-graph2d.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <style>
-    body { font-family:'Segoe UI',sans-serif; background:white; color:#333; padding-bottom:60px; }
-    nav { background:#f8f9fa; padding:12px; text-align:center; border-bottom:1px solid #ddd; }
-    nav a { margin:0 14px; color:#007bff; text-decoration:none; font-weight:500; }
-    nav a:hover { text-decoration:underline; }
-    .container { max-width:1450px; margin:auto; padding:20px; }
-    h1,h2 { text-align:center; color:#222; }
-    .intro { text-align:center; font-size:1.1em; max-width:900px; margin:20px auto; color:#555; }
-    table.display { border:1px solid #ddd; border-radius:6px; overflow:hidden; }
-    table.display thead th { background:#f8f9fa; color:#333; padding:12px; font-weight:600; }
-    table.display tbody td { padding:10px; text-align:center; border-bottom:1px solid #eee; }
-    table.display tbody tr:nth-child(even) { background:#f9f9f9; }
-    table.display tbody tr:hover { background:#f0f4f8; }
-    #paulTimeline { height:520px; border:1px solid #ddd; margin:30px 0; background:white; border-radius:6px; }
-    .note { font-style:italic; color:#666; text-align:center; margin:12px 0; }
-    .summary-box { background:#f8f9fa; border-left:5px solid #007bff; padding:16px 20px; margin:30px 0; border-radius:6px; }
-    footer { text-align:center; padding:30px 0; color:#666; border-top:1px solid #eee; font-size:0.95em; }
-    footer a { color:#007bff; text-decoration:none; margin:0 8px; }
-    footer a:hover { text-decoration:underline; }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>New Testament Timeline: When Each Book Was Written | VizBible</title>
+<meta name="description" content="All 27 New Testament books on one timeline: Paul's letters, the Gospels and Acts, the general letters and Revelation, with Paul's journeys and key events.">
+<link rel="canonical" href="https://vizbible.com/PaulineChurches.html">
+<meta property="og:type" content="website"><meta property="og:site_name" content="VizBible">
+<meta property="og:title" content="New Testament Timeline: When Each Book Was Written">
+<meta property="og:description" content="All 27 New Testament books on one timeline, with Paul's journeys and key events.">
+<meta property="og:url" content="https://vizbible.com/PaulineChurches.html">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/timeline.css">
 </head>
 <body>
-
-<nav>
-    <a href="index.html">Home</a> |
-    <a href="about.html">About</a> |
-    <a href="privacy.html">Privacy</a> |
-    <a href="terms.html">Terms</a>
-</nav>
-
-<div class="container">
-  <h1>Churches Associated with Paul</h1>
-  <p class="intro">
-    Chronology of the churches Paul founded or significantly influenced during his missionary journeys,
-    the letters he wrote to them, and their timing relative to the writing of the four Gospels.
-  </p>
-
-  <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
-    <input type="text" id="globalSearch" class="form-control w-100 w-md-50" placeholder="Search churches, letters, cities, provinces...">
-    <button id="printBtn" class="btn btn-outline-secondary"><i class="fas fa-print"></i> Print</button>
+<a class="skip" href="#main">Skip to content</a>
+<div id="site-nav"></div>
+<main id="main" class="wrap">
+  <div class="pagehead">
+    <h1>New Testament timeline</h1>
+    <p>When was each book written? All 27 books on one chart, with Paul’s journeys and key events for context. Click any bar for details.</p>
   </div>
 
-  <p class="note">On mobile: swipe left/right to view all columns →</p>
+  <div class="tl-controls noprint">
+    <div class="grp" id="filters" role="group" aria-label="Highlight a group of books"></div>
+    <span class="sep"></span>
+    <div class="grp" id="layout" role="group" aria-label="Chart layout">
+      <button class="fchip" data-l="grouped" aria-pressed="true">Group by type</button>
+      <button class="fchip" data-l="flat" aria-pressed="false">All by date</button>
+      <button class="fchip" data-l="extras" aria-pressed="true">Journeys &amp; events</button>
+    </div>
+  </div>
 
-  <table id="paulTable" class="display responsive nowrap" style="width:100%">
-    <thead>
-      <tr>
-        <th>Order</th><th>Letter(s)</th><th>Year Written (AD)</th><th>Years After Founding</th>
-        <th>Ancient City / Church</th><th>Roman Province</th><th>Modern Location</th><th>Continent</th>
-        <th>Founded (AD)</th><th>Before Gospels?</th><th>Written From</th><th>Imprisoned?</th><th>Local Leaders / Notes</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
+  <div class="tl-scroll" id="timeline" role="region" aria-label="Timeline of New Testament books. Scroll sideways on small screens." tabindex="0"></div>
+  <div class="legend">
+    <span style="--c:var(--j2)"><i></i>Paul’s letters</span><span style="--c:var(--j5)"><i></i>Gospels &amp; Acts</span>
+    <span style="--c:var(--j6)"><i></i>General letters</span><span style="--c:var(--j7)"><i></i>Revelation</span>
+    <span style="--c:var(--j0)"><i class="jn"></i>Paul’s journeys (opens map)</span><span style="--c:var(--j0)"><i class="ev"></i>Key events</span>
+    <span>A short bar means a single year; a longer bar is a range.</span>
+  </div>
 
-  <h2 class="mt-5">Timeline – Paul's Letters vs. Gospels</h2>
-  <div id="paulTimeline"></div>
+  <section id="detail" class="card detail" hidden aria-live="polite"></section>
 
   <div class="summary-box">
-    <strong>Key observation:</strong> All of Paul’s authentic letters (≈ AD 49–64) were written <strong>before</strong> or only slightly overlapping with the earliest Gospel (Mark ≈ AD 65–70). This places the Pauline epistles among the earliest surviving Christian documents.
+    <strong>What the dates show.</strong> Galatians to Romans (AD 49–57) were all written before any Gospel, even on early datings. The prison letters and the Pastoral letters (AD 60–67) overlap with Mark, usually seen as the earliest Gospel (c. AD 60–65). Matthew, Luke and John are probably later. James may be earlier than any of Paul’s letters. Dates are approximate and follow a conservative scholarly view; some scholars place several books later.
   </div>
 
-  <footer>
-    Based on widely accepted New Testament chronology • For Bible study & reference • © 2026 • 
-    <a href="about.html">About</a> • <a href="privacy.html">Privacy Policy</a> • <a href="terms.html">Terms of Service</a>
-  </footer>
-</div>
-
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://unpkg.com/vis-timeline@latest/standalone/umd/vis-timeline-graph2d.min.js"></script>
-
-<script>
-// ── Churches Data ────────────────────────────────────────────────
-const churches = [
-  {order:1,  letter:'Galatians',           year:'49',       after:2,   city:'Pisidian Antioch', province:'Galatia',   modern:'Yalvaç, Turkey',     continent:'Asia',    founded:47,  before:'Yes', from:'Antioch (Syria)', imprisoned:'No',  leaders:'Elders (Acts 14:23)'},
-  {order:2,  letter:'Galatians',           year:'49',       after:2,   city:'Iconium',          province:'Galatia',   modern:'Konya, Turkey',      continent:'Asia',    founded:47,  before:'Yes', from:'Antioch (Syria)', imprisoned:'No',  leaders:'Elders (Acts 14:23)'},
-  {order:3,  letter:'Galatians',           year:'49',       after:2,   city:'Lystra',           province:'Galatia',   modern:'Hatunsaray, Turkey', continent:'Asia',    founded:47,  before:'Yes', from:'Antioch (Syria)', imprisoned:'No',  leaders:'Elders (Acts 14:23)'},
-  {order:4,  letter:'Galatians',           year:'49',       after:2,   city:'Derbe',            province:'Galatia',   modern:'Karaman, Turkey',    continent:'Asia',    founded:47,  before:'Yes', from:'Antioch (Syria)', imprisoned:'No',  leaders:'Elders (Acts 14:23)'},
-  {order:5,  letter:'Philippians',         year:'61',       after:12,  city:'Philippi',         province:'Macedonia', modern:'Filippoi, Greece',  continent:'Europe',  founded:49,  before:'Yes', from:'Rome',            imprisoned:'Yes', leaders:'Bishops & deacons (Phil 1:1)'},
-  {order:6,  letter:'1 & 2 Thessalonians', year:'51–52',    after:'1–2',city:'Thessalonica',   province:'Macedonia', modern:'Thessaloniki, Greece',continent:'Europe', founded:50,  before:'Yes', from:'Corinth',         imprisoned:'No',  leaders:'—'},
-  {order:7,  letter:'1 & 2 Corinthians',   year:'55–56',    after:'4–5',city:'Corinth',        province:'Achaia',    modern:'Korinthos, Greece',  continent:'Europe',  founded:51,  before:'Yes', from:'Ephesus / Macedonia',imprisoned:'No', leaders:'—'},
-  {order:8,  letter:'Ephesians / 1 Timothy',year:'61 / 64', after:'8 / 11',city:'Ephesus',     province:'Asia',      modern:'Selçuk, Turkey',     continent:'Asia',    founded:53,  before:'Yes', from:'Rome / Macedonia',   imprisoned:'Yes / No', leaders:'Elders (Acts 20), Timothy'},
-  {order:9,  letter:'Colossians / Philemon',year:'61',      after:6,   city:'Colossae',         province:'Asia',      modern:'Honaz, Turkey',      continent:'Asia',    founded:55,  before:'Yes', from:'Rome',            imprisoned:'Yes', leaders:'Epaphras, Archippus'},
-  {order:10, letter:'Romans',               year:'57',      after:'N/A',city:'Rome',           province:'Italy',     modern:'Rome, Italy',        continent:'Europe',  founded:'Pre-Paul', before:'Yes', from:'Corinth',      imprisoned:'No',  leaders:'—'},
-  {order:11, letter:'Titus',                year:'64',      after:1,   city:'Crete (various)',  province:'Crete',     modern:'Crete, Greece',      continent:'Europe',  founded:63,  before:'Yes', from:'Macedonia',       imprisoned:'No',  leaders:'Titus appoints elders (Titus 1:5)'}
-];
-
-// Populate Table
-const tbody = $('#paulTable tbody');
-churches.forEach(c => {
-  tbody.append(`
-    <tr>
-      <td>${c.order}</td>
-      <td><strong>${c.letter}</strong></td>
-      <td>${c.year}</td>
-      <td>${c.after}</td>
-      <td>${c.city}</td>
-      <td>${c.province}</td>
-      <td>${c.modern}</td>
-      <td>${c.continent}</td>
-      <td>${c.founded}</td>
-      <td>${c.before}</td>
-      <td>${c.from}</td>
-      <td>${c.imprisoned}</td>
-      <td>${c.leaders}</td>
-    </tr>
-  `);
-});
-
-const table = $('#paulTable').DataTable({
-  responsive: true,
-  paging: false,
-  info: false,
-  order: [[0, 'asc']]
-});
-
-$('#globalSearch').on('keyup', function() {
-  table.search(this.value).draw();
-});
-
-document.getElementById('printBtn').onclick = () => window.print();
-
-// Timeline
-const container = document.getElementById('paulTimeline');
-const groups = new vis.DataSet([
-  {id: 'letters', content: "Paul's Letters"},
-  {id: 'gospels', content: 'Gospels'}
-]);
-
-const items = new vis.DataSet();
-
-const letterPoints = [
-  {name:'Galatians',          year:49,  prison:false},
-  {name:'1 Thess',            year:51,  prison:false},
-  {name:'2 Thess',            year:52,  prison:false},
-  {name:'1 Cor',              year:55,  prison:false},
-  {name:'2 Cor',              year:56,  prison:false},
-  {name:'Romans',             year:57,  prison:false},
-  {name:'Eph / Col / Phlm / Phil', year:61, prison:true},
-  {name:'1 Tim / Titus',      year:64,  prison:false}
-];
-
-letterPoints.forEach((l, i) => {
-  items.add({
-    id: 'l'+i,
-    group: 'letters',
-    content: l.name + ' (' + l.year + ')',
-    start: l.year,
-    type: 'point',
-    className: l.prison ? 'bg-danger text-white' : ''
-  });
-});
-
-const gospels = [
-  {name:'Mark',    year:65},
-  {name:'Matthew', year:70},
-  {name:'Luke',    year:80},
-  {name:'John',    year:90}
-];
-
-gospels.forEach((g, i) => {
-  items.add({
-    id: 'g'+i,
-    group: 'gospels',
-    content: g.name + ' (~' + g.year + ')',
-    start: g.year,
-    type: 'point',
-    className: 'bg-success text-white'
-  });
-});
-
-const options = {
-  start: 45,
-  end: 95,
-  height: '480px',
-  min: 40,
-  max: 100,
-  zoomable: true,
-  zoomMin: 5,
-  orientation: 'both',
-  showCurrentTime: false,
-  format: {
-    minorLabels: { year: 'YYYY' },
-    majorLabels: { year: 'YYYY' }
-  }
-};
-
-new vis.Timeline(container, items, groups, options);
-</script>
+  <h2 class="sec2">Churches Paul founded or wrote to</h2>
+  <p style="color:var(--muted)">Each church, the letters sent to it, and when they were written. Click a column heading to sort, or click a city to see it on the map.</p>
+  <p><input id="search" class="search" type="search" placeholder="Search churches, letters, cities, provinces…" aria-label="Search churches"></p>
+  <div class="tbl-wrap"><table class="dt" id="churches">
+    <thead><tr>
+      <th data-k="city">Church</th><th data-k="province">Province</th><th data-k="modern">Modern location</th><th data-k="foundedYear">Founded (AD)</th>
+      <th data-k="letters">Letters</th><th data-k="letterYear" aria-sort="ascending">Written</th><th data-k="gap">After founding</th><th data-k="before">Before Mark?</th>
+      <th data-k="from">Written from</th><th data-k="prison">From prison?</th><th>Notes</th>
+    </tr></thead><tbody></tbody></table></div>
+  <p style="color:var(--muted);font-size:14px;margin-top:12px">Dates and places follow widely used conservative chronologies and the book of Acts. Where scholars disagree, the table says so.</p>
+</main>
+<div id="site-footer"></div>
+<script src="assets/site.js"></script>
+<script src="assets/timeline.js"></script>
 </body>
 </html>
