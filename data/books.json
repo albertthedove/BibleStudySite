@@ -1,0 +1,502 @@
+{
+ "groups": {
+  "paul": "Paul's letters",
+  "gospels": "Gospels & Acts",
+  "general": "General letters",
+  "rev": "Revelation"
+ },
+ "books": [
+  {
+   "slug": "matthew",
+   "name": "Matthew",
+   "author": "Matthew",
+   "group": "gospels",
+   "start": 60,
+   "end": 70,
+   "chapters": 28,
+   "canon": 40,
+   "theme": "Jesus as King",
+   "fromPlace": null,
+   "toPlace": null,
+   "cities": []
+  },
+  {
+   "slug": "mark",
+   "name": "Mark",
+   "author": "John Mark, with Peter’s testimony",
+   "group": "gospels",
+   "start": 60,
+   "end": 65,
+   "chapters": 16,
+   "canon": 41,
+   "theme": "The earliest Gospel",
+   "fromPlace": null,
+   "toPlace": null,
+   "cities": []
+  },
+  {
+   "slug": "luke",
+   "name": "Luke",
+   "author": "Luke",
+   "group": "gospels",
+   "start": 60,
+   "end": 80,
+   "chapters": 24,
+   "canon": 42,
+   "theme": "Jesus as Son of Man",
+   "fromPlace": null,
+   "toPlace": null,
+   "cities": []
+  },
+  {
+   "slug": "john",
+   "name": "John",
+   "author": "John",
+   "group": "gospels",
+   "start": 85,
+   "end": 95,
+   "chapters": 21,
+   "canon": 43,
+   "theme": "Jesus as Son of God",
+   "fromPlace": "Ephesus (traditional)",
+   "toPlace": null,
+   "cities": [
+    "ephesus"
+   ]
+  },
+  {
+   "slug": "acts",
+   "name": "Acts",
+   "author": "Luke",
+   "group": "gospels",
+   "start": 62,
+   "end": 65,
+   "chapters": 28,
+   "canon": 44,
+   "theme": "The early church expands",
+   "fromPlace": "Rome (traditional)",
+   "toPlace": null,
+   "cities": [
+    "rome"
+   ]
+  },
+  {
+   "slug": "romans",
+   "name": "Romans",
+   "author": "Paul",
+   "group": "paul",
+   "start": 57,
+   "end": 57,
+   "chapters": 16,
+   "canon": 45,
+   "theme": "The gospel set out in full",
+   "fromPlace": "Corinth",
+   "toPlace": "The church in Rome",
+   "cities": [
+    "corinth",
+    "rome"
+   ]
+  },
+  {
+   "slug": "1-corinthians",
+   "name": "1 Corinthians",
+   "author": "Paul",
+   "group": "paul",
+   "start": 55,
+   "end": 55,
+   "chapters": 16,
+   "canon": 46,
+   "theme": "Order and problems in the church",
+   "fromPlace": "Ephesus",
+   "toPlace": "The church in Corinth",
+   "cities": [
+    "ephesus",
+    "corinth"
+   ]
+  },
+  {
+   "slug": "2-corinthians",
+   "name": "2 Corinthians",
+   "author": "Paul",
+   "group": "paul",
+   "start": 56,
+   "end": 56,
+   "chapters": 13,
+   "canon": 47,
+   "theme": "Paul’s defence and comfort",
+   "fromPlace": "Macedonia",
+   "toPlace": "The church in Corinth",
+   "cities": [
+    "corinth"
+   ]
+  },
+  {
+   "slug": "galatians",
+   "name": "Galatians",
+   "author": "Paul",
+   "group": "paul",
+   "start": 49,
+   "end": 49,
+   "chapters": 6,
+   "canon": 48,
+   "theme": "Grace, not law",
+   "fromPlace": "Antioch (Syria)",
+   "toPlace": "The churches of Galatia",
+   "cities": [
+    "pisidian",
+    "iconium",
+    "lystra",
+    "derbe"
+   ]
+  },
+  {
+   "slug": "ephesians",
+   "name": "Ephesians",
+   "author": "Paul",
+   "group": "paul",
+   "start": 60,
+   "end": 62,
+   "chapters": 6,
+   "canon": 49,
+   "theme": "Unity in Christ",
+   "fromPlace": "Rome (prison)",
+   "toPlace": "The believers in Ephesus and the region",
+   "cities": [
+    "ephesus",
+    "rome"
+   ]
+  },
+  {
+   "slug": "philippians",
+   "name": "Philippians",
+   "author": "Paul",
+   "group": "paul",
+   "start": 61,
+   "end": 61,
+   "chapters": 4,
+   "canon": 50,
+   "theme": "Joy in suffering",
+   "fromPlace": "Rome (prison)",
+   "toPlace": "The church in Philippi",
+   "cities": [
+    "philippi",
+    "rome"
+   ]
+  },
+  {
+   "slug": "colossians",
+   "name": "Colossians",
+   "author": "Paul",
+   "group": "paul",
+   "start": 60,
+   "end": 62,
+   "chapters": 4,
+   "canon": 51,
+   "theme": "The supremacy of Christ",
+   "fromPlace": "Rome (prison)",
+   "toPlace": "The church in Colossae",
+   "cities": [
+    "colossae",
+    "laodicea",
+    "rome"
+   ]
+  },
+  {
+   "slug": "1-thessalonians",
+   "name": "1 Thessalonians",
+   "author": "Paul",
+   "group": "paul",
+   "start": 51,
+   "end": 51,
+   "chapters": 5,
+   "canon": 52,
+   "theme": "Encouragement about Christ’s return",
+   "fromPlace": "Corinth",
+   "toPlace": "The church in Thessalonica",
+   "cities": [
+    "thessalonica",
+    "corinth"
+   ]
+  },
+  {
+   "slug": "2-thessalonians",
+   "name": "2 Thessalonians",
+   "author": "Paul",
+   "group": "paul",
+   "start": 52,
+   "end": 52,
+   "chapters": 3,
+   "canon": 53,
+   "theme": "The day of the Lord",
+   "fromPlace": "Corinth",
+   "toPlace": "The church in Thessalonica",
+   "cities": [
+    "thessalonica",
+    "corinth"
+   ]
+  },
+  {
+   "slug": "1-timothy",
+   "name": "1 Timothy",
+   "author": "Paul",
+   "group": "paul",
+   "start": 62,
+   "end": 64,
+   "chapters": 6,
+   "canon": 54,
+   "theme": "Leading the church",
+   "fromPlace": "Macedonia",
+   "toPlace": "Timothy, in Ephesus",
+   "cities": [
+    "ephesus"
+   ]
+  },
+  {
+   "slug": "2-timothy",
+   "name": "2 Timothy",
+   "author": "Paul",
+   "group": "paul",
+   "start": 66,
+   "end": 67,
+   "chapters": 4,
+   "canon": 55,
+   "theme": "Paul’s final charge",
+   "fromPlace": "Rome (prison)",
+   "toPlace": "Timothy",
+   "cities": [
+    "rome"
+   ]
+  },
+  {
+   "slug": "titus",
+   "name": "Titus",
+   "author": "Paul",
+   "group": "paul",
+   "start": 63,
+   "end": 65,
+   "chapters": 3,
+   "canon": 56,
+   "theme": "Order in the churches of Crete",
+   "fromPlace": "Macedonia (traditional)",
+   "toPlace": "Titus, in Crete",
+   "cities": [
+    "crete"
+   ]
+  },
+  {
+   "slug": "philemon",
+   "name": "Philemon",
+   "author": "Paul",
+   "group": "paul",
+   "start": 60,
+   "end": 62,
+   "chapters": 1,
+   "canon": 57,
+   "theme": "Forgiveness and a runaway slave",
+   "fromPlace": "Rome (prison)",
+   "toPlace": "Philemon, in Colossae",
+   "cities": [
+    "colossae",
+    "rome"
+   ]
+  },
+  {
+   "slug": "hebrews",
+   "name": "Hebrews",
+   "author": "Unknown (Paul, Barnabas and Apollos have been proposed)",
+   "group": "general",
+   "start": 60,
+   "end": 70,
+   "chapters": 13,
+   "canon": 58,
+   "theme": "Christ is greater",
+   "fromPlace": "Unknown",
+   "toPlace": "Jewish believers",
+   "cities": []
+  },
+  {
+   "slug": "james",
+   "name": "James",
+   "author": "James, the brother of Jesus",
+   "group": "general",
+   "start": 45,
+   "end": 50,
+   "chapters": 5,
+   "canon": 59,
+   "theme": "Faith that works",
+   "fromPlace": "Jerusalem",
+   "toPlace": "Jewish believers scattered abroad",
+   "cities": [
+    "jerusalem"
+   ]
+  },
+  {
+   "slug": "1-peter",
+   "name": "1 Peter",
+   "author": "Peter, with Silvanus",
+   "group": "general",
+   "start": 62,
+   "end": 64,
+   "chapters": 5,
+   "canon": 60,
+   "theme": "Hope in suffering",
+   "fromPlace": "Rome (“Babylon”)",
+   "toPlace": "Believers across Asia Minor",
+   "cities": [
+    "rome"
+   ]
+  },
+  {
+   "slug": "2-peter",
+   "name": "2 Peter",
+   "author": "Peter",
+   "group": "general",
+   "start": 65,
+   "end": 68,
+   "chapters": 3,
+   "canon": 61,
+   "theme": "Warning against false teachers",
+   "fromPlace": "Rome (traditional)",
+   "toPlace": "The same believers",
+   "cities": []
+  },
+  {
+   "slug": "1-john",
+   "name": "1 John",
+   "author": "John",
+   "group": "general",
+   "start": 90,
+   "end": 95,
+   "chapters": 5,
+   "canon": 62,
+   "theme": "Assurance and love",
+   "fromPlace": "Ephesus (traditional)",
+   "toPlace": "Churches in Asia",
+   "cities": [
+    "ephesus"
+   ]
+  },
+  {
+   "slug": "2-john",
+   "name": "2 John",
+   "author": "John",
+   "group": "general",
+   "start": 90,
+   "end": 95,
+   "chapters": 1,
+   "canon": 63,
+   "theme": "Walk in the truth",
+   "fromPlace": "Ephesus (traditional)",
+   "toPlace": "“The elect lady”",
+   "cities": [
+    "ephesus"
+   ]
+  },
+  {
+   "slug": "3-john",
+   "name": "3 John",
+   "author": "John",
+   "group": "general",
+   "start": 90,
+   "end": 95,
+   "chapters": 1,
+   "canon": 64,
+   "theme": "Hospitality to the truth",
+   "fromPlace": "Ephesus (traditional)",
+   "toPlace": "Gaius",
+   "cities": [
+    "ephesus"
+   ]
+  },
+  {
+   "slug": "jude",
+   "name": "Jude",
+   "author": "Jude, the brother of Jesus",
+   "group": "general",
+   "start": 65,
+   "end": 80,
+   "chapters": 1,
+   "canon": 65,
+   "theme": "Contend for the faith",
+   "fromPlace": "Unknown",
+   "toPlace": "Believers at risk from false teachers",
+   "cities": []
+  },
+  {
+   "slug": "revelation",
+   "name": "Revelation",
+   "author": "John",
+   "group": "rev",
+   "start": 95,
+   "end": 95,
+   "chapters": 22,
+   "canon": 66,
+   "theme": "Christ’s victory",
+   "fromPlace": "Patmos",
+   "toPlace": "Seven churches in Asia",
+   "cities": [
+    "ephesus"
+   ]
+  }
+ ],
+ "events": [
+  {
+   "name": "Crucifixion and resurrection",
+   "start": 30,
+   "end": 30,
+   "note": "Traditional date; some scholars say AD 33."
+  },
+  {
+   "name": "Paul’s conversion",
+   "start": 34,
+   "end": 34,
+   "note": "Roughly two to three years after the resurrection; the dating varies."
+  },
+  {
+   "name": "Jerusalem Council",
+   "start": 49,
+   "end": 49,
+   "note": "Acts 15."
+  },
+  {
+   "name": "Nero’s persecution at Rome",
+   "start": 64,
+   "end": 64,
+   "note": "Traditionally the time of Peter’s and Paul’s deaths (AD 64–68)."
+  },
+  {
+   "name": "Temple destroyed",
+   "start": 70,
+   "end": 70,
+   "note": "Jerusalem falls to Rome."
+  }
+ ],
+ "journeys": [
+  {
+   "name": "1st journey",
+   "start": 46,
+   "end": 48,
+   "map": "paulmap.html?journey=1"
+  },
+  {
+   "name": "2nd journey",
+   "start": 49,
+   "end": 52,
+   "map": "paulmap.html?journey=2"
+  },
+  {
+   "name": "3rd journey",
+   "start": 53,
+   "end": 57,
+   "map": "paulmap.html?journey=3"
+  },
+  {
+   "name": "To Rome",
+   "start": 57,
+   "end": 62,
+   "map": "paulmap.html?journey=4"
+  }
+ ],
+ "min": 25,
+ "max": 100
+}

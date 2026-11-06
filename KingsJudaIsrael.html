@@ -3,39 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Biblical Kings of Israel & Judah • Chronology</title>
+  <title>Kings of Israel and Judah: Chronology and Timeline | VizBible</title>
+  <meta name="description" content="Every king of the United and Divided Monarchy with dates, spiritual evaluation, prophets, key events and Scripture references, plus an interactive timeline.">
+  <link rel="canonical" href="https://vizbible.com/KingsJudaIsrael.html">
+  <meta property="og:type" content="website"><meta property="og:site_name" content="VizBible">
+  <meta property="og:title" content="Kings of Israel and Judah: Chronology and Timeline">
+  <meta property="og:description" content="Every king of the United and Divided Monarchy with dates, spiritual evaluation, prophets, key events and Scripture references, plus an interactive timeline.">
+  <meta property="og:url" content="https://vizbible.com/KingsJudaIsrael.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <!-- DataTables CSS -->
-  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
-  <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
+  <link rel="stylesheet" href="vendor/datatables/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="vendor/datatables/css/responsive.dataTables.min.css">
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-  <!-- vis.js Timeline CSS -->
-  <link rel="stylesheet" href="https://unpkg.com/vis-timeline@latest/styles/vis-timeline-graph2d.min.css">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="vendor/bootstrap/bootstrap.min.css">
 
   <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: white;
-      color: #333;
-      padding-bottom: 60px;
-    }
-    nav {
-      background: #f8f9fa;
-      padding: 12px;
-      text-align: center;
-      border-bottom: 1px solid #ddd;
-    }
-    nav a {
-      margin: 0 14px;
-      color: #007bff;
-      text-decoration: none;
-      font-weight: 500;
-    }
-    nav a:hover {
-      text-decoration: underline;
-    }
     .container { max-width: 1450px; margin: auto; padding: 20px; }
     h1, h2 { text-align: center; color: #222; }
     .intro { text-align: center; font-size: 1.1em; max-width: 900px; margin: 20px auto; color: #555; }
@@ -65,32 +48,14 @@
     .partial    { background-color: #fff3cd !important; color: #856404; }
     .evil       { background-color: #f8d7da !important; color: #721c24; }
     .united     { background-color: #e2e3ff !important; }
-    #timeline   { height: 520px; border: 1px solid #ddd; margin: 30px 0; background: white; border-radius: 6px; overflow: hidden; }
     .note { font-style: italic; color: #666; text-align: center; margin: 12px 0; }
-    footer {
-      text-align: center;
-      padding: 30px 0;
-      color: #666;
-      border-top: 1px solid #eee;
-      font-size: 0.95em;
-    }
-    footer a { color: #007bff; text-decoration: none; margin: 0 8px; }
-    footer a:hover { text-decoration: underline; }
   </style>
+  <link rel="stylesheet" href="assets/site.css">
+  <link rel="stylesheet" href="assets/timeline.css">
 </head>
-<body>
+<body class="legacy">
 
-  <nav>
-    <a href="index.html">Home</a> |
-    <a href="PaulineChurches.html">Paul's Letters</a> |
-    <a href="jesusmap.html">Jesus Map</a> |
-    <a href="paulmap.html">Paul Map</a> |
-    <a href="BooksGraphs.html">Book Graphs</a> |
-    <a href="BibleChronos.html">Combined Chronology</a> |
-    <a href="about.html">About</a> |
-    <a href="privacy.html">Privacy</a> |
-    <a href="terms.html">Terms</a>
-  </nav>
+  <div id="site-nav"></div>
 
   <div class="container">
     <h1>Kings of Israel and Judah</h1>
@@ -100,7 +65,7 @@
 
     <div class="controls d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
       <input type="text" id="globalSearch" class="form-control w-100 w-md-50" placeholder="Search kings, notes, prophets...">
-      <button id="printBtn" class="btn btn-outline-secondary"><i class="fas fa-print"></i> Print</button>
+      <button id="printBtn" class="btn btn-outline-secondary">Print</button>
     </div>
 
     <p class="note">On mobile: swipe left/right to view all columns →</p>
@@ -304,20 +269,18 @@
     </table>
 
     <h2 class="mt-5">Timeline of the Kings</h2>
-    <div id="timeline"></div>
+    <p class="note">Every king in the table, on one chart. Colour shows the Bible’s evaluation of the king. Scroll sideways on small screens.</p>
+    <div class="tl-scroll" id="kingsTimeline" role="region" aria-label="Timeline of the kings of Israel and Judah" tabindex="0"></div>
+    <div class="legend"><span style="--c:#2e8b57"><i></i>Faithful</span><span style="--c:var(--j5)"><i></i>Partially faithful</span><span style="--c:var(--j4)"><i></i>Evil</span></div>
 
-    <footer>
-      Biblical chronology (approximate dates) • Data compiled from 1–2 Kings, 1–2 Chronicles • For study purposes • © 2026 • 
-      <a href="about.html">About</a> • <a href="privacy.html">Privacy Policy</a> • <a href="terms.html">Terms of Service</a>
-    </footer>
+    <div id="site-footer"></div>
   </div>
 
   <!-- Scripts -->
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
-  <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://unpkg.com/vis-timeline@latest/standalone/umd/vis-timeline-graph2d.min.js"></script>
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/datatables/js/jquery.dataTables.min.js"></script>
+  <script src="vendor/datatables/js/dataTables.responsive.min.js"></script>
+  <script src="vendor/bootstrap/bootstrap.bundle.min.js"></script>
 
   <script>
     // Dark Mode removed - keeping light theme only
@@ -336,56 +299,9 @@
 
     document.getElementById('printBtn').onclick = () => window.print();
 
-    // Timeline
-    try {
-      const container = document.getElementById('timeline');
-      const groups = new vis.DataSet([
-        {id: 'united', content: 'United Monarchy'},
-        {id: 'judah',  content: 'Judah (South)'},
-        {id: 'israel', content: 'Israel (North)'}
-      ]);
-
-      const items = new vis.DataSet();
-
-      // Key selected kings shown on timeline (full list in table above)
-      const kings = [
-        // United
-        {group:'united', content:'Saul', start:-1050, end:-1010, className:'partial'},
-        {group:'united', content:'David', start:-1010, end:-970, className:'faithful'},
-        {group:'united', content:'Solomon', start:-970, end:-931, className:'partial'},
-        // Judah
-        {group:'judah', content:'Rehoboam', start:-931, end:-913, className:'evil'},
-        {group:'judah', content:'Asa', start:-911, end:-870, className:'faithful'},
-        {group:'judah', content:'Hezekiah', start:-716, end:-687, className:'faithful'},
-        {group:'judah', content:'Josiah', start:-640, end:-609, className:'faithful'},
-        {group:'judah', content:'Zedekiah', start:-597, end:-586, className:'evil'},
-        // Israel
-        {group:'israel', content:'Jeroboam I', start:-931, end:-910, className:'evil'},
-        {group:'israel', content:'Ahab', start:-874, end:-853, className:'evil'},
-        {group:'israel', content:'Jeroboam II', start:-782, end:-753, className:'evil'},
-        {group:'israel', content:'Hoshea (fall)', start:-732, end:-722, className:'evil'}
-      ];
-
-      kings.forEach((k,i) => items.add({id:i, ...k, type:'range'}));
-
-      const options = {
-        start: -1050,
-        end: -500,
-        height: '480px',
-        min: -1100,
-        max: -500,
-        zoomable: true,
-        zoomMin: 20,
-        orientation: 'both',
-        showCurrentTime: false,
-        format: { minorLabels: { year: 'YYYY BCE' }, majorLabels: { year: 'YYYY BCE' } }
-      };
-
-      new vis.Timeline(container, items, groups, options);
-    } catch(e) {
-      console.error("Timeline error:", e);
-      document.getElementById('timeline').innerHTML = '<p class="text-danger text-center p-5">Timeline failed to load. Check browser console.</p>';
-    }
   </script>
+  <script src="assets/kings-timeline.js"></script>
+
+<script src="assets/site.js"></script>
 </body>
 </html>
