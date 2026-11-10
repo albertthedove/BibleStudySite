@@ -16,7 +16,8 @@
   const nm = id => names === 'ancient' ? C[id].n : MODERN[id];
   const P = k => C[k].ll;
 
-  const dark = matchMedia('(prefers-color-scheme: dark)').matches;
+  const osDark = matchMedia('(prefers-color-scheme: dark)').matches;
+  let noHalo = false;   // dark base map: no white halo under routes
   const mapEl = document.getElementById('map');
   const map = L.map('map', { zoomControl: true, worldCopyJump: false, minZoom: 4, maxZoom: 14 });
   // Built-in vector map: always works, even offline
@@ -52,18 +53,44 @@ function renderPlaces() {
       icon: L.divIcon({ className: '', iconSize: [0, 0], html: `<div class="place ${cls.replace('sea', '')}">${t}</div>` }) }).addTo(placeLayer);
   });
 }
-renderPlaces();
-renderBorders();
-// Detailed terrain tiles load on top when the network allows it.
+// ---- base maps: four looks, one default ----
 // Esri's label-free basemaps need no API key (CARTO now returns an "API key required" placeholder).
 const ESRI = 'https://server.arcgisonline.com/ArcGIS/rest/services/';
-const tiles = L.tileLayer(
-  ESRI + (dark ? 'Canvas/World_Dark_Gray_Base' : 'World_Terrain_Base') + '/MapServer/tile/{z}/{y}/{x}',
-  { maxZoom: 19, maxNativeZoom: dark ? 16 : 13, opacity: 0, errorTileUrl: 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==',
-    attribution: 'Map data &copy; Natural Earth &middot; tiles &copy; Esri' });
-let tileOK = false;
-tiles.on('tileload', () => { if (!tileOK) { tileOK = true; tiles.setOpacity(1); } });
-tiles.addTo(map);
+const NOTILE = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
+const BASES = {
+  clean:     { label: 'Clean',     path: 'Canvas/World_Light_Gray_Base', native: 16, darkUI: false, halo: true,  attr: 'Tiles &copy; Esri' },
+  terrain:   { label: 'Terrain',   path: 'World_Terrain_Base',           native: 13, darkUI: false, halo: true,  attr: 'Tiles &copy; Esri' },
+  satellite: { label: 'Satellite', path: 'World_Imagery',                native: 19, darkUI: true,  halo: true,  attr: 'Imagery &copy; Esri, Maxar, Earthstar Geographics' },
+  dark:      { label: 'Dark',      path: 'Canvas/World_Dark_Gray_Base',  native: 16, darkUI: true,  halo: false, attr: 'Tiles &copy; Esri' }
+};
+function savedBase() { try { return localStorage.getItem('vb-base'); } catch (e) { return null; } }
+const wanted = new URLSearchParams(location.search).get('map') || savedBase();
+let baseKey = BASES[wanted] ? wanted : (osDark ? 'dark' : 'clean');   // default: Clean (Dark if the device is in dark mode)
+function setBaseClasses(key) {
+  const b = BASES[key];
+  noHalo = !b.halo;
+  mapEl.classList.toggle('base-dark', b.darkUI);
+  mapEl.classList.toggle('base-light', !b.darkUI);
+}
+setBaseClasses(baseKey);
+renderPlaces();
+renderBorders();
+const baseLayers = {}, keyByLabel = {};
+Object.entries(BASES).forEach(([key, b]) => {
+  const t = L.tileLayer(ESRI + b.path + '/MapServer/tile/{z}/{y}/{x}',
+    { maxZoom: 19, maxNativeZoom: b.native, opacity: 0, errorTileUrl: NOTILE, attribution: b.attr + ' &middot; Natural Earth' });
+  let ok = false;   // stay see-through until a real tile arrives, so the built-in map shows if tiles are blocked
+  t.on('tileload', () => { if (!ok) { ok = true; t.setOpacity(1); } });
+  baseLayers[b.label] = t; keyByLabel[b.label] = key;
+});
+baseLayers[BASES[baseKey].label].addTo(map);
+L.control.layers(baseLayers, null, { position: 'topright', collapsed: innerWidth < 700 }).addTo(map);
+map.on('baselayerchange', e => {
+  baseKey = keyByLabel[e.name];
+  setBaseClasses(baseKey);
+  try { localStorage.setItem('vb-base', baseKey); } catch (err) { /* private mode */ }
+  renderBorders(); render(); syncURL();
+});
   const layer = L.layerGroup().addTo(map);
   const arrowLayer = L.layerGroup().addTo(map);
   let sel = 'all';
@@ -274,7 +301,7 @@ function render() {
       for (let i = 1; i < path.length; i++) {
         const a = path[i - 1], b = path[i];
         const seg = [[a[0], a[1]], [b[0], b[1]]];
-        L.polyline(seg, { color: '#fff', weight: 7, opacity: dark ? .0 : .75, interactive: false }).addTo(layer);
+        L.polyline(seg, { color: '#fff', weight: 7, opacity: noHalo ? 0 : .75, interactive: false }).addTo(layer);
         L.polyline(seg, { color, weight: 4, opacity: .95, dashArray: b[2] ? '8 7' : null, lineCap: 'round', interactive: false }).addTo(layer);
       }
       path.forEach(p => bounds.push([p[0], p[1]]));
@@ -415,6 +442,7 @@ function syncURL(city) {
   const q = new URLSearchParams();
   if (sel !== 'all') q.set('journey', sel);
   if (names !== 'ancient') q.set('names', names);
+  if (baseKey !== (osDark ? 'dark' : 'clean')) q.set('map', baseKey);
   if (city) q.set('city', city);
   history.replaceState(null, '', location.pathname + (q.toString() ? '?' + q : ''));
 }
