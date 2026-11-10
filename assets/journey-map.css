@@ -103,3 +103,16 @@ body.journey-page #app { flex: 1; min-height: 0; display: flex; flex-direction: 
 .pp .xl a { color: var(--accent); font-weight: 600; }
 .pp .xl.share a { font-weight: 500; color: var(--muted); }
 @media (max-width: 600px) { .key { display: none; } }
+
+/* base-map switcher + label styles that follow the chosen base map, not the device theme */
+.leaflet-control-layers { border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,.3); font: 600 13px/1.2 var(--sans); color: #14242c; }
+.leaflet-control-layers-expanded { padding: 8px 12px 6px; }
+.leaflet-control-layers label { display: block; padding: 4px 0; cursor: pointer; }
+.leaflet-control-layers-selector { margin-right: 6px; }
+#map.base-light { --prov: #a4502a; --ctry: #7a4f8f; }
+#map.base-dark  { --prov: #e8b06f; --ctry: #d4aaea; }
+#map.base-light .place { color: #5d7f90; text-shadow: none; } #map.base-light .place.land { color: #8b836c; }
+#map.base-dark .place { color: #bcd6e2; text-shadow: 0 0 3px #000, 0 0 4px #000; } #map.base-dark .place.land { color: #e3dcc0; }
+#map.base-light .leaflet-tooltip.lbl { color: #14242c; text-shadow: 0 0 3px #fff, 0 0 3px #fff, 0 0 5px #fff, 0 0 5px #fff; }
+#map.base-dark .leaflet-tooltip.lbl { color: #eaf1f4; text-shadow: 0 0 3px #000, 0 0 3px #000, 0 0 5px #000, 0 0 5px #000; }
+#map.base-light .badge { color: #fff; border-color: #fff; } #map.base-dark .badge { color: #0d151a; border-color: #0d151a; }
