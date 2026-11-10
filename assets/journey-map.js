@@ -1,6 +1,6 @@
 /* VizBible journey map engine.
    Shared by paulmap.html and jesusmap.html. Data comes from a JSON file (window.JOURNEY_DATA_URL).
-   Offline-safe: draws a built-in Natural Earth land outline first; CARTO tiles fade in on top when they load. */
+   Offline-safe: draws a built-in Natural Earth land outline first; Esri terrain tiles fade in on top when they load. */
 (async function () {
   const base = (document.currentScript && document.currentScript.src) ? document.currentScript.src.replace(/assets\/[^/]*$/, '') : '';
   const getJSON = u => fetch(u).then(r => { if (!r.ok) throw new Error(u + ' ' + r.status); return r.json(); });
@@ -54,11 +54,13 @@ function renderPlaces() {
 }
 renderPlaces();
 renderBorders();
-// Detailed street/terrain tiles load on top when the network allows it
+// Detailed terrain tiles load on top when the network allows it.
+// Esri's label-free basemaps need no API key (CARTO now returns an "API key required" placeholder).
+const ESRI = 'https://server.arcgisonline.com/ArcGIS/rest/services/';
 const tiles = L.tileLayer(
-  `https://{s}.basemaps.cartocdn.com/rastertiles/${dark ? 'dark_all' : 'voyager_nolabels'}/{z}/{x}/{y}{r}.png`,
-  { subdomains: 'abcd', maxZoom: 19, opacity: 0, errorTileUrl: 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==',
-    attribution: 'Map data &copy; Natural Earth &middot; tiles &copy; OpenStreetMap, CARTO' });
+  ESRI + (dark ? 'Canvas/World_Dark_Gray_Base' : 'World_Terrain_Base') + '/MapServer/tile/{z}/{y}/{x}',
+  { maxZoom: 19, maxNativeZoom: dark ? 16 : 13, opacity: 0, errorTileUrl: 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==',
+    attribution: 'Map data &copy; Natural Earth &middot; tiles &copy; Esri' });
 let tileOK = false;
 tiles.on('tileload', () => { if (!tileOK) { tileOK = true; tiles.setOpacity(1); } });
 tiles.addTo(map);

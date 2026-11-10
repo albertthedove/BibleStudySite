@@ -9,7 +9,7 @@ Static site (no build step). Open `index.html` through any web server, for examp
 - `KingsJudaIsrael.html`: kings table; the chart is built from the table by `assets/kings-timeline.js`.
 - `BibleChronos.html`, `BooksGraphs.html`: older pages, now inside the shared shell.
 - `assets/site.css`, `assets/site.js`: shared styles, nav and footer. Add a page by adding one line to the `pages` list in `site.js`.
-- `data/land.json`, `country-lines.json`, `admin-lines.json`: built-in offline base map (Natural Earth). CARTO tiles load on top when available.
+- `data/land.json`, `country-lines.json`, `admin-lines.json`: built-in offline base map (Natural Earth). Esri terrain tiles load on top when available.
 - `vendor/`: self-hosted libraries (Leaflet 1.9.4, jQuery, DataTables, Bootstrap, Chart.js, vis-timeline 7.7.3).
 
 ## Adding a place to a map
