@@ -21,7 +21,9 @@
   const mapEl = document.getElementById('map');
   const map = L.map('map', { zoomControl: true, worldCopyJump: false, minZoom: 4, maxZoom: 14 });
   // Built-in vector map: always works, even offline
-  L.geoJSON(LAND, { interactive: false, style: () => ({
+  // Own pane BELOW the tile pane (z 200), so the opaque land fill never covers real map tiles
+  map.createPane('fallback').style.zIndex = 150;
+  L.geoJSON(LAND, { pane: 'fallback', interactive: false, style: () => ({
     fillColor: getComputedStyle(mapEl).getPropertyValue('--land').trim(),
     fillOpacity: 1, color: getComputedStyle(mapEl).getPropertyValue('--border').trim(), weight: .8 }) }).addTo(map);
 
