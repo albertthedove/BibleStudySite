@@ -60,3 +60,13 @@ h2.sec2 { font-size: 24px; margin: 38px 0 12px; }
 @media (max-width: 700px) { .tl { --labelw: 128px; min-width: 760px; } .tl-row .nm { font-size: 13px; padding: 0 6px; } }
 .tl-axis .tick { white-space: nowrap; }
 .tl-row .track, .tl-axis .ticks { margin-left: 20px; }
+
+/* AD 70 marker and critical-dating comparison */
+.tl-vline { position: absolute; top: 0; bottom: 0; z-index: 1; pointer-events: none; border-left: 2px dashed var(--ink); opacity: .7;
+  left: calc(var(--labelw) + 20px + (100% - var(--labelw) - 42px) * var(--f)); }
+.tl-vtag { position: absolute; top: 34px; z-index: 3; transform: translateX(-50%); white-space: nowrap; font: 600 12px/1 var(--sans); background: var(--ink); color: var(--panel); border-radius: 999px; padding: 5px 10px; cursor: help;
+  left: calc(var(--labelw) + 20px + (100% - var(--labelw) - 42px) * var(--f)); }
+.tl-row .ghost { position: absolute; top: 5px; height: 20px; min-width: 9px; border: 1.5px dashed var(--muted); border-radius: 6px; opacity: .8; pointer-events: auto; }
+.summary-box.method { border-left-color: var(--muted); font-size: 14.5px; color: var(--muted); }
+table.dt tr.mark td { font-weight: 700; border-top: 2px solid var(--ink); }
+table.dt th:not([data-k]) { cursor: default; }

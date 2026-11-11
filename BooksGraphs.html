@@ -38,7 +38,7 @@
         .author-icon { width:60px; height:60px; border-radius:50%; background:#007bff; color:white; display:flex; align-items:center; justify-content:center; font-size:24px; font-weight:bold; float:left; margin-right:16px; }
         #debugInfo { background:#fff3cd; color:#856404; padding:12px; margin:10px auto; max-width:800px; border:1px solid #ffeeba; border-radius:6px; display:none; }
     </style>
-  <link rel="stylesheet" href="assets/site.css?v=20261110">
+  <link rel="stylesheet" href="assets/site.css?v=20261111">
 </head>
 <body class="legacy">
 
@@ -161,7 +161,7 @@ const bibleBooks = [
     // New Testament
     {name:"Matthew", testament:"nt", author:"Matthew", years:"60–70 CE", chapters:28, words:{kjv:23684,nkjv:23500,esv:23300,niv:23600,nlt:22000,nasb:23500}, major:"Jesus", christ:"King of the Jews", summary:"Teachings & miracles"},
     {name:"Mark", testament:"nt", author:"Mark", years:"55–65 CE", chapters:16, words:{kjv:15166,nkjv:15100,esv:15000,niv:15100,nlt:14200,nasb:15100}, major:"Jesus", christ:"Servant", summary:"Action-oriented gospel"},
-    {name:"Luke", testament:"nt", author:"Luke", years:"60–80 CE", chapters:24, words:{kjv:25844,nkjv:25700,esv:25600,niv:25800,nlt:24500,nasb:25700}, major:"Jesus", christ:"Son of Man", summary:"Detailed & compassionate"},
+    {name:"Luke", testament:"nt", author:"Luke", years:"58–62 CE", chapters:24, words:{kjv:25844,nkjv:25700,esv:25600,niv:25800,nlt:24500,nasb:25700}, major:"Jesus", christ:"Son of Man", summary:"Detailed & compassionate"},
     {name:"John", testament:"nt", author:"John", years:"85–95 CE", chapters:21, words:{kjv:19899,nkjv:19800,esv:19700,niv:19900,nlt:18800,nasb:19800}, major:"Jesus", christ:"Son of God", summary:"Signs & 'I Am' statements"},
     {name:"Acts", testament:"nt", author:"Luke", years:"62–65 CE", chapters:28, words:{kjv:24229,nkjv:24100,esv:24000,niv:24200,nlt:23000,nasb:24100}, major:"Peter, Paul", christ:"Ascended Lord", summary:"Early church growth"},
     {name:"Romans", testament:"nt", author:"Paul", years:"57 CE", chapters:16, words:{kjv:7111,nkjv:7100,esv:7100,niv:7100,nlt:6800,nasb:7100}, major:"Paul", christ:"Justification", summary:"Gospel explained"},
@@ -413,7 +413,17 @@ document.querySelector('.close').onclick = () => document.getElementById('bookMo
 window.onclick = e => { if (e.target.id === 'bookModal') e.target.style.display = 'none'; };
 
 // Initial render
-window.addEventListener('load', () => {
+window.addEventListener('load', async () => {
+    // New Testament dates come from data/books.json, the same source as the NT timeline and chronology table
+    try {
+        const D = await fetch('data/books.json').then(r => r.json());
+        const norm = t => t.toLowerCase().replace(/[^a-z0-9]/g, '');
+        D.books.forEach(nb => {
+            const b = bibleBooks.find(x => x.testament === 'nt' && norm(x.name) === norm(nb.name));
+            if (b) b.years = (nb.start === nb.end ? nb.start : nb.start + '–' + nb.end) + ' CE';
+            else showDebug('No date match for ' + nb.name);
+        });
+    } catch (err) { showDebug('Could not load shared dates: ' + err.message); }
     setTimeout(() => {
         createOTChart();
         createNTChart();
@@ -421,6 +431,6 @@ window.addEventListener('load', () => {
     }, 300);
 });
 </script>
-<script src="assets/site.js?v=20261110"></script>
+<script src="assets/site.js?v=20261111"></script>
 </body>
 </html>
