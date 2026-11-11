@@ -18,35 +18,50 @@
    "theme": "Jesus as King",
    "fromPlace": null,
    "toPlace": null,
-   "cities": []
+   "cities": [],
+   "crit": {
+    "start": 80,
+    "end": 90
+   },
+   "critDisputed": true
   },
   {
    "slug": "mark",
    "name": "Mark",
-   "author": "John Mark, with Peter’s testimony",
+   "author": "John Mark, with Peter\u2019s testimony",
    "group": "gospels",
    "start": 60,
    "end": 65,
    "chapters": 16,
    "canon": 41,
-   "theme": "The earliest Gospel",
+   "theme": "Often seen as the earliest Gospel",
    "fromPlace": null,
    "toPlace": null,
-   "cities": []
+   "cities": [],
+   "crit": {
+    "start": 66,
+    "end": 70
+   },
+   "critDisputed": true
   },
   {
    "slug": "luke",
    "name": "Luke",
    "author": "Luke",
    "group": "gospels",
-   "start": 60,
-   "end": 80,
+   "start": 58,
+   "end": 62,
    "chapters": 24,
    "canon": 42,
    "theme": "Jesus as Son of Man",
    "fromPlace": null,
    "toPlace": null,
-   "cities": []
+   "cities": [],
+   "crit": {
+    "start": 80,
+    "end": 90
+   },
+   "critDisputed": true
   },
   {
    "slug": "john",
@@ -62,7 +77,12 @@
    "toPlace": null,
    "cities": [
     "ephesus"
-   ]
+   ],
+   "crit": {
+    "start": 90,
+    "end": 100
+   },
+   "critDisputed": true
   },
   {
    "slug": "acts",
@@ -78,7 +98,12 @@
    "toPlace": null,
    "cities": [
     "rome"
-   ]
+   ],
+   "crit": {
+    "start": 80,
+    "end": 90
+   },
+   "critDisputed": true
   },
   {
    "slug": "romans",
@@ -95,7 +120,12 @@
    "cities": [
     "corinth",
     "rome"
-   ]
+   ],
+   "crit": {
+    "start": 57,
+    "end": 57
+   },
+   "critDisputed": false
   },
   {
    "slug": "1-corinthians",
@@ -112,7 +142,12 @@
    "cities": [
     "ephesus",
     "corinth"
-   ]
+   ],
+   "crit": {
+    "start": 55,
+    "end": 55
+   },
+   "critDisputed": false
   },
   {
    "slug": "2-corinthians",
@@ -123,12 +158,17 @@
    "end": 56,
    "chapters": 13,
    "canon": 47,
-   "theme": "Paul’s defence and comfort",
+   "theme": "Paul\u2019s defence and comfort",
    "fromPlace": "Macedonia",
    "toPlace": "The church in Corinth",
    "cities": [
     "corinth"
-   ]
+   ],
+   "crit": {
+    "start": 56,
+    "end": 56
+   },
+   "critDisputed": false
   },
   {
    "slug": "galatians",
@@ -147,7 +187,12 @@
     "iconium",
     "lystra",
     "derbe"
-   ]
+   ],
+   "crit": {
+    "start": 49,
+    "end": 49
+   },
+   "critDisputed": false
   },
   {
    "slug": "ephesians",
@@ -164,7 +209,12 @@
    "cities": [
     "ephesus",
     "rome"
-   ]
+   ],
+   "crit": {
+    "start": 70,
+    "end": 90
+   },
+   "critDisputed": true
   },
   {
    "slug": "philippians",
@@ -181,7 +231,12 @@
    "cities": [
     "philippi",
     "rome"
-   ]
+   ],
+   "crit": {
+    "start": 61,
+    "end": 61
+   },
+   "critDisputed": false
   },
   {
    "slug": "colossians",
@@ -199,7 +254,12 @@
     "colossae",
     "laodicea",
     "rome"
-   ]
+   ],
+   "crit": {
+    "start": 70,
+    "end": 90
+   },
+   "critDisputed": true
   },
   {
    "slug": "1-thessalonians",
@@ -210,13 +270,18 @@
    "end": 51,
    "chapters": 5,
    "canon": 52,
-   "theme": "Encouragement about Christ’s return",
+   "theme": "Encouragement about Christ\u2019s return",
    "fromPlace": "Corinth",
    "toPlace": "The church in Thessalonica",
    "cities": [
     "thessalonica",
     "corinth"
-   ]
+   ],
+   "crit": {
+    "start": 51,
+    "end": 51
+   },
+   "critDisputed": false
   },
   {
    "slug": "2-thessalonians",
@@ -233,7 +298,12 @@
    "cities": [
     "thessalonica",
     "corinth"
-   ]
+   ],
+   "crit": {
+    "start": 70,
+    "end": 90
+   },
+   "critDisputed": true
   },
   {
    "slug": "1-timothy",
@@ -249,7 +319,12 @@
    "toPlace": "Timothy, in Ephesus",
    "cities": [
     "ephesus"
-   ]
+   ],
+   "crit": {
+    "start": 90,
+    "end": 110
+   },
+   "critDisputed": true
   },
   {
    "slug": "2-timothy",
@@ -260,12 +335,17 @@
    "end": 67,
    "chapters": 4,
    "canon": 55,
-   "theme": "Paul’s final charge",
+   "theme": "Paul\u2019s final charge",
    "fromPlace": "Rome (prison)",
    "toPlace": "Timothy",
    "cities": [
     "rome"
-   ]
+   ],
+   "crit": {
+    "start": 90,
+    "end": 110
+   },
+   "critDisputed": true
   },
   {
    "slug": "titus",
@@ -281,7 +361,12 @@
    "toPlace": "Titus, in Crete",
    "cities": [
     "crete"
-   ]
+   ],
+   "crit": {
+    "start": 90,
+    "end": 110
+   },
+   "critDisputed": true
   },
   {
    "slug": "philemon",
@@ -298,7 +383,12 @@
    "cities": [
     "colossae",
     "rome"
-   ]
+   ],
+   "crit": {
+    "start": 60,
+    "end": 62
+   },
+   "critDisputed": false
   },
   {
    "slug": "hebrews",
@@ -312,7 +402,13 @@
    "theme": "Christ is greater",
    "fromPlace": "Unknown",
    "toPlace": "Jewish believers",
-   "cities": []
+   "cities": [],
+   "crit": {
+    "start": 60,
+    "end": 99,
+    "label": "60s\u201390s"
+   },
+   "critDisputed": true
   },
   {
    "slug": "james",
@@ -328,7 +424,12 @@
    "toPlace": "Jewish believers scattered abroad",
    "cities": [
     "jerusalem"
-   ]
+   ],
+   "crit": {
+    "start": 70,
+    "end": 100
+   },
+   "critDisputed": true
   },
   {
    "slug": "1-peter",
@@ -340,11 +441,16 @@
    "chapters": 5,
    "canon": 60,
    "theme": "Hope in suffering",
-   "fromPlace": "Rome (“Babylon”)",
+   "fromPlace": "Rome (\u201cBabylon\u201d)",
    "toPlace": "Believers across Asia Minor",
    "cities": [
     "rome"
-   ]
+   ],
+   "crit": {
+    "start": 75,
+    "end": 90
+   },
+   "critDisputed": true
   },
   {
    "slug": "2-peter",
@@ -358,7 +464,12 @@
    "theme": "Warning against false teachers",
    "fromPlace": "Rome (traditional)",
    "toPlace": "The same believers",
-   "cities": []
+   "cities": [],
+   "crit": {
+    "start": 100,
+    "end": 130
+   },
+   "critDisputed": true
   },
   {
    "slug": "1-john",
@@ -374,7 +485,13 @@
    "toPlace": "Churches in Asia",
    "cities": [
     "ephesus"
-   ]
+   ],
+   "crit": {
+    "start": 100,
+    "end": 100,
+    "label": "~100"
+   },
+   "critDisputed": true
   },
   {
    "slug": "2-john",
@@ -387,10 +504,16 @@
    "canon": 63,
    "theme": "Walk in the truth",
    "fromPlace": "Ephesus (traditional)",
-   "toPlace": "“The elect lady”",
+   "toPlace": "\u201cThe elect lady\u201d",
    "cities": [
     "ephesus"
-   ]
+   ],
+   "crit": {
+    "start": 100,
+    "end": 100,
+    "label": "~100"
+   },
+   "critDisputed": true
   },
   {
    "slug": "3-john",
@@ -406,7 +529,13 @@
    "toPlace": "Gaius",
    "cities": [
     "ephesus"
-   ]
+   ],
+   "crit": {
+    "start": 100,
+    "end": 100,
+    "label": "~100"
+   },
+   "critDisputed": true
   },
   {
    "slug": "jude",
@@ -420,7 +549,12 @@
    "theme": "Contend for the faith",
    "fromPlace": "Unknown",
    "toPlace": "Believers at risk from false teachers",
-   "cities": []
+   "cities": [],
+   "crit": {
+    "start": 70,
+    "end": 100
+   },
+   "critDisputed": true
   },
   {
    "slug": "revelation",
@@ -431,12 +565,18 @@
    "end": 95,
    "chapters": 22,
    "canon": 66,
-   "theme": "Christ’s victory",
+   "theme": "Christ\u2019s victory",
    "fromPlace": "Patmos",
    "toPlace": "Seven churches in Asia",
    "cities": [
     "ephesus"
-   ]
+   ],
+   "crit": {
+    "start": 95,
+    "end": 95,
+    "label": "~95"
+   },
+   "critDisputed": true
   }
  ],
  "events": [
@@ -447,7 +587,7 @@
    "note": "Traditional date; some scholars say AD 33."
   },
   {
-   "name": "Paul’s conversion",
+   "name": "Paul\u2019s conversion",
    "start": 34,
    "end": 34,
    "note": "Roughly two to three years after the resurrection; the dating varies."
@@ -459,16 +599,17 @@
    "note": "Acts 15."
   },
   {
-   "name": "Nero’s persecution at Rome",
+   "name": "Nero\u2019s persecution at Rome",
    "start": 64,
    "end": 64,
-   "note": "Traditionally the time of Peter’s and Paul’s deaths (AD 64–68)."
+   "note": "Traditionally the time of Peter\u2019s and Paul\u2019s deaths (AD 64\u201368)."
   },
   {
-   "name": "Temple destroyed",
+   "name": "Jerusalem temple destroyed",
    "start": 70,
    "end": 70,
-   "note": "Jerusalem falls to Rome."
+   "note": "Jerusalem falls to Rome. The Gospels record Jesus foretelling it; no New Testament book explicitly describes it as already past.",
+   "marker": true
   }
  ],
  "journeys": [
@@ -498,5 +639,6 @@
   }
  ],
  "min": 25,
- "max": 100
+ "max": 100,
+ "maxCrit": 130
 }

@@ -13,7 +13,7 @@
 <meta name="twitter:card" content="summary">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="assets/site.css?v=20261110">
-<link rel="stylesheet" href="assets/timeline.css?v=20261110">
+<link rel="stylesheet" href="assets/timeline.css?v=20261111">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -27,6 +27,11 @@
   <div class="tl-controls noprint">
     <div class="grp" id="filters" role="group" aria-label="Highlight a group of books"></div>
     <span class="sep"></span>
+    <div class="grp" id="dating" role="group" aria-label="Dating view">
+      <button class="fchip" data-d="cons" aria-pressed="true">Conservative dates</button>
+      <button class="fchip" data-d="crit" aria-pressed="false">Critical dates</button>
+    </div>
+    <span class="sep"></span>
     <div class="grp" id="layout" role="group" aria-label="Chart layout">
       <button class="fchip" data-l="grouped" aria-pressed="true">Group by type</button>
       <button class="fchip" data-l="flat" aria-pressed="false">All by date</button>
@@ -38,15 +43,19 @@
   <div class="legend">
     <span style="--c:var(--j2)"><i></i>Paul’s letters</span><span style="--c:var(--j5)"><i></i>Gospels &amp; Acts</span>
     <span style="--c:var(--j6)"><i></i>General letters</span><span style="--c:var(--j7)"><i></i>Revelation</span>
-    <span style="--c:var(--j0)"><i class="jn"></i>Paul’s journeys (opens map)</span><span style="--c:var(--j0)"><i class="ev"></i>Key events</span>
+    <span style="--c:var(--j0)"><i class="jn"></i>Paul’s journeys (opens map)</span><span style="--c:var(--j0)"><i class="ev"></i>Key events</span><span style="--c:var(--ink)"><i style="width:0;height:14px;border-radius:0;border-left:2px dashed var(--ink);background:none"></i>AD 70, temple destroyed</span>
     <span>A short bar means a single year; a longer bar is a range.</span>
   </div>
 
   <section id="detail" class="card detail" hidden aria-live="polite"></section>
 
-  <div class="summary-box">
-    <strong>What the dates show.</strong> Galatians to Romans (AD 49–57) were all written before any Gospel, even on early datings. The prison letters and the Pastoral letters (AD 60–67) overlap with Mark, usually seen as the earliest Gospel (c. AD 60–65). Matthew, Luke and John are probably later. James may be earlier than any of Paul’s letters. Dates are approximate and follow a conservative scholarly view; some scholars place several books later.
-  </div>
+  <div class="summary-box" id="summary" aria-live="polite"></div>
+  <div class="summary-box method" id="method"></div>
+
+  <h2 class="sec2">Key events and journeys</h2>
+  <div class="tbl-wrap"><table class="dt" id="events">
+    <thead><tr><th>Date</th><th>Event</th><th>Note</th></tr></thead><tbody id="evbody"></tbody></table></div>
+
 
   <h2 class="sec2">Churches Paul founded or wrote to</h2>
   <p style="color:var(--muted)">Each church, the letters sent to it, and when they were written. Click a column heading to sort, or click a city to see it on the map.</p>
@@ -57,10 +66,10 @@
       <th data-k="letters">Letters</th><th data-k="letterYear" aria-sort="ascending">Written</th><th data-k="gap">After founding</th><th data-k="before">Before Mark?</th>
       <th data-k="from">Written from</th><th data-k="prison">From prison?</th><th>Notes</th>
     </tr></thead><tbody></tbody></table></div>
-  <p style="color:var(--muted);font-size:14px;margin-top:12px">Dates and places follow widely used conservative chronologies and the book of Acts. Where scholars disagree, the table says so.</p>
+  <p style="color:var(--muted);font-size:14px;margin-top:12px">Dates and places follow widely used conservative chronologies (the church dates below do not change with the dating toggle) and the book of Acts. Where scholars disagree, the table says so.</p>
 </main>
 <div id="site-footer"></div>
 <script src="assets/site.js?v=20261110"></script>
-<script src="assets/timeline.js?v=20261110"></script>
+<script src="assets/timeline.js?v=20261111"></script>
 </body>
 </html>

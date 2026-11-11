@@ -3,11 +3,17 @@
   const getJSON = u => fetch(u).then(r => { if (!r.ok) throw new Error(u); return r.json(); });
   const [D, CH] = await Promise.all([getJSON('data/books.json'), getJSON('data/churches.json')]);
   const COL = { paul: 'var(--j2)', gospels: 'var(--j5)', general: 'var(--j6)', rev: 'var(--j7)', ev: 'var(--j0)' };
-  const MIN = D.min, MAX = D.max, SPAN = MAX - MIN;
+  const MIN = D.min;
+  let MAX = D.max, SPAN = MAX - MIN;
   const pct = y => ((y - MIN) / SPAN * 100);
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   const yrs = (a, b) => 'AD ' + (a === b ? a : a + '–' + b);
-  const state = { filter: 'all', layout: 'grouped', extras: true, sel: null };
+  const lab = it => it.label ? 'AD ' + it.label : yrs(it.start, it.end);
+  const state = { filter: 'all', layout: 'grouped', extras: true, sel: null,
+    dating: new URLSearchParams(location.search).get('dating') === 'critical' ? 'crit' : 'cons' };
+  // One data source (data/books.json). A book's dates depend on the chosen dating view.
+  const view = b => state.dating === 'crit' ? Object.assign({}, b, b.crit) : b;
+  const TEMPLE = D.events.find(e => e.marker);
   const root = document.getElementById('timeline');
   const detail = document.getElementById('detail');
 
@@ -20,7 +26,7 @@
     const w = Math.max(item.end - item.start, 1);
     const left = pct(item.start), width = w / SPAN * 100;
     const right = left + width > 82;
-    const label = yrs(item.start, item.end);
+    const label = lab(item);
     const dim = state.filter !== 'all' && kind === 'book' && item.group !== state.filter;
     const cls = ['tbar', kind === 'event' ? 'ev' : '', kind === 'journey' ? 'jn' : '', state.sel === item.slug ? 'sel' : '', dim ? 'dim' : ''].filter(Boolean).join(' ');
     const attrs = kind === 'book' ? `data-slug="${item.slug}"` : (kind === 'journey' ? `data-map="${item.map}"` : `data-ev="${esc(item.name)}"`);
@@ -31,26 +37,47 @@
     return `<div class="tl-row${selected ? ' sel' : ''}"><div class="nm" title="${esc(name)}">${dot ? `<i style="display:inline-block;width:9px;height:9px;border-radius:50%;background:${dot};margin-right:7px"></i>` : ''}${esc(name)}</div><div class="track" style="--spans:${SPAN / 5}">${inner}</div></div>`;
   }
   function render() {
+    MAX = state.dating === 'crit' ? D.maxCrit : D.max; SPAN = MAX - MIN;
     let h = `<div class="tl-axis"><div></div><div class="ticks">${ticks()}</div></div>`;
+    if (TEMPLE) h += `<div class="tl-vline" style="--f:${pct(TEMPLE.start) / 100}"></div><span class="tl-vtag" tabindex="0" style="--f:${pct(TEMPLE.start) / 100}" title="No New Testament book explicitly describes the temple’s destruction as already past.">AD ${TEMPLE.start}: temple destroyed</span>`;
     if (state.extras) {
       h += `<div class="tl-lane" style="--c:var(--j0)"><span>Paul’s journeys and key events</span></div>`;
       D.journeys.forEach(j => { h += row(j.name, bar(j, 'journey', COL.ev, '. Opens the map'), false); });
       D.events.forEach(e => { h += row(e.name, bar(e, 'event', COL.ev), false); });
     }
-    const books = D.books.slice();
+    const books = D.books.map(view);
+    const ghost = b => {
+      if (state.dating !== 'crit' || !b.critDisputed) return '';
+      const o = D.books.find(x => x.slug === b.slug), w = Math.max(o.end - o.start, 1);
+      return `<span class="ghost" title="Conservative dating: ${lab(o)}" style="left:${pct(o.start)}%;width:${w / SPAN * 100}%"></span>`;
+    };
     const order = (a, b) => a.start - b.start || a.end - b.end || a.canon - b.canon;
     if (state.layout === 'grouped') {
       Object.entries(D.groups).forEach(([g, label]) => {
         const list = books.filter(b => b.group === g).sort(order);
         if (!list.length) return;
         h += `<div class="tl-lane" style="--c:${COL[g]}"><span>${esc(label)}</span></div>`;
-        list.forEach(b => { h += row(b.name, bar(b, 'book', COL[b.group]), state.sel === b.slug); });
+        list.forEach(b => { h += row(b.name, ghost(b) + bar(b, 'book', COL[b.group]), state.sel === b.slug); });
       });
     } else {
       h += `<div class="tl-lane" style="--c:var(--ink)"><span>All 27 books, in order of writing</span></div>`;
-      books.sort(order).forEach(b => { h += row(b.name, bar(b, 'book', COL[b.group]), state.sel === b.slug, COL[b.group]); });
+      books.sort(order).forEach(b => { h += row(b.name, ghost(b) + bar(b, 'book', COL[b.group]), state.sel === b.slug, COL[b.group]); });
     }
     root.innerHTML = `<div class="tl">${h}</div>`;
+    renderSummary();
+  }
+
+  // Words that follow the data, so the text can never disagree with the chart
+  function renderSummary() {
+    const bs = D.books.map(view), cut = TEMPLE.start;
+    const before = bs.filter(b => b.end <= cut), after = bs.filter(b => b.start >= cut), span = bs.filter(b => b.start < cut && b.end > cut);
+    const names = l => l.map(b => b.name).join(', ').replace(/, ([^,]*)$/, ' and $1');
+    const g = n => view(D.books.find(b => b.slug === n)), r = n => lab(g(n));
+    const crit = state.dating === 'crit';
+    document.getElementById('summary').innerHTML = crit
+      ? `<strong>Critical dating (mainstream academic view).</strong> Only Paul’s seven undisputed letters and Mark sit before AD ${cut}. Most other books are placed after it: ${after.length} books fall after AD ${cut}, ${span.length} spans it (${names(span) || 'none'}), and ${before.length} end before it. Paul’s seven undisputed letters are dated the same in both views. The dashed outlines show the conservative dates for comparison.`
+      : `<strong>Conservative dating (this site’s default).</strong> ${before.length} of 27 books are dated before the temple’s destruction in AD ${cut}. Only ${names(after)} come after${span.length ? ', and ' + names(span) + ' spans it' : ''}. Galatians to Romans (${r('galatians')} to ${r('romans')}) all precede the Gospels. Luke (${r('luke')}) was written before Acts (${r('acts')}), as Acts 1:1 implies. Mark is dated ${r('mark')} and Matthew ${r('matthew')}, and John ${r('john')}. James (${r('james')}) may be earlier than any of Paul’s letters. Dates are approximate.`;
+    document.getElementById('method').innerHTML = `<strong>How to read these dates.</strong> <em>Conservative</em> dates accept the traditional authors and place most books before AD ${cut}. <em>Critical</em> dates follow the mainstream academic consensus, which places many books later and treats some letters as written after the apostle’s lifetime. Both are shown so you can compare; neither is certain, and Paul’s seven undisputed letters are the same in both.`;
   }
 
   function showDetail(slug, scroll) {
@@ -59,7 +86,7 @@
     const cityLinks = (b.cities || []).map(c => `<a href="paulmap.html?city=${c}">${esc(c.charAt(0).toUpperCase() + c.slice(1))}</a>`).join(', ');
     detail.hidden = false; detail.style.setProperty('--c', COL[b.group]);
     detail.innerHTML = `<h2>${esc(b.name)}</h2><p class="meta">${esc(D.groups[b.group])} · book ${b.canon} of 66 · ${b.chapters} chapter${b.chapters > 1 ? 's' : ''}</p>
-      <dl><dt>Theme</dt><dd>${esc(b.theme)}</dd><dt>Author</dt><dd>${esc(b.author)}</dd><dt>Written</dt><dd>${yrs(b.start, b.end)} (approximate)</dd>
+      <dl><dt>Theme</dt><dd>${esc(b.theme)}</dd><dt>Author</dt><dd>${esc(b.author)}</dd><dt>Written (conservative)</dt><dd>${lab(b)} (approximate)</dd><dt>Written (critical)</dt><dd>${lab(b.crit)}${b.critDisputed ? '' : ' (same: undisputed letter)'}</dd>
       ${b.fromPlace ? `<dt>Written from</dt><dd>${esc(b.fromPlace)}</dd>` : ''}${b.toPlace ? `<dt>Written to</dt><dd>${esc(b.toPlace)}</dd>` : ''}
       ${cityLinks ? `<dt>On the map</dt><dd>${cityLinks}</dd>` : ''}</dl>
       <div class="acts"><a class="vbtn" href="https://www.biblegateway.com/passage/?search=${encodeURIComponent(b.name + ' 1')}" target="_blank" rel="noopener">Read ${esc(b.name)}</a>
@@ -87,6 +114,20 @@
     else { state.layout = b.dataset.l; lay.querySelectorAll('[data-l]:not([data-l=extras])').forEach(x => x.setAttribute('aria-pressed', x === b)); }
     render();
   });
+  const dat = document.getElementById('dating');
+  const syncDating = () => dat.querySelectorAll('[data-d]').forEach(x => x.setAttribute('aria-pressed', x.dataset.d === state.dating));
+  dat.addEventListener('click', e => {
+    const b = e.target.closest('[data-d]'); if (!b) return;
+    state.dating = b.dataset.d; syncDating();
+    const u = new URL(location.href); state.dating === 'crit' ? u.searchParams.set('dating', 'critical') : u.searchParams.delete('dating');
+    history.replaceState(null, '', u); render();
+  });
+  syncDating();
+
+  // key events and journeys, each with a visible date
+  document.getElementById('evbody').innerHTML =
+    D.events.concat(D.journeys).sort((a, b) => a.start - b.start || a.end - b.end).map(e =>
+      `<tr${e.marker ? ' class="mark"' : ''}><td>${yrs(e.start, e.end)}</td><td>${e.map ? `<a href="${e.map}">${esc(e.name)}</a>` : esc(e.name)}</td><td>${esc(e.note || (e.map ? 'Opens the map.' : ''))}</td></tr>`).join('');
   render();
   if (root.scrollWidth > root.clientWidth) root.scrollLeft = (root.scrollWidth - 130) * pct(42) / 100;
   const q = new URLSearchParams(location.search).get('book');
