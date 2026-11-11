@@ -43,7 +43,7 @@
     if (state.extras) {
       h += `<div class="tl-lane" style="--c:var(--j0)"><span>Paul’s journeys and key events</span></div>`;
       D.journeys.forEach(j => { h += row(j.name, bar(j, 'journey', COL.ev, '. Opens the map'), false); });
-      D.events.forEach(e => { h += row(e.name, bar(e, 'event', COL.ev), false); });
+      D.events.slice().sort((a, b) => a.start - b.start || a.end - b.end).forEach(e => { h += row(e.name, bar(e, 'event', COL.ev), false); });
     }
     const books = D.books.map(view);
     const ghost = b => {
