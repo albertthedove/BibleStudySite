@@ -3,7 +3,7 @@
    Offline-safe: draws a built-in Natural Earth land outline first; Esri terrain tiles fade in on top when they load. */
 (async function () {
   const base = (document.currentScript && document.currentScript.src) ? document.currentScript.src.replace(/assets\/[^/]*$/, '') : '';
-  const getJSON = u => fetch(u).then(r => { if (!r.ok) throw new Error(u + ' ' + r.status); return r.json(); });
+  const getJSON = u => fetch(u + (u.includes('?') ? '&' : '?') + 'v=20261112').then(r => { if (!r.ok) throw new Error(u + ' ' + r.status); return r.json(); });
   const D = await getJSON(window.JOURNEY_DATA_URL);
   const [LAND, COUNTRY_LINES, ADMIN_LINES] = await Promise.all([
     getJSON('data/land.json'), getJSON('data/country-lines.json'), getJSON('data/admin-lines.json')]);

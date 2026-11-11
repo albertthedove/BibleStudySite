@@ -416,7 +416,7 @@ window.onclick = e => { if (e.target.id === 'bookModal') e.target.style.display 
 window.addEventListener('load', async () => {
     // New Testament dates come from data/books.json, the same source as the NT timeline and chronology table
     try {
-        const D = await fetch('data/books.json').then(r => r.json());
+        const D = await fetch('data/books.json?v=20261112').then(r => r.json());
         const norm = t => t.toLowerCase().replace(/[^a-z0-9]/g, '');
         D.books.forEach(nb => {
             const b = bibleBooks.find(x => x.testament === 'nt' && norm(x.name) === norm(nb.name));
