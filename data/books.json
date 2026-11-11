@@ -587,10 +587,34 @@
    "note": "Traditional date; some scholars say AD 33."
   },
   {
+   "name": "Pentecost",
+   "start": 30,
+   "end": 30,
+   "note": "The Spirit comes and the church is born in Jerusalem. Acts 2."
+  },
+  {
+   "name": "Stephen martyred",
+   "start": 33,
+   "end": 34,
+   "note": "Stephen is stoned and the church is scattered, spreading the gospel beyond Jerusalem. Acts 7\u20138. Dates are approximate."
+  },
+  {
    "name": "Paul\u2019s conversion",
    "start": 34,
    "end": 34,
    "note": "Roughly two to three years after the resurrection; the dating varies."
+  },
+  {
+   "name": "Herod Agrippa I dies",
+   "start": 44,
+   "end": 44,
+   "note": "He had just executed James, the brother of John. Acts 12. The date is fixed from Josephus."
+  },
+  {
+   "name": "Famine in Judea",
+   "start": 46,
+   "end": 46,
+   "note": "Predicted by Agabus; the church at Antioch sends relief. Acts 11:27\u201330. Dated under Claudius, roughly AD 45\u201348."
   },
   {
    "name": "Jerusalem Council",
@@ -599,10 +623,52 @@
    "note": "Acts 15."
   },
   {
+   "name": "Claudius expels Jews",
+   "start": 49,
+   "end": 49,
+   "note": "Priscilla and Aquila leave Rome and meet Paul in Corinth. Acts 18:2. Some scholars date the edict to AD 41."
+  },
+  {
+   "name": "Gallio governs Achaia",
+   "start": 51,
+   "end": 52,
+   "note": "A Delphi inscription fixes his term, which anchors Paul\u2019s 18 months in Corinth. Acts 18:12."
+  },
+  {
+   "name": "Paul arrested in Jerusalem",
+   "start": 57,
+   "end": 57,
+   "note": "The start of Paul\u2019s imprisonment and his road to Rome. Acts 21:27\u201336."
+  },
+  {
+   "name": "Paul appeals to Caesar",
+   "start": 59,
+   "end": 59,
+   "note": "After two years in Caesarea, under the governor Festus. Acts 25:11. The year is debated, between about AD 55 and 60."
+  },
+  {
+   "name": "Paul reaches Rome",
+   "start": 60,
+   "end": 60,
+   "note": "After the shipwreck on Malta, he lives under guard for two years. Acts 28. Estimates range from AD 59 to 61."
+  },
+  {
+   "name": "Jesus\u2019 brother James killed",
+   "start": 62,
+   "end": 62,
+   "note": "Recorded by Josephus; James had led the Jerusalem church. Date approximate."
+  },
+  {
    "name": "Nero\u2019s persecution at Rome",
    "start": 64,
    "end": 64,
-   "note": "Traditionally the time of Peter\u2019s and Paul\u2019s deaths (AD 64\u201368)."
+   "note": "Follows the fire of Rome. Traditionally the time of Peter\u2019s and Paul\u2019s deaths (AD 64\u201368)."
+  },
+  {
+   "name": "Jewish revolt begins",
+   "start": 66,
+   "end": 66,
+   "note": "The war with Rome that ends with the temple\u2019s destruction in AD 70."
   },
   {
    "name": "Jerusalem temple destroyed",
