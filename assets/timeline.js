@@ -1,6 +1,6 @@
 /* NT timeline: every New Testament book on one chart, plus Paul's journeys and key events */
 (async function () {
-  const getJSON = u => fetch(u).then(r => { if (!r.ok) throw new Error(u); return r.json(); });
+  const getJSON = u => fetch(u + (u.includes('?') ? '&' : '?') + 'v=20261112').then(r => { if (!r.ok) throw new Error(u); return r.json(); });
   const [D, CH] = await Promise.all([getJSON('data/books.json'), getJSON('data/churches.json')]);
   const COL = { paul: 'var(--j2)', gospels: 'var(--j5)', general: 'var(--j6)', rev: 'var(--j7)', ev: 'var(--j0)' };
   const MIN = D.min;

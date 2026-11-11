@@ -185,7 +185,7 @@
   <script>
     let ntTerm = '', ntMode = 'cons', NT = null, drawNT = () => {};
     function initNT() {
-      fetch('data/books.json').then(r => r.json()).then(D => {
+      fetch('data/books.json?v=20261112').then(r => r.json()).then(D => {
         NT = D;
         const CUT = D.events.find(e => e.marker).start;
         const lab = (o, bce) => (o.label || (o.start === o.end ? o.start : o.start + '–' + o.end)) + ' CE';
