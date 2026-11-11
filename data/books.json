@@ -614,6 +614,12 @@
  ],
  "journeys": [
   {
+   "name": "Damascus road to Antioch",
+   "start": 34,
+   "end": 46,
+   "map": "paulmap.html?journey=0"
+  },
+  {
    "name": "1st journey",
    "start": 46,
    "end": 48,
