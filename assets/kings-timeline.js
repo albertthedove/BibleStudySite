@@ -61,5 +61,7 @@
   chips('kfilter', 'k'); chips('efilter', 'e');
   const s = document.getElementById('globalSearch');
   s.addEventListener('input', () => t.setSearch(s.value));
+  const q0 = new URLSearchParams(location.search).get('q');
+  if (q0) { s.value = q0; t.setSearch(q0); document.getElementById('kingsTable').scrollIntoView(); }
   document.getElementById('printBtn').addEventListener('click', () => window.print());
 })();

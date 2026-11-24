@@ -64,5 +64,7 @@
   drawNT();
 
   search.addEventListener('input', () => { ot.setSearch(search.value); drawNT(); });
+  const q0 = new URLSearchParams(location.search).get('q');
+  if (q0) { search.value = q0; ot.setSearch(q0); drawNT(); if (!OT.books.some(b => b.name.toLowerCase().includes(q0.toLowerCase()))) show('nt'); }
   document.getElementById('printBtn').addEventListener('click', () => window.print());
 })();
