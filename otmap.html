@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Old Testament Journeys Map: Abraham, Exodus, Conquest, Exile | VizBible</title>
+<meta name="description" content="Interactive map of Old Testament journeys: Abraham from Ur to Canaan, the Exodus to Sinai and Moab, Joshua's conquest, the exiles to Assyria and Babylon, and the return, with ancient and modern place names and Bible references.">
+<link rel="canonical" href="https://vizbible.com/otmap.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VizBible">
+<meta property="og:title" content="Old Testament Journeys Map">
+<meta property="og:description" content="Interactive map of Old Testament journeys: Abraham from Ur to Canaan, the Exodus to Sinai and Moab, Joshua's conquest, the exiles to Assyria and Babylon, and the return, with ancient and modern place names and Bible references.">
+<meta property="og:url" content="https://vizbible.com/otmap.html">
+<meta name="twitter:card" content="summary_large_image"><meta property="og:image" content="https://vizbible.com/assets/og/otmap.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="vendor/leaflet/leaflet.css">
+<link rel="stylesheet" href="assets/site.css?v=9bd00f37">
+<link rel="stylesheet" href="assets/journey-map.css?v=5936baaf">
+</head>
+<body class="journey-page">
+<a class="skip" href="#map">Skip to map</a>
+<div id="site-nav"></div>
+<div id="app">
+  <header>
+    <div class="top">
+      <h1>Old Testament journeys</h1>
+      <div class="seg" role="group" aria-label="Place names">
+        <button id="nmA" aria-pressed="true">Ancient</button><button id="nmM" aria-pressed="false">Modern</button>
+      </div>
+    </div>
+    <div class="chips" id="chips" role="group" aria-label="Choose a view"></div>
+    <p id="summary" aria-live="polite"></p>
+    <div class="stepper" id="stepper" hidden>
+      <button type="button" data-dir="-1" aria-label="Previous stop">&larr; Back</button>
+      <button type="button" data-dir="1" aria-label="Next stop">Next stop &rarr;</button>
+      <span class="lbl2" aria-live="polite"></span>
+    </div>
+  </header>
+  <div id="map" role="application" aria-label="Old Testament journeys map. Use the chips above, or tab to a place marker and press Enter for details."></div>
+  <div class="key" aria-hidden="true">
+    <svg width="26" height="6"><line x1="0" y1="3" x2="26" y2="3" stroke="currentColor" stroke-width="3"/></svg>by land<br>
+    <svg width="26" height="6"><line x1="0" y1="3" x2="26" y2="3" stroke="currentColor" stroke-width="3" stroke-dasharray="6 4"/></svg>by sea<br>
+    <svg width="26" height="6"><line x1="0" y1="3" x2="26" y2="3" stroke="currentColor" stroke-width="2" stroke-dasharray="9 4 2 4" style="color:var(--bcol,#a4502a)"/></svg><span id="bkey"></span><br>
+    Tap a place for details
+  </div>
+  <noscript><p style="padding:16px">This map needs JavaScript. </p></noscript>
+</div>
+<div id="site-footer" data-compact></div>
+<script src="vendor/leaflet/leaflet.js"></script>
+<script>window.JOURNEY_DATA_URL = "data/ot-journeys.json";</script>
+<script src="assets/journey-map.js?v=21faf46c"></script>
+<script src="assets/site.js?v=1fc36849"></script>
+</body>
+</html>
