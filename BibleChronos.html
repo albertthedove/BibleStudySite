@@ -210,7 +210,7 @@
           document.getElementById('ntBody').innerHTML = html || '<tr><td colspan="8">No matches.</td></tr>';
         };
         const before = D.books.filter(b => b.end <= CUT).length;
-        document.getElementById('ntMethod').innerHTML = '<strong>Conservative</strong> dates (the default) accept traditional authorship and place ' + before + ' of 27 books before AD ' + CUT + '. <strong>Critical</strong> dates follow the mainstream academic consensus, which dates many books later. Paul’s seven undisputed letters are the same in both columns.';
+        document.getElementById('ntMethod').innerHTML = '<strong>Conservative</strong> dates (the default) accept traditional authorship and place ' + before + ' of 27 books before AD ' + CUT + '. <strong>Critical</strong> dates follow the mainstream academic consensus, which dates many books later. Paul’s seven undisputed letters are the same in both columns. <a href="about.html#dating">Sources and method</a>.';
         drawNT();
       });
     }
@@ -247,6 +247,6 @@
       document.getElementById('printBtn').onclick = () => window.print();
     });
   </script>
-<script src="assets/site.js?v=6313c1fe"></script>
+<script src="assets/site.js?v=9c199bd5"></script>
 </body>
 </html>

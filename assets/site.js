@@ -1,5 +1,15 @@
 /* VizBible shared nav + footer. Pages include: <div id="site-nav"></div> ... <div id="site-footer"></div> */
 (function () {
+  // Cloudflare Web Analytics: cookieless visit counts. Paste the token from the Cloudflare dashboard
+  // between the quotes to switch it on, and update privacy.html at the same time (see the comment there).
+  var CF_ANALYTICS_TOKEN = '';
+  if (CF_ANALYTICS_TOKEN && location.hostname.indexOf('vizbible.com') > -1) {
+    var cf = document.createElement('script');
+    cf.defer = true; cf.src = 'https://static.cloudflareinsights.com/beacon.min.js';
+    cf.setAttribute('data-cf-beacon', JSON.stringify({ token: CF_ANALYTICS_TOKEN }));
+    document.head.appendChild(cf);
+  }
+
   var pages = [
     ['index.html', 'Home'],
     ['PaulineChurches.html', 'NT Timeline & Letters'],
