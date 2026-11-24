@@ -2,7 +2,7 @@
 (function () {
   // Cloudflare Web Analytics: cookieless visit counts. Paste the token from the Cloudflare dashboard
   // between the quotes to switch it on, and update privacy.html at the same time (see the comment there).
-  var CF_ANALYTICS_TOKEN = '';
+  var CF_ANALYTICS_TOKEN = 'd48bceebb9e743e3bd0928ecb4e97142';
   if (CF_ANALYTICS_TOKEN && location.hostname.indexOf('vizbible.com') > -1) {
     var cf = document.createElement('script');
     cf.defer = true; cf.src = 'https://static.cloudflareinsights.com/beacon.min.js';
