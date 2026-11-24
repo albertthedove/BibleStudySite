@@ -1,0 +1,23 @@
+name: Site checks
+on:
+  pull_request:
+  push:
+    branches: [main]
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Data and links
+        run: python3 tools/check.py
+      - name: Version tags are current
+        run: python3 tools/stamp.py --check
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Pages load and dates match (headless Chrome)
+        run: |
+          npm install --no-save puppeteer-core@23
+          python3 -m http.server 8099 >/dev/null 2>&1 &
+          sleep 2
+          CHROME=$(which google-chrome) node tools/browser-check.js

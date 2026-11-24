@@ -17,3 +17,11 @@ Add an entry to `C` (the city), to `MODERN`, optionally `ART` and `WIKI`, and to
 
 ## Donate button
 `assets/site.js` leaves an empty `<span id="donate-slot">` in the footer. Put the donate link or button inside it.
+
+## Before you push a change
+
+1. `python3 tools/stamp.py` refreshes the `?v=` version tags so visitors get the new files instead of cached ones.
+2. `python3 tools/check.py` checks the data files, the New Testament dates and local links.
+3. Optional: `python3 -m http.server 8099` and `node tools/browser-check.js` (needs `npm install puppeteer-core`) opens every page in headless Chrome.
+
+The same checks run automatically on GitHub for every pull request (`.github/workflows/check.yml`).
