@@ -10,7 +10,7 @@
   <meta property="og:title" content="Bible Dashboard: Books, Chapters and Word Counts">
   <meta property="og:description" content="Chapters, word counts and approximate writing dates for all 66 books of the Bible, with interactive charts.">
   <meta property="og:url" content="https://vizbible.com/BooksGraphs.html">
-  <meta name="twitter:card" content="summary">
+  <meta name="twitter:card" content="summary_large_image"><meta property="og:image" content="https://vizbible.com/assets/og/BooksGraphs.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 
     <script src="vendor/chartjs/chart.umd.js"></script>
@@ -38,7 +38,7 @@
         .author-icon { width:60px; height:60px; border-radius:50%; background:#007bff; color:white; display:flex; align-items:center; justify-content:center; font-size:24px; font-weight:bold; float:left; margin-right:16px; }
         #debugInfo { background:#fff3cd; color:#856404; padding:12px; margin:10px auto; max-width:800px; border:1px solid #ffeeba; border-radius:6px; display:none; }
     </style>
-  <link rel="stylesheet" href="assets/site.css?v=20261111">
+  <link rel="stylesheet" href="assets/site.css?v=9bd00f37">
 </head>
 <body class="legacy">
 
@@ -416,7 +416,7 @@ window.onclick = e => { if (e.target.id === 'bookModal') e.target.style.display 
 window.addEventListener('load', async () => {
     // New Testament dates come from data/books.json, the same source as the NT timeline and chronology table
     try {
-        const D = await fetch('data/books.json?v=20261112').then(r => r.json());
+        const D = await fetch('data/books.json?v=cb4920f5').then(r => r.json());
         const norm = t => t.toLowerCase().replace(/[^a-z0-9]/g, '');
         D.books.forEach(nb => {
             const b = bibleBooks.find(x => x.testament === 'nt' && norm(x.name) === norm(nb.name));
@@ -431,6 +431,6 @@ window.addEventListener('load', async () => {
     }, 300);
 });
 </script>
-<script src="assets/site.js?v=20261111"></script>
+<script src="assets/site.js?v=6313c1fe"></script>
 </body>
 </html>

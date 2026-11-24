@@ -10,7 +10,7 @@
   <meta property="og:title" content="Bible Chronology: Books by Writing Date">
   <meta property="og:description" content="Old and New Testament books ordered by approximate date of writing, with authors, chapters and themes.">
   <meta property="og:url" content="https://vizbible.com/BibleChronos.html">
-  <meta name="twitter:card" content="summary">
+  <meta name="twitter:card" content="summary_large_image"><meta property="og:image" content="https://vizbible.com/assets/og/BibleChronos.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 
   <link rel="stylesheet" href="vendor/bootstrap/bootstrap.min.css">
@@ -68,7 +68,7 @@
       margin: 12px 0;
     }
   </style>
-  <link rel="stylesheet" href="assets/site.css?v=20261111">
+  <link rel="stylesheet" href="assets/site.css?v=9bd00f37">
 </head>
 <body class="legacy">
 
@@ -185,7 +185,7 @@
   <script>
     let ntTerm = '', ntMode = 'cons', NT = null, drawNT = () => {};
     function initNT() {
-      fetch('data/books.json?v=20261112').then(r => r.json()).then(D => {
+      fetch('data/books.json?v=cb4920f5').then(r => r.json()).then(D => {
         NT = D;
         const CUT = D.events.find(e => e.marker).start;
         const lab = (o, bce) => (o.label || (o.start === o.end ? o.start : o.start + '–' + o.end)) + ' CE';
@@ -247,6 +247,6 @@
       document.getElementById('printBtn').onclick = () => window.print();
     });
   </script>
-<script src="assets/site.js?v=20261111"></script>
+<script src="assets/site.js?v=6313c1fe"></script>
 </body>
 </html>
