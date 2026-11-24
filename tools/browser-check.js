@@ -62,6 +62,15 @@ const problems = [];
     if (!(await t.$('.tl-vline'))) problems.push(`Timeline${q}: AD 70 marker missing`);
   }
 
+  // site search finds things from every data file
+  const sp = await open('index.html');
+  await sp.click('.searchbtn'); await wait(1500);
+  for (const [q, want] of [['romans', 'Book'], ['hezekiah', 'King'], ['sinai', 'Place'], ['corinth', 'Church']]) {
+    await sp.$eval('.vbsearch input', (e, q) => { e.value = q; e.dispatchEvent(new Event('input')); }, q); await wait(150);
+    const types = await sp.$$eval('.vbs-res .vbs-type', x => x.map(e => e.textContent));
+    if (!types.includes(want)) problems.push(`Search for "${q}" found no ${want}`);
+  }
+
   await browser.close();
   if (problems.length) { console.log('Problems found:\n - ' + problems.join('\n - ')); process.exit(1); }
   console.log(`All good: ${pages.length} pages loaded without errors; all 27 books match on all three pages in both views.`);

@@ -1,252 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bible Chronology: Books by Writing Date | VizBible</title>
-  <meta name="description" content="Old and New Testament books ordered by approximate date of writing, with authors, chapters and themes.">
-  <link rel="canonical" href="https://vizbible.com/BibleChronos.html">
-  <meta property="og:type" content="website"><meta property="og:site_name" content="VizBible">
-  <meta property="og:title" content="Bible Chronology: Books by Writing Date">
-  <meta property="og:description" content="Old and New Testament books ordered by approximate date of writing, with authors, chapters and themes.">
-  <meta property="og:url" content="https://vizbible.com/BibleChronos.html">
-  <meta name="twitter:card" content="summary_large_image"><meta property="og:image" content="https://vizbible.com/assets/og/BibleChronos.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-
-  <link rel="stylesheet" href="vendor/bootstrap/bootstrap.min.css">
-  <link rel="stylesheet" href="vendor/datatables/css/jquery.dataTables.min.css">
-  <link rel="stylesheet" href="vendor/datatables/css/responsive.dataTables.min.css">
-
-  <style>
-    .container {
-      max-width: 1400px;
-      margin: auto;
-      padding: 20px;
-    }
-    h1, h2 {
-      text-align: center;
-      color: #222;
-    }
-    .intro {
-      text-align: center;
-      font-size: 1.1em;
-      max-width: 900px;
-      margin: 20px auto;
-      color: #555;
-    }
-    table.display {
-      border: 1px solid #ddd;
-      border-radius: 6px;
-      overflow: hidden;
-    }
-    table.display thead th {
-      background: #f8f9fa;
-      color: #333;
-      padding: 12px;
-      font-weight: 600;
-    }
-    table.display tbody td {
-      padding: 10px;
-      text-align: center;
-      border-bottom: 1px solid #eee;
-    }
-    table.display tbody tr:nth-child(even) {
-      background: #f9f9f9;
-    }
-    table.display tbody tr:hover {
-      background: #f0f4f8;
-    }
-    .nt-wrap { overflow-x: auto; }
-    table.nt { border-collapse: collapse; }
-    table.nt tr.d70 td { background: #1d2a31 !important; color: #fff; font-weight: 700; text-align: center; letter-spacing: .02em; }
-    table.nt td.on { background: #fff6d6; font-weight: 700; }
-    table.nt .sp { font-size: 11px; color: #9a6b00; border: 1px solid #9a6b0066; border-radius: 999px; padding: 1px 6px; margin-left: 4px; white-space: nowrap; }
-    .note {
-      font-style: italic;
-      color: #666;
-      text-align: center;
-      margin: 12px 0;
-    }
-  </style>
-  <link rel="stylesheet" href="assets/site.css?v=9bd00f37">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bible Chronology: Books by Writing Date | VizBible</title>
+<meta name="description" content="Old and New Testament books ordered by approximate date of writing, with authors, chapters and themes.">
+<link rel="canonical" href="https://vizbible.com/BibleChronos.html">
+<meta property="og:type" content="website"><meta property="og:site_name" content="VizBible">
+<meta property="og:title" content="Bible Chronology: Books by Writing Date">
+<meta property="og:description" content="Old and New Testament books ordered by approximate date of writing, with authors, chapters and themes.">
+<meta property="og:url" content="https://vizbible.com/BibleChronos.html">
+<meta name="twitter:card" content="summary_large_image"><meta property="og:image" content="https://vizbible.com/assets/og/BibleChronos.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/site.css?v=350c0aa7">
+<link rel="stylesheet" href="assets/timeline.css?v=748a2bb2">
+<link rel="stylesheet" href="assets/tables.css?v=4f500710">
 </head>
-<body class="legacy">
-
-  <div id="site-nav"></div>
-
-  <div class="container">
-    <h1>Bible Chronology – Books by Approximate Writing Date</h1>
-    <p class="intro">
-      Books ordered roughly by when they were written. Dates follow conservative scholarship by default; the New Testament tab can also show mainstream critical dates. 
-      The "Canonical Order" column shows the book's position in the standard Bible (Genesis = 1, Revelation = 66).
-      Multiple contributors are listed where applicable.
-    </p>
-
-    <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
-      <input type="text" id="globalSearch" class="form-control w-100 w-md-50" placeholder="Search books, authors, dates...">
-      <button id="printBtn" class="btn btn-outline-secondary">Print</button>
-    </div>
-
-    <p class="note">On mobile: swipe left/right to view all columns →</p>
-
-    <ul class="nav nav-tabs mb-4" id="chronologyTabs" role="tablist">
-      <li class="nav-item" role="presentation">
-        <button class="nav-link active" id="ot-tab" data-bs-toggle="tab" data-bs-target="#ot" type="button" role="tab">Old Testament</button>
-      </li>
-      <li class="nav-item" role="presentation">
-        <button class="nav-link" id="nt-tab" data-bs-toggle="tab" data-bs-target="#nt" type="button" role="tab">New Testament</button>
-      </li>
-    </ul>
-
-    <div class="tab-content">
-      <!-- Old Testament Tab -->
-      <div class="tab-pane fade show active" id="ot" role="tabpanel">
-        <h2>Old Testament – Approximate Order of Writing</h2>
-        <table id="otTable" class="display responsive nowrap" style="width:100%">
-          <thead>
-            <tr>
-              <th>Chronological Order</th>
-              <th>Canonical Order</th>
-              <th>Book</th>
-              <th>Author(s)</th>
-              <th>Approx. Date</th>
-              <th>Chapters</th>
-              <th>Key Theme / Note</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>1</td><td>18</td><td>Job</td><td>Unknown (possibly Moses or earlier)</td><td>~2000–1500 BCE</td><td>42</td><td>Suffering & God's sovereignty</td></tr>
-            <tr><td>2</td><td>1</td><td>Genesis</td><td>Moses (primary)</td><td>1440–1400 BCE</td><td>50</td><td>Creation to patriarchs</td></tr>
-            <tr><td>3</td><td>2</td><td>Exodus</td><td>Moses (primary)</td><td>1440–1400 BCE</td><td>40</td><td>Deliverance & Law</td></tr>
-            <tr><td>4</td><td>3</td><td>Leviticus</td><td>Moses (primary)</td><td>1440 BCE</td><td>27</td><td>Holiness & sacrifices</td></tr>
-            <tr><td>5</td><td>4</td><td>Numbers</td><td>Moses (primary)</td><td>1440–1400 BCE</td><td>36</td><td>Wilderness wanderings</td></tr>
-            <tr><td>6</td><td>5</td><td>Deuteronomy</td><td>Moses (primary)</td><td>1400 BCE</td><td>34</td><td>Covenant renewal</td></tr>
-            <tr><td>7</td><td>6</td><td>Joshua</td><td>Joshua (primary)</td><td>1400–1375 BCE</td><td>24</td><td>Conquest of Canaan</td></tr>
-            <tr><td>8</td><td>7</td><td>Judges</td><td>Samuel (primary)</td><td>1050–1000 BCE</td><td>21</td><td>Cycles of apostasy & deliverance</td></tr>
-            <tr><td>9</td><td>8</td><td>Ruth</td><td>Samuel (traditional)</td><td>~1000 BCE</td><td>4</td><td>Redemption story</td></tr>
-            <tr><td>10</td><td>9</td><td>1 Samuel</td><td>Samuel, Nathan, Gad</td><td>~930 BCE</td><td>31</td><td>Transition to monarchy</td></tr>
-            <tr><td>11</td><td>10</td><td>2 Samuel</td><td>Nathan, Gad (primary contributors)</td><td>~930 BCE</td><td>24</td><td>David's reign</td></tr>
-            <tr><td>12</td><td>19</td><td>Psalms</td><td>David (73), Asaph (12), Sons of Korah (11), Solomon, Moses, Heman, Ethan, anonymous</td><td>1000–400 BCE</td><td>150</td><td>Worship & prayer collection</td></tr>
-            <tr><td>13</td><td>20</td><td>Proverbs</td><td>Solomon (primary), Agur, Lemuel</td><td>~950 BCE</td><td>31</td><td>Wisdom sayings</td></tr>
-            <tr><td>14</td><td>21</td><td>Ecclesiastes</td><td>Solomon (traditional)</td><td>~935 BCE</td><td>12</td><td>Vanity without God</td></tr>
-            <tr><td>15</td><td>22</td><td>Song of Solomon</td><td>Solomon (traditional)</td><td>~950 BCE</td><td>8</td><td>Love & marriage</td></tr>
-            <tr><td>16</td><td>11</td><td>1 Kings</td><td>Jeremiah (possible compiler)</td><td>~560 BCE</td><td>22</td><td>Solomon to divided kingdom</td></tr>
-            <tr><td>17</td><td>12</td><td>2 Kings</td><td>Jeremiah (possible compiler)</td><td>~560 BCE</td><td>25</td><td>Fall of Israel & Judah</td></tr>
-            <tr><td>18</td><td>23</td><td>Isaiah</td><td>Isaiah son of Amoz</td><td>740–680 BCE</td><td>66</td><td>Judgment & Messianic hope</td></tr>
-            <tr><td>19</td><td>30</td><td>Amos</td><td>Amos</td><td>760–750 BCE</td><td>9</td><td>Social justice</td></tr>
-            <tr><td>20</td><td>28</td><td>Hosea</td><td>Hosea</td><td>755–715 BCE</td><td>14</td><td>Unfaithful Israel</td></tr>
-            <tr><td>21</td><td>33</td><td>Micah</td><td>Micah</td><td>735–700 BCE</td><td>7</td><td>Judgment & restoration</td></tr>
-            <tr><td>22</td><td>34</td><td>Nahum</td><td>Nahum</td><td>663–612 BCE</td><td>3</td><td>Nineveh's doom</td></tr>
-            <tr><td>23</td><td>36</td><td>Zephaniah</td><td>Zephaniah</td><td>640–620 BCE</td><td>3</td><td>Day of the Lord</td></tr>
-            <tr><td>24</td><td>35</td><td>Habakkuk</td><td>Habakkuk</td><td>612–589 BCE</td><td>3</td><td>Faith amid evil</td></tr>
-            <tr><td>25</td><td>31</td><td>Obadiah</td><td>Obadiah</td><td>~586 BCE</td><td>1</td><td>Edom judged</td></tr>
-            <tr><td>26</td><td>24</td><td>Jeremiah</td><td>Jeremiah (Baruch scribe)</td><td>627–586 BCE</td><td>52</td><td>Judah's fall</td></tr>
-            <tr><td>27</td><td>25</td><td>Lamentations</td><td>Jeremiah</td><td>586 BCE</td><td>5</td><td>Mourning Jerusalem</td></tr>
-            <tr><td>28</td><td>26</td><td>Ezekiel</td><td>Ezekiel</td><td>593–571 BCE</td><td>48</td><td>Exile visions</td></tr>
-            <tr><td>29</td><td>29</td><td>Joel</td><td>Joel</td><td>~835–500 BCE (disputed)</td><td>3</td><td>Locust plague & Spirit</td></tr>
-            <tr><td>30</td><td>32</td><td>Jonah</td><td>Jonah</td><td>~780 BCE</td><td>4</td><td>Nineveh repents</td></tr>
-            <tr><td>31</td><td>37</td><td>Haggai</td><td>Haggai</td><td>520 BCE</td><td>2</td><td>Temple rebuilding</td></tr>
-            <tr><td>32</td><td>38</td><td>Zechariah</td><td>Zechariah</td><td>520–480 BCE</td><td>14</td><td>Visions & Messiah</td></tr>
-            <tr><td>33</td><td>27</td><td>Daniel</td><td>Daniel</td><td>605–536 BCE</td><td>12</td><td>Kingdoms & prophecy</td></tr>
-            <tr><td>34</td><td>15</td><td>Ezra</td><td>Ezra</td><td>458–445 BCE</td><td>10</td><td>Return & temple rebuilt</td></tr>
-            <tr><td>35</td><td>13</td><td>1 Chronicles</td><td>Ezra (traditional)</td><td>450–430 BCE</td><td>29</td><td>Genealogies & David's reign</td></tr>
-            <tr><td>36</td><td>14</td><td>2 Chronicles</td><td>Ezra (traditional)</td><td>450–430 BCE</td><td>36</td><td>Temple & Judah's kings</td></tr>
-            <tr><td>37</td><td>16</td><td>Nehemiah</td><td>Nehemiah</td><td>445–432 BCE</td><td>13</td><td>Walls rebuilt, reforms</td></tr>
-            <tr><td>38</td><td>17</td><td>Esther</td><td>Unknown (Mordecai?)</td><td>~460 BCE</td><td>10</td><td>Purim deliverance</td></tr>
-            <tr><td>39</td><td>39</td><td>Malachi</td><td>Malachi</td><td>~430 BCE</td><td>4</td><td>Final OT prophecy</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- New Testament Tab -->
-      <div class="tab-pane fade" id="nt" role="tabpanel">
-        <h2>New Testament – Approximate Order of Writing</h2>
-        <div class="d-flex flex-wrap justify-content-center align-items-center gap-2 mb-2" id="ntView" role="group" aria-label="Dating view">
-          <span class="text-muted">Order by:</span>
-          <button class="btn btn-sm btn-dark" data-d="cons" aria-pressed="true">Conservative dates</button>
-          <button class="btn btn-sm btn-outline-dark" data-d="crit" aria-pressed="false">Critical dates</button>
-        </div>
-        <p class="note" id="ntMethod"></p>
-        <div class="nt-wrap"><table id="ntTable" class="display nt" style="width:100%">
-          <thead>
-            <tr>
-              <th>Order</th><th>Canonical Order</th><th>Book</th><th>Author(s)</th>
-              <th id="thCons">Conservative date</th><th id="thCrit">Critical date</th><th>Chapters</th><th>Key Theme / Note</th>
-            </tr>
-          </thead>
-          <tbody id="ntBody"><tr><td colspan="8">Loading…</td></tr></tbody>
-        </table></div>
-      </div>
-    </div>
-
-    <div id="site-footer"></div>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div id="site-nav"></div>
+<main id="main" class="wrap">
+  <div class="pagehead">
+    <h1>Bible chronology: books by date of writing</h1>
+    <p>Every book of the Bible in the order it was probably written, with authors, chapters and themes. Dates follow conservative scholarship by default; the New Testament tab can also show mainstream critical dates. Click a column heading to sort.</p>
   </div>
 
-  <script>
-    let ntTerm = '', ntMode = 'cons', NT = null, drawNT = () => {};
-    function initNT() {
-      fetch('data/books.json?v=cb4920f5').then(r => r.json()).then(D => {
-        NT = D;
-        const CUT = D.events.find(e => e.marker).start;
-        const lab = (o, bce) => (o.label || (o.start === o.end ? o.start : o.start + '–' + o.end)) + ' CE';
-        const esc = t => String(t).replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
-        drawNT = function () {
-          const crit = ntMode === 'crit';
-          const rows = D.books.map(b => Object.assign({ b }, crit ? b.crit : { start: b.start, end: b.end }))
-            .sort((x, y) => x.start - y.start || x.end - y.end || x.b.canon - y.b.canon);
-          let html = '', n = 0, done = false;
-          rows.forEach(r => {
-            const b = r.b, text = [b.name, b.author, lab(b), lab(b.crit), b.theme].join(' ').toLowerCase();
-            if (!done && r.start >= CUT) {
-              done = true;
-              if (!ntTerm) html += `<tr class="d70"><td colspan="8">AD ${CUT}: Jerusalem temple destroyed. Books above were written before it (or begin before it); books below after. No NT book explicitly describes the destruction as past.</td></tr>`;
-            }
-            n++;
-            if (ntTerm && !text.includes(ntTerm)) return;
-            const spans = r.start < CUT && r.end > CUT ? '<span class="sp">spans AD ' + CUT + '</span>' : '';
-            html += `<tr><td>${n}</td><td>${b.canon}</td><td>${esc(b.name)}${spans}</td><td>${esc(b.author)}</td>
-              <td class="${crit ? '' : 'on'}">${lab(b)}</td><td class="${crit ? 'on' : ''}">${lab(b.crit)}</td><td>${b.chapters}</td><td>${esc(b.theme)}</td></tr>`;
-          });
-          document.getElementById('ntBody').innerHTML = html || '<tr><td colspan="8">No matches.</td></tr>';
-        };
-        const before = D.books.filter(b => b.end <= CUT).length;
-        document.getElementById('ntMethod').innerHTML = '<strong>Conservative</strong> dates (the default) accept traditional authorship and place ' + before + ' of 27 books before AD ' + CUT + '. <strong>Critical</strong> dates follow the mainstream academic consensus, which dates many books later. Paul’s seven undisputed letters are the same in both columns. <a href="about.html#dating">Sources and method</a>.';
-        drawNT();
-      });
-    }
-    document.addEventListener('click', e => {
-      const t = e.target.closest('#ntView [data-d]'); if (!t) return;
-      ntMode = t.dataset.d;
-      document.querySelectorAll('#ntView [data-d]').forEach(x => { const on = x === t; x.setAttribute('aria-pressed', on); x.className = 'btn btn-sm ' + (on ? 'btn-dark' : 'btn-outline-dark'); });
-      drawNT();
-    });
-  </script>
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/datatables/js/jquery.dataTables.min.js"></script>
-  <script src="vendor/datatables/js/dataTables.responsive.min.js"></script>
-  <script src="vendor/bootstrap/bootstrap.bundle.min.js"></script>
+  <div class="tl-controls noprint">
+    <div class="grp" role="tablist" aria-label="Testament">
+      <button class="fchip" role="tab" id="ot-tab" aria-controls="ot" aria-selected="true" aria-pressed="true">Old Testament</button>
+      <button class="fchip" role="tab" id="nt-tab" aria-controls="nt" aria-selected="false" aria-pressed="false">New Testament</button>
+    </div>
+    <span class="sep"></span>
+    <input type="search" id="globalSearch" class="tsearch" placeholder="Search books, authors, dates…" aria-label="Search the table">
+    <button class="fchip" id="printBtn" type="button">Print</button>
+  </div>
 
-  <script>
-    $(document).ready(function() {
-      const otTable = $('#otTable').DataTable({
-        responsive: true,
-        paging: false,
-        info: false,
-        order: [[0, 'asc']],  // sort by chronological order
-        searching: false
-      });
+  <section id="ot" role="tabpanel" aria-labelledby="ot-tab">
+    <h2 class="sec2">Old Testament: approximate order of writing</h2>
+    <p class="note">“Order” is the approximate order of writing; “Canon” is the book’s place in the Bible (Genesis is 1, Revelation is 66). Where several people wrote a book, they are all listed.</p>
+    <div class="tbl-wrap"><table class="dt first-sticky" id="otTable"></table></div>
+  </section>
 
-      // NT table is built from data/books.json, the same source the NT timeline and Book Graphs use
-      initNT();
-
-      $('#globalSearch').on('keyup', function() {
-        otTable.search(this.value).draw();
-        ntTerm = this.value.toLowerCase(); drawNT();
-      });
-
-      document.getElementById('printBtn').onclick = () => window.print();
-    });
-  </script>
-<script src="assets/site.js?v=9c199bd5"></script>
+  <section id="nt" role="tabpanel" aria-labelledby="nt-tab" hidden>
+    <h2 class="sec2">New Testament: approximate order of writing</h2>
+    <div class="grp noprint" id="ntView" role="group" aria-label="Dating view" style="margin:0 0 10px">
+      <button class="fchip" data-d="cons" aria-pressed="true">Order by conservative dates</button>
+      <button class="fchip" data-d="crit" aria-pressed="false">Order by critical dates</button>
+    </div>
+    <p class="note" id="ntMethod"></p>
+    <div class="tbl-wrap"><table class="dt nt first-sticky" id="ntTable">
+      <thead><tr><th>Order</th><th>Canon</th><th>Book</th><th>Author(s)</th><th>Conservative date</th><th>Critical date</th><th>Chapters</th><th>Key theme / note</th></tr></thead>
+      <tbody id="ntBody"><tr><td colspan="8">Loading…</td></tr></tbody>
+    </table></div>
+  </section>
+</main>
+<div id="site-footer"></div>
+<script src="assets/datatable.js?v=f1f9da38"></script>
+<script src="assets/chronology.js?v=060179f0"></script>
+<script src="assets/site.js?v=2a98c604"></script>
 </body>
 </html>
