@@ -3,7 +3,7 @@
    Offline-safe: draws a built-in Natural Earth land outline first; Esri terrain tiles fade in on top when they load. */
 (async function () {
   const base = (document.currentScript && document.currentScript.src) ? document.currentScript.src.replace(/assets\/[^/]*$/, '') : '';
-  const getJSON = u => fetch(u + (u.includes('?') ? '&' : '?') + 'v=5e6fc9a1').then(r => { if (!r.ok) throw new Error(u + ' ' + r.status); return r.json(); });
+  const getJSON = u => fetch(u + (u.includes('?') ? '&' : '?') + 'v=a554aee4').then(r => { if (!r.ok) throw new Error(u + ' ' + r.status); return r.json(); });
   const D = await getJSON(window.JOURNEY_DATA_URL);
   const [LAND, COUNTRY_LINES, ADMIN_LINES] = await Promise.all([
     getJSON('data/land.json'), getJSON('data/country-lines.json'), getJSON('data/admin-lines.json')]);
@@ -174,6 +174,9 @@ function ancientArt(motif, label) {
       o += `<rect x="12" y="${y}" width="136" height="${h}" fill="${S}" stroke="${D}"/>`;
       for (let i = 0; i < 6; i++) { const x = 19 + i * 21; o += `<path d="M${x} ${y + h} V${y + 14} A7 7 0 0 1 ${x + 14} ${y + 14} V${y + h} Z" fill="#6b5a3c"/>`; }
     }
+  } else if (motif === 'mountain') {
+    o += `<rect y="96" width="160" height="24" fill="${G}"/><path d="M0 100 L46 40 L70 66 L96 22 L160 100 Z" fill="#b9915c"/><path d="M96 22 L108 38 L100 36 L92 42 L86 34 Z" fill="#f3ead6"/><path d="M46 40 L54 50 L44 48 L38 52 Z" fill="#f3ead6"/>`;
+    for (let i = 0; i < 4; i++) { const x = 18 + i * 34; o += `<path d="M${x} 108 L${x + 8} 96 L${x + 16} 108 Z" fill="#7a5a3a"/>`; }
   } else { // island
     o += `<rect y="62" width="160" height="58" fill="#5fa3c7"/><path d="M14 96 Q56 34 100 66 T152 96 Z" fill="#8a7a58"/><path d="M40 72 Q56 52 76 62 Q60 66 40 72Z" fill="#7fa069"/>`;
     o += `<g transform="rotate(-16 112 78)"><path d="M92 82 Q112 96 134 82 L128 76 H98 Z" fill="#7a4a24"/><rect x="112" y="46" width="2" height="32" fill="#4b3118"/><path d="M114 48 Q132 60 114 72 Z" fill="#f5efe0" stroke="${D}"/></g>`;
@@ -193,6 +196,8 @@ function modernArt(type, id, label) {
     o += `<rect y="100" width="160" height="20" fill="#7f8f86"/><rect y="106" width="160" height="3" fill="#e8e4d4"/>`;
     for (let x = 2; x < 150;) { const w = 14 + r() * 12, h = 30 + r() * 52; o += bld(x, w, h, B[Math.floor(r() * B.length)]); x += w + 1; }
     o += `<rect x="78" y="12" width="3" height="20" fill="#9aa7b2"/>`;
+  } else if (type === 'mountain') {
+    o += `<rect y="96" width="160" height="24" fill="#c9b48c"/><path d="M0 104 L52 38 L76 62 L104 18 L160 104 Z" fill="#a8835a"/><path d="M104 18 L116 34 L106 32 L98 38 L92 30 Z" fill="#efe4cc"/><path d="M124 104 V90 H140 V104 Z" fill="#e2d9cc"/><path d="M122 90 L132 82 L142 90 Z" fill="#b25c3a"/>`;
   } else if (type === 'coastcity') {
     o += `<rect x="96" y="82" width="64" height="38" fill="#4f9bc7"/><rect y="100" width="96" height="20" fill="#7f8f86"/>`;
     for (let x = 2; x < 88;) { const w = 12 + r() * 10, h = 24 + r() * 40; o += bld(x, w, h, B[Math.floor(r() * B.length)]); x += w + 1; }

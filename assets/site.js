@@ -5,6 +5,7 @@
     ['PaulineChurches.html', 'NT Timeline & Letters'],
     ['paulmap.html', "Paul's Journeys"],
     ['jesusmap.html', "Jesus' Journeys"],
+    ['otmap.html', 'OT Journeys'],
     ['KingsJudaIsrael.html', 'Kings'],
     ['BibleChronos.html', 'Chronology'],
     ['BooksGraphs.html', 'Book Graphs']
